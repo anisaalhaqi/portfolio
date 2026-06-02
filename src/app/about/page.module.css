@@ -1,0 +1,185 @@
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.hero {
+  width: 100%;
+  padding: 64px 0;
+}
+
+.heroContent {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.profileImage {
+  width: 320px;
+  height: 320px;
+  border-radius: 9999px;
+  object-fit: cover;
+}
+
+.heroText {
+  flex: 1;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--color-text-accent);
+  text-align: center;
+}
+
+.bio {
+  padding-bottom: 48px;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+}
+
+.bioText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.skills {
+  padding-bottom: 48px;
+}
+
+.skillsGrid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.skillsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skillCategory {
+  margin-bottom: 12px;
+}
+
+.categoryTitle {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-text-card);
+  display: inline;
+}
+
+.skillList {
+  font-size: 24px;
+  font-weight: 300;
+  color: #1A2238;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.toolsColumn {
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.figmaTool {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toolIcon {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+}
+
+.toolName {
+  font-size: 24px;
+  font-weight: 500;
+  color: #1A2238;
+}
+
+.education {
+  padding-bottom: 48px;
+}
+
+.educationItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.degree {
+  font-size: 24px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.school {
+  font-size: 24px;
+  font-weight: 300;
+  color: #000000;
+  text-align: right;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 40px;
+  }
+  .heroContent {
+    flex-direction: column;
+    text-align: center;
+  }
+  .heroText {
+    font-size: 32px;
+  }
+  .bioText, .skillList, .categoryTitle, .toolName, .degree, .school {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+  .profileImage {
+    width: 250px;
+    height: 250px;
+  }
+  .heroText {
+    font-size: 24px;
+  }
+  .skillsGrid {
+    flex-direction: column;
+    gap: 48px;
+  }
+  .toolsColumn {
+    width: 100%;
+  }
+  .educationItem {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .bioText, .skillList, .categoryTitle, .toolName, .degree, .school {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,137 @@
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero {
+  width: 100%;
+  padding: 64px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.heroContent {
+  width: 100%;
+  max-width: var(--max-width);
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  text-align: center;
+}
+
+.heroTitles {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.name {
+  font-size: 42px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+
+.role {
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+}
+
+.statement {
+  max-width: 800px;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+  background: var(--gradient-statement);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.resumeButton {
+  padding: 12px 40px;
+  background-color: var(--color-primary);
+  color: var(--color-primary-light);
+  font-size: 24px;
+  font-weight: 500;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.resumeButton:hover {
+  transform: translateY(-2px);
+  background-color: #385195;
+}
+
+.caseStudies {
+  width: 100%;
+  padding: 32px 0 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 50px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 64px;
+}
+
+.cardList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .heroContent {
+    padding: 0 40px;
+  }
+  .name {
+    font-size: 40px;
+  }
+  .role {
+    font-size: 28px;
+  }
+  .statement {
+    font-size: 32px;
+  }
+  .resumeButton {
+    font-size: 24px;
+  }
+  .sectionTitle {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroContent {
+    padding: 0 20px;
+    gap: 32px;
+  }
+  .name {
+    font-size: 32px;
+  }
+  .role {
+    font-size: 20px;
+  }
+  .statement {
+    font-size: 24px;
+  }
+  .resumeButton {
+    font-size: 20px;
+    padding: 12px 32px;
+  }
+  .sectionTitle {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+}
