@@ -16,10 +16,20 @@
   padding: 64px 0;
 }
 
-.heroContent {
+.heroLayout {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 48px;
+  width: 100%;
+}
+
+.heroHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 48px;
+  width: 100%;
 }
 
 .profileImage {
@@ -27,42 +37,46 @@
   height: 320px;
   border-radius: 9999px;
   object-fit: cover;
+  flex-shrink: 0;
+}
+
+.heroTextContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .heroText {
-  flex: 1;
-  font-size: 32px;
-  font-weight: 500;
-  color: var(--color-text-accent);
+  width: 792px;
   text-align: center;
-}
-
-.bio {
-  padding-bottom: 48px;
-}
-
-.sectionTitle {
+  color: var(--color-text-accent);
   font-size: 32px;
   font-weight: 500;
-  color: var(--color-primary);
-  margin-bottom: 12px;
+  line-height: 1.2;
 }
 
-.bioText {
+.sectionBlock {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.sectionTitle {
+  color: var(--color-primary);
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.bioText {
+  color: var(--color-text-muted);
   font-size: 24px;
   font-weight: 300;
-  color: var(--color-text-muted);
   line-height: 1.4;
 }
 
-.skills {
-  padding-bottom: 48px;
-}
-
-.skillsGrid {
+.gridContainer {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -71,115 +85,118 @@
 .skillsColumn {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
 }
 
-.skillCategory {
-  margin-bottom: 12px;
+.skillEntry {
+  display: flex;
+  flex-direction: column;
 }
 
-.categoryTitle {
+.skillCategoryHeader {
   font-size: 24px;
+  line-height: 1.2;
+}
+
+.skillLabelBold {
+  color: #292929;
   font-weight: 500;
-  color: var(--color-text-card);
-  display: inline;
+}
+
+.skillLabelLight {
+  color: #292929;
+  font-weight: 300;
 }
 
 .skillList {
+  color: #1A2238;
   font-size: 24px;
   font-weight: 300;
-  color: #1A2238;
   line-height: 1.4;
-  margin-top: 4px;
+  list-style: none;
 }
 
 .toolsColumn {
   width: 480px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
 }
 
-.figmaTool {
+.figmaContainer {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.toolIcon {
+.figmaLogo {
   width: 60px;
   height: auto;
-  object-fit: contain;
 }
 
-.toolName {
+.figmaName {
+  color: #1A2238;
   font-size: 24px;
   font-weight: 500;
-  color: #1A2238;
 }
 
-.education {
-  padding-bottom: 48px;
-}
-
-.educationItem {
+.educationRow {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
-.degree {
+.eduDegree {
+  color: black;
   font-size: 24px;
   font-weight: 500;
-  color: #000000;
 }
 
-.school {
+.eduSchool {
+  color: black;
   font-size: 24px;
   font-weight: 300;
-  color: #000000;
-  text-align: right;
 }
 
 @media (max-width: 1024px) {
-  .container {
-    padding: 0 40px;
-  }
-  .heroContent {
+  .heroHeader {
     flex-direction: column;
     text-align: center;
   }
-  .heroText {
-    font-size: 32px;
+  .heroTextContainer {
+    width: 100%;
   }
-  .bioText, .skillList, .categoryTitle, .toolName, .degree, .school {
-    font-size: 24px;
+  .heroText {
+    width: 100%;
+    font-size: 28px;
   }
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 0 20px;
+  .heroHeader {
+    gap: 24px;
   }
   .profileImage {
     width: 250px;
     height: 250px;
   }
-  .heroText {
-    font-size: 24px;
-  }
-  .skillsGrid {
+  .gridContainer {
     flex-direction: column;
     gap: 48px;
   }
   .toolsColumn {
     width: 100%;
   }
-  .educationItem {
+  .educationRow {
     flex-direction: column;
     gap: 8px;
   }
-  .bioText, .skillList, .categoryTitle, .toolName, .degree, .school {
+  .bioText, .skillCategoryHeader, .skillList, .figmaName, .eduDegree, .eduSchool {
     font-size: 18px;
   }
 }
