@@ -10,7 +10,7 @@ before_script:
   - npm -v
   - if (Test-Path package-lock.json) { Remove-Item package-lock.json -Force }
   - npm cache clean --force
-  - npm install --no-audit --no-fund
+  - npm install --no-audit --no-fund --legacy-peer-deps
 
 pages:
   stage: deploy
