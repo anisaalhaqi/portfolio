@@ -6,7 +6,9 @@ cache:
     - .npm/
 
 before_script:
-  - npm ci --cache .npm --prefer-offline
+  - node -v
+  - npm -v
+  - npm install --no-audit --no-fund
 
 pages:
   stage: deploy
