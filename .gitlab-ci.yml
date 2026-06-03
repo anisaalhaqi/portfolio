@@ -14,8 +14,9 @@ pages:
     - build
   script:
     - npm run build
-    - rm -rf public/*
-    - cp -r out/* public/
+    - if (Test-Path public) { Remove-Item -Recurse -Force public }
+    - New-Item -ItemType Directory -Path public -Force
+    - Copy-Item -Recurse out/* public/
   artifacts:
     paths:
       - public
