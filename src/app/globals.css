@@ -22,7 +22,6 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: var(--color-bg);
   color: var(--color-text-dark);
 }
 
@@ -30,6 +29,55 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  margin: 0;
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+/* Moving Gradient Blobs */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(120px); /* Creates the soft gradient edge */
+}
+
+/* Primary Blue Blob - bolder color */
+body::before {
+  width: 40vw;
+  height: 60vh;
+  background: var(--color-primary); /* Bold blue */
+  opacity: 0.35; 
+  top: -10vh;
+  left: -10vw;
+  animation: moveBlob1 15s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Cyan Blob */
+body::after {
+  width: 50vw;
+  height: 50vh;
+  background: #15ECE2; /* Vibrant cyan */
+  opacity: 0.25;
+  bottom: -10vh;
+  right: -10vw;
+  animation: moveBlob2 18s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Keep movement restricted to the edges to avoid text overlap in the center */
+@keyframes moveBlob1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(5vw, 15vh) scale(1.1); }
+  100% { transform: translate(2vw, 30vh) scale(0.9); }
+}
+
+@keyframes moveBlob2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-5vw, -15vh) scale(1.1); }
+  100% { transform: translate(-10vw, -5vh) scale(0.95); }
 }
 
 a {
