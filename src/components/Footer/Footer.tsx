@@ -23,7 +23,7 @@ const Footer = ({ variant = "blue" }: FooterProps) => {
           rel="noopener noreferrer"
           className={styles.socialLink}
         >
-          <img src="/icons/linkedin-blue.png" alt="LinkedIn" className={styles.socialIcon} />
+          <img src="/portfolio/icons/linkedin-blue.png" alt="LinkedIn" className={styles.socialIcon} />
         </a>
       </div>
     </footer>

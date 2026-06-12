@@ -9,7 +9,7 @@ export default function About() {
           <div className={styles.heroLayout}>
             <div className={styles.heroHeader}>
               <img 
-                src="/icons/profile-picture.png" 
+                src="/portfolio/icons/profile-picture.png" 
                 alt="Anisa Aulia" 
                 className={styles.profileImage} 
               />
@@ -75,7 +75,7 @@ export default function About() {
               <div className={styles.toolsColumn}>
                 <h2 className={styles.sectionTitle}>Design Tools</h2>
                 <div className={styles.figmaContainer}>
-                  <img src="/icons/figma.png" alt="Figma" className={styles.figmaLogo} />
+                  <img src="/portfolio/icons/figma.png" alt="Figma" className={styles.figmaLogo} />
                   <span className={styles.figmaName}>Figma</span>
                 </div>
               </div>

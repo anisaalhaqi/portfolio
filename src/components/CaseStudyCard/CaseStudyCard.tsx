@@ -28,7 +28,7 @@ const CaseStudyCard = ({
         <p className={styles.description}>{description}</p>
         <Link href={link} className={styles.button}>
           <span>View Case Study</span>
-          <img src="/icons/arrow-right-blue.png" alt="" className={styles.arrowImg} />
+          <img src="/portfolio/icons/arrow-right-blue.png" alt="" className={styles.arrowImg} />
         </Link>
       </div>
       <div className={styles.imageContainer} style={{ backgroundColor: bgColor }}>

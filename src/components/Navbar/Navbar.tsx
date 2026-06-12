@@ -11,7 +11,7 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          <img src="/icons/logo.png" alt="saa.design" className={styles.logoImg} />
+          <img src="/portfolio/icons/logo.png" alt="saa.design" className={styles.logoImg} />
         </Link>
         <div className={styles.links}>
           <Link 
@@ -40,7 +40,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className={styles.socialLink}
           >
-            <img src="/icons/linkedin-white.png" alt="LinkedIn" className={styles.socialIcon} />
+            <img src="/portfolio/icons/linkedin-white.png" alt="LinkedIn" className={styles.socialIcon} />
           </a>
         </div>
       </div>
