@@ -41,7 +41,7 @@ export default function Home() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroTitles}>
-            <h1 className={styles.name}>Hi, I'm Anisaa!</h1>
+            <h1 className={styles.name}>Hi, I'm Anisa!</h1>
             <p className={styles.role}>
               UI/UX Designer & Researcher based in Bandung
             </p>
