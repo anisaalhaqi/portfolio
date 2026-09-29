@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import styles from "./CaseStudyCard.module.css";
 
@@ -20,8 +23,28 @@ const CaseStudyCard = ({
   link,
   reverse = false,
 }: CaseStudyCardProps) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Reveal once when the card scrolls into view
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          card.dataset.visible = "";
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -100px 0px" }
+    );
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className={`${styles.card} ${reverse ? styles.reverse : ""}`}>
+    <div ref={cardRef} className={`${styles.card} ${reverse ? styles.reverse : ""}`}>
       <div className={styles.content}>
         <div className={styles.tag}>{tag}</div>
         <h2 className={styles.title}>{title}</h2>

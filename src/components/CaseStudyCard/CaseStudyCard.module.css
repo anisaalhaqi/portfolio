@@ -8,6 +8,28 @@
   margin-bottom: 48px;
 }
 
+/* Scroll reveal, fired once. Only hidden when JS can reveal it again. */
+@media (scripting: enabled) {
+  .card {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 600ms var(--ease-out),
+      transform 600ms var(--ease-out);
+  }
+
+  .card[data-visible] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: reduce) {
+  .card {
+    transform: none;
+  }
+}
+
 .reverse {
   flex-direction: row-reverse;
 }
@@ -82,6 +104,13 @@
   width: 36px;
   height: auto;
   object-fit: contain;
+  transition: transform 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .button:hover .arrowImg {
+    transform: translateX(4px);
+  }
 }
 
 .imageContainer {
