@@ -130,6 +130,45 @@
   box-shadow: var(--shadow-soft);
 }
 
+/* At a glance: the whole story for readers who only skim */
+.glance {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.8fr;
+  gap: 16px;
+  margin-top: -48px;
+}
+
+.glanceItem {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--color-text-card);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.eyebrow {
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.glanceStat {
+  align-self: flex-start;
+  font-size: clamp(2.75rem, 2vw + 2rem, 3.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  background: var(--gradient-statement);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* Role / tools / timeframe panel */
 .meta {
   display: grid;
@@ -192,6 +231,15 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+/* One-sentence takeaway that opens a section */
+.lead {
+  color: var(--color-text-card);
+  font-size: clamp(1.375rem, 1vw + 1rem, 1.75rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
 }
 
 /* Problem key numbers */
@@ -367,9 +415,9 @@
 }
 
 .finding p {
-  color: var(--color-text-muted);
+  color: var(--color-text-card);
   font-size: 17px;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .comingSoon {
@@ -395,6 +443,12 @@
   .section {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+  .glance {
+    grid-template-columns: 1fr 1fr;
+  }
+  .glanceItem:last-child {
+    grid-column: 1 / -1;
   }
   .sectionTitle {
     position: static;
@@ -451,8 +505,15 @@
     box-shadow: 0 0 0 4px rgb(72 117 200 / 0.15);
   }
   .findings,
-  .highlights {
+  .highlights,
+  .glance {
     grid-template-columns: 1fr;
+  }
+  .glance {
+    margin-top: -24px;
+  }
+  .glanceItem {
+    padding: 24px;
   }
   .finding {
     padding: 24px;

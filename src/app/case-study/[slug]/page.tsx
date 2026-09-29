@@ -55,6 +55,24 @@ export default async function CaseStudyPage({ params }: Props) {
           <img src={study.imageSrc} alt={study.title} className={styles.heroImage} />
         </section>
 
+        {study.glance && (
+          <ul className={styles.glance} aria-label="At a glance">
+            <li className={`${styles.glass} ${styles.glanceItem}`}>
+              <span className={styles.eyebrow}>Problem</span>
+              <p>{study.glance.problem}</p>
+            </li>
+            <li className={`${styles.glass} ${styles.glanceItem}`}>
+              <span className={styles.eyebrow}>Solution</span>
+              <p>{study.glance.solution}</p>
+            </li>
+            <li className={`${styles.glass} ${styles.glanceItem}`}>
+              <span className={styles.eyebrow}>Result</span>
+              <span className={styles.glanceStat}>{study.glance.result.stat}</span>
+              <p>{study.glance.result.label}</p>
+            </li>
+          </ul>
+        )}
+
         {study.meta && (
           <dl className={`${styles.glass} ${styles.meta}`}>
             <div className={styles.metaItem}>
@@ -73,10 +91,13 @@ export default async function CaseStudyPage({ params }: Props) {
           </dl>
         )}
 
-        {study.problem && (
+        {(study.problemStatement || study.problem) && (
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Problem</h2>
             <div className={styles.sectionBody}>
+              {study.problemStatement && (
+                <p className={styles.lead}>{study.problemStatement}</p>
+              )}
               {study.problemHighlights && (
                 <ul className={styles.highlights}>
                   {study.problemHighlights.map((item) => (
@@ -87,11 +108,13 @@ export default async function CaseStudyPage({ params }: Props) {
                   ))}
                 </ul>
               )}
-              <div className={styles.prose}>
-                {study.problem.map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
-              </div>
+              {study.problem && (
+                <div className={styles.prose}>
+                  {study.problem.map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
         )}
@@ -156,7 +179,7 @@ export default async function CaseStudyPage({ params }: Props) {
           </section>
         )}
 
-        {!study.problem && !study.methodology && (
+        {!study.problemStatement && !study.problem && !study.methodology && (
           <div className={`${styles.glass} ${styles.comingSoon}`}>
             <p className={styles.comingSoonTitle}>Full case study coming soon</p>
             <p>I&rsquo;m still writing up the research and design process for this project.</p>
