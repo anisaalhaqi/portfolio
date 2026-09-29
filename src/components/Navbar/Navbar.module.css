@@ -95,3 +95,20 @@
     padding: 0 20px;
   }
 }
+
+/* Small phones: logo + three links + icon must fit on one row */
+@media (max-width: 480px) {
+  .logoImg {
+    height: 22px;
+  }
+  .links {
+    gap: 16px;
+  }
+  .link {
+    font-size: 15px;
+  }
+  .socialIcon {
+    width: 24px;
+    height: 24px;
+  }
+}

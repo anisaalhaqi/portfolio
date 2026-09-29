@@ -118,7 +118,7 @@
   height: 380px;
   position: relative;
   overflow: hidden;
-  border-radius: 0px;
+  border-radius: var(--radius-lg);
   display: flex;
   justify-content: center;
   align-items: center;
