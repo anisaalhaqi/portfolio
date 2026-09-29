@@ -80,6 +80,14 @@ body::after {
   100% { transform: translate(-10vw, -5vh) scale(0.95); }
 }
 
+/* Keep the blobs as a static backdrop for users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;

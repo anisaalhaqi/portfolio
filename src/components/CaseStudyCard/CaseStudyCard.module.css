@@ -70,6 +70,12 @@
   font-weight: 500;
   text-decoration: none;
   margin-top: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.button:active {
+  opacity: 0.6;
+  transition-duration: 100ms;
 }
 
 .arrowImg {

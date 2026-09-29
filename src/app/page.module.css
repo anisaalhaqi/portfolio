@@ -64,9 +64,26 @@
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.resumeButton:hover {
-  transform: translateY(-2px);
+/* Hover lift only where a real pointer can hover, so it doesn't stick on touch */
+@media (hover: hover) {
+  .resumeButton:hover {
+    transform: translateY(-2px);
+    background-color: #385195;
+  }
+}
+
+/* Instant feedback on press */
+.resumeButton:active {
+  transform: scale(0.97);
   background-color: #385195;
+  transition-duration: 100ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resumeButton:hover,
+  .resumeButton:active {
+    transform: none;
+  }
 }
 
 .caseStudies {
