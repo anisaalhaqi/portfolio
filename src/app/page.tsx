@@ -4,13 +4,13 @@ import Footer from "@/components/Footer/Footer";
 
 const caseStudies = [
   {
-    tag: "1st Winner",
-    title: "Web Redesign Ciputra Online University",
+    tag: "Submitted",
+    title: "Temu.in",
     description:
-      "Universitas Ciputra Online’s platform is the primary gateway for prospective students. However, the original site suffered from a cluttered information hierarchy and a complex enrollment flow that led to high user drop-off rates.",
-    bgColor: "#FFE5D4",
-    imageSrc: "/portfolio/icons/redesign-uc.png",
-    link: "/case-study/ciputra",
+      "An AI-powered marketplace designed to simplify the reselling of second-hand academic goods by integrating AI Auto-Listing, Price Suggestion, and SSO ITB verification to reduce user skepticism. It promotes responsible consumption within the ITB community, in line with SDG 12.",
+    bgColor: "#C5FFF7",
+    imageSrc: "/portfolio/icons/temuin.png",
+    link: "/case-study/temuin",
     reverse: false,
   },
   {
@@ -24,13 +24,13 @@ const caseStudies = [
     reverse: true,
   },
   {
-    tag: "Submitted",
-    title: "Temu.in",
+    tag: "1st Winner",
+    title: "Web Redesign Ciputra Online University",
     description:
-      "An SSO ITB-verified marketplace that leverages AI Auto-Listing and Price Suggestion to simplify the reselling of second-hand academic goods. The platform strategically aligns with SDG 12 to promote responsible consumption and reduce user skepticism.",
-    bgColor: "#C5FFF7",
-    imageSrc: "/portfolio/icons/temuin.png",
-    link: "/case-study/temuin",
+      "A website redesign aimed at simplifying the path to enrollment by restructuring a cluttered information hierarchy and streamlining a complex enrollment flow to reduce user drop-off. It reshapes the primary digital gateway for prospective students of Universitas Ciputra Online.",
+    bgColor: "#FFE5D4",
+    imageSrc: "/portfolio/icons/redesign-uc.png",
+    link: "/case-study/ciputra",
     reverse: false,
   },
 ];

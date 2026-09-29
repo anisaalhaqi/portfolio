@@ -52,7 +52,7 @@ export const caseStudies: CaseStudy[] = [
     tag: "1st Winner",
     title: "Web Redesign Ciputra Online University",
     summary:
-      "Universitas Ciputra Online’s platform is the primary gateway for prospective students. However, the original site suffered from a cluttered information hierarchy and a complex enrollment flow that led to high user drop-off rates.",
+      "A website redesign aimed at simplifying the path to enrollment by restructuring a cluttered information hierarchy and streamlining a complex enrollment flow to reduce user drop-off. It reshapes the primary digital gateway for prospective students of Universitas Ciputra Online.",
     imageSrc: "/portfolio/icons/redesign-uc.png",
   },
   {
