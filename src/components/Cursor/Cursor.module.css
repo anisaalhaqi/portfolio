@@ -1,0 +1,77 @@
+/* Hidden until the first mouse move; touch devices never show it */
+.root {
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.root[data-visible] {
+  opacity: 1;
+}
+
+/* Outer layer: positioned every frame from JS, never transitioned */
+.follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Inner layers: centered on the pointer, scale changes are CSS transitions */
+.dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  transition:
+    transform 200ms var(--ease-out),
+    background-color 200ms ease;
+}
+
+.ring {
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border-radius: 50%;
+  border: 1.5px solid rgb(72 117 200 / 0.5);
+  background: rgb(72 117 200 / 0);
+  transition:
+    transform 200ms var(--ease-out),
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+/* Over the blue navbar: switch to white so the cursor stays visible */
+.root[data-on-dark] .dot {
+  background: #FFFFFF;
+}
+
+.root[data-on-dark] .ring {
+  border-color: rgb(255 255 255 / 0.8);
+}
+
+.root[data-on-dark][data-hover] .ring {
+  background: rgb(255 255 255 / 0.2);
+}
+
+/* Over something clickable: the ring grows and fills, the dot steps aside */
+.root[data-hover] .ring {
+  transform: scale(1.4);
+  background: rgb(72 117 200 / 0.1);
+}
+
+.root[data-hover] .dot {
+  transform: scale(0);
+}
+
+/* Press feedback */
+.root[data-pressed] .ring {
+  transform: scale(0.85);
+  transition-duration: 100ms;
+}
+
+.root[data-hover][data-pressed] .ring {
+  transform: scale(1.2);
+}

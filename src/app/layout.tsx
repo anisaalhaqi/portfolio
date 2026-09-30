@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Playfair_Display } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
+import Cursor from "@/components/Cursor/Cursor";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
         <Navbar />
         {children}
+        <Cursor />
       </body>
     </html>
   );

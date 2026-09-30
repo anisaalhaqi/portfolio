@@ -97,6 +97,15 @@ body::after {
   }
 }
 
+/* Custom cursor (components/Cursor) replaces the system one on mouse devices.
+   The class is only added from JS, so touch and forced-colors keep the default. */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor,
+  html.custom-cursor * {
+    cursor: none !important;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
