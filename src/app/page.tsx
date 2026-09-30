@@ -4,7 +4,7 @@ import Footer from "@/components/Footer/Footer";
 
 const caseStudies = [
   {
-    tag: "Submitted",
+    tag: "Gemastik 2026",
     title: "Temu.in",
     description:
       "An AI-powered marketplace designed to simplify the reselling of second-hand academic goods by integrating AI Auto-Listing, Price Suggestion, and SSO ITB verification to reduce user skepticism. It promotes responsible consumption within the ITB community, in line with SDG 12.",
