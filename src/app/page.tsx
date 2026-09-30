@@ -1,6 +1,18 @@
+import Link from "next/link";
 import styles from "./page.module.css";
 import CaseStudyCard from "@/components/CaseStudyCard/CaseStudyCard";
+import UIProjectCard from "@/components/UIProjectCard/UIProjectCard";
 import Footer from "@/components/Footer/Footer";
+import { projectHref, projects } from "@/data/projects";
+
+const uiProjects = projects.filter((project) => project.kind === "ui");
+
+// Proof points shown under the hero, each linking to its case study
+const achievements = [
+  { label: "1st Winner", project: "UC Online Redesign", href: "/case-study/ciputra" },
+  { label: "1st Runner Up", project: "Titipin", href: "/case-study/titipin" },
+  { label: "Gemastik 2026", project: "Temu.in", href: "/case-study/temuin" },
+];
 
 const caseStudies = [
   {
@@ -40,28 +52,42 @@ export default function Home() {
     <main className={styles.main}>
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <div className={styles.heroTitles}>
-            <h1 className={styles.name}>Hi, I'm Anisa!</h1>
-            <p className={styles.role}>
-              UI/UX Designer & Researcher based in Bandung
-            </p>
-          </div>
-          <p className={styles.statement}>
-            I bridge the gap between complex system logic and human-centered
-            design through data-driven research and strategic analysis.
+          <p className={styles.eyebrow}>
+            Anisa Aulia · UI/UX Designer &amp; Researcher, Bandung
           </p>
-          <a
-            href="https://docs.google.com/document/d/1J8dM-wM57rX83Nr7v8cixy-GKkJYClgmzU_zProBTdc/edit?usp=sharing"
-            className={styles.resumeButton}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View My Resume
-          </a>
+          <h1 className={styles.headline}>
+            I bridge the gap between complex system logic and{" "}
+            <span className={styles.highlight}>human-centered design</span>{" "}
+            through data-driven research and strategic analysis
+          </h1>
+          <div className={styles.actions}>
+            <a href="#case-studies" className={styles.primaryButton}>
+              View Work
+            </a>
+            <a
+              href="https://docs.google.com/document/d/1J8dM-wM57rX83Nr7v8cixy-GKkJYClgmzU_zProBTdc/edit?usp=sharing"
+              className={styles.secondaryLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>View Resume</span>
+              <img src="/portfolio/icons/arrow-right-blue.png" alt="" className={styles.arrowImg} />
+            </a>
+          </div>
+          <ul className={styles.achievements} aria-label="Achievements">
+            {achievements.map((item) => (
+              <li key={item.label}>
+                <Link href={item.href} className={styles.chip}>
+                  <span className={styles.chipLabel}>{item.label}</span>
+                  <span>{item.project}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      <section className={styles.caseStudies}>
+      <section id="case-studies" className={styles.caseStudies}>
         <h2 className={styles.sectionTitle}>Case Studies</h2>
         <div className={styles.cardList}>
           {caseStudies.map((study, index) => (
@@ -69,6 +95,24 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {uiProjects.length > 0 && (
+        <section id="ui-design" className={styles.caseStudies}>
+          <h2 className={styles.sectionTitle}>UI Design</h2>
+          <div className={styles.uiGrid}>
+            {uiProjects.map((project) => (
+              <UIProjectCard
+                key={project.slug}
+                tag={project.tag}
+                title={project.title}
+                summary={typeof project.summary === "string" ? project.summary : ""}
+                imageSrc={project.imageSrc}
+                link={projectHref(project)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       <Footer variant="blue" />
     </main>

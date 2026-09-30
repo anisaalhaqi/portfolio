@@ -24,12 +24,22 @@ export interface Phase {
   blocks: Block[];
 }
 
-export interface CaseStudy {
+export type ProjectKind = "case-study" | "ui";
+
+// URL prefix for each kind of project (without the /portfolio base path)
+export const KIND_PATH: Record<ProjectKind, string> = {
+  "case-study": "/case-study",
+  ui: "/ui-design",
+};
+
+export interface Project {
   slug: string;
+  kind: ProjectKind;
   tag: string;
   title: string;
   summary: ReactNode;
-  imageSrc: string;
+  // Leave empty to show a placeholder until the cover image is ready
+  imageSrc?: string;
   figmaUrl?: string;
   youtubeId?: string;
   glance?: {
@@ -50,6 +60,9 @@ export interface CaseStudy {
     intro: ReactNode;
     phases: Phase[];
   };
+  // Free-form sections, each with a title on the left and blocks on the right.
+  // UI projects are built entirely from these.
+  sections?: { title: string; blocks: Block[] }[];
 }
 
 export const PHASE_ORDER: Phase["name"][] = [
@@ -60,9 +73,10 @@ export const PHASE_ORDER: Phase["name"][] = [
   "Test",
 ];
 
-export const caseStudies: CaseStudy[] = [
+export const projects: Project[] = [
   {
     slug: "ciputra",
+    kind: "case-study",
     tag: "1st Winner",
     title: "Web Redesign Ciputra Online University",
     summary:
@@ -71,6 +85,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "titipin",
+    kind: "case-study",
     tag: "1st Runner Up",
     title: "Titipin",
     summary:
@@ -79,6 +94,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "temuin",
+    kind: "case-study",
     tag: "Gemastik 2026",
     title: "Temu.in",
     summary:
@@ -355,8 +371,92 @@ export const caseStudies: CaseStudy[] = [
       ],
     },
   },
+  ...[1, 2].map((n): Project => uiPlaceholder(`ui-project-${n}`, `UI Project ${n}`)),
 ];
 
-export function getCaseStudy(slug: string) {
-  return caseStudies.find((study) => study.slug === slug);
+// Template content for a UI project; copy it and replace the text when the real
+// project is ready
+function uiPlaceholder(slug: string, title: string): Project {
+  return {
+    slug,
+    kind: "ui",
+    tag: "UI Design",
+    title,
+    summary: "A one-line description of the product and who it’s for.",
+    meta: {
+      role: "UI Design, Visual Design",
+      team: "1 Designer",
+      tools: "Figma",
+      timeframe: "TBD",
+    },
+    sections: [
+      {
+        title: "Overview",
+        blocks: [
+          {
+            type: "text",
+            content:
+              "Describe the brief in two or three sentences: who the product is for, what it needs to help them do, and any constraints you designed around.",
+          },
+        ],
+      },
+      {
+        title: "Key Screens",
+        blocks: [
+          {
+            type: "images",
+            items: [
+              { caption: "Home" },
+              { caption: "Detail" },
+              { caption: "Flow" },
+              { caption: "Settings" },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Design Decisions",
+        blocks: [
+          {
+            type: "cards",
+            items: [
+              {
+                title: "Decision about hierarchy",
+                text: "What you decided, and the user need or principle behind it.",
+              },
+              {
+                title: "Decision about navigation",
+                text: "What you decided, and the user need or principle behind it.",
+              },
+              {
+                title: "Decision about accessibility",
+                text: "What you decided, and the user need or principle behind it.",
+              },
+              {
+                title: "Decision about visual style",
+                text: "What you decided, and the user need or principle behind it.",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Before & After",
+        blocks: [
+          {
+            type: "images",
+            items: [{ caption: "Before" }, { caption: "After" }],
+          },
+        ],
+      },
+    ],
+  };
+}
+
+export function getProject(kind: ProjectKind, slug: string) {
+  return projects.find((project) => project.kind === kind && project.slug === slug);
+}
+
+export function projectHref(project: Project) {
+  return `${KIND_PATH[project.kind]}/${project.slug}`;
 }

@@ -7,7 +7,7 @@
 
 .hero {
   width: 100%;
-  padding: 64px 0;
+  padding: 96px 0 88px;
   display: flex;
   justify-content: center;
 }
@@ -19,86 +19,164 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 36px;
+  gap: 28px;
   text-align: center;
 }
 
-.heroTitles {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 100%;
+/* Who: small label above the headline */
+.eyebrow {
+  color: var(--color-primary);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.name {
-  font-size: 42px;
-  font-weight: 500;
-  color: var(--color-text-dark);
+/* What: the one large element in the hero */
+.headline {
+  max-width: 920px;
+  color: var(--color-text-card);
+  font-size: clamp(2.125rem, 3.2vw + 1rem, 4rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
 }
 
-.role {
-  font-size: 28px;
-  font-weight: 300;
-  color: var(--color-text-muted);
-}
-
-.statement {
-  max-width: 800px;
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 1.2;
+.highlight {
   background: var(--gradient-statement);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.resumeButton {
-  padding: 12px 40px;
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-top: 8px;
+}
+
+.primaryButton {
+  padding: 14px 36px;
   background-color: var(--color-primary);
-  color: var(--color-primary-light);
-  font-size: 24px;
+  color: #FFFFFF;
+  font-size: 20px;
   font-weight: 500;
-  border-radius: 16px;
-  text-decoration: none;
+  border-radius: 100px;
   transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.secondaryLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.arrowImg {
+  width: 28px;
+  height: auto;
+  transition: transform 200ms var(--ease-out);
 }
 
 /* Hover lift only where a real pointer can hover, so it doesn't stick on touch */
 @media (hover: hover) {
-  .resumeButton:hover {
+  .primaryButton:hover {
     transform: translateY(-2px);
     background-color: #385195;
   }
 }
 
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .secondaryLink:hover .arrowImg {
+    transform: translateX(4px);
+  }
+}
+
 /* Instant feedback on press */
-.resumeButton:active {
+.primaryButton:active {
   transform: scale(0.97);
   background-color: #385195;
   transition-duration: 100ms;
 }
 
+.secondaryLink:active {
+  opacity: 0.6;
+  transition-duration: 100ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .resumeButton:hover,
-  .resumeButton:active {
+  .primaryButton:hover,
+  .primaryButton:active {
     transform: none;
+  }
+}
+
+/* Proof: awards, each linking to its case study */
+.achievements {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgb(72 117 200 / 0.2);
+  border-radius: 100px;
+  background: var(--surface-glass);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  color: var(--color-text-muted);
+  font-size: 15px;
+  transition:
+    border-color 200ms ease,
+    transform 160ms var(--ease-out);
+}
+
+.chipLabel {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip:hover {
+    border-color: rgb(72 117 200 / 0.5);
+  }
+}
+
+.chip:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .chip {
+    background: #FFFFFF;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 }
 
 /* Hero entrance: staggered rise on first load.
    `backwards` fill only, so the animation releases transform afterwards
-   and the button's hover/press transforms still work. */
-.name,
-.role,
-.statement,
-.resumeButton {
+   and the buttons' hover/press transforms still work. */
+.eyebrow,
+.headline,
+.actions,
+.achievements {
   animation: heroIn 500ms var(--ease-out) backwards;
 }
 
-.role { animation-delay: 60ms; }
-.statement { animation-delay: 120ms; }
-.resumeButton { animation-delay: 180ms; }
+.headline { animation-delay: 60ms; }
+.actions { animation-delay: 120ms; }
+.achievements { animation-delay: 180ms; }
 
 @keyframes heroIn {
   from {
@@ -114,10 +192,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .name,
-  .role,
-  .statement,
-  .resumeButton {
+  .eyebrow,
+  .headline,
+  .actions,
+  .achievements {
     animation-name: heroFadeIn;
   }
 }
@@ -128,13 +206,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Clear the sticky navbar when jumped to via #case-studies / #ui-design */
+  scroll-margin-top: 72px;
 }
 
+/* UI Design: two-column grid of image-first cards */
+.uiGrid {
+  width: min(100% - 40px, var(--content-width));
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 56px 40px;
+}
+
+/* Smaller than the hero headline so the hero stays the page's first read */
 .sectionTitle {
-  font-size: 50px;
+  font-size: clamp(2rem, 1.5vw + 1.4rem, 2.75rem);
   font-weight: 600;
+  letter-spacing: -0.02em;
   color: var(--color-text-dark);
-  margin-bottom: 64px;
+  margin-bottom: 56px;
 }
 
 .cardList {
@@ -148,43 +238,32 @@
   .heroContent {
     padding: 0 40px;
   }
-  .name {
-    font-size: 40px;
-  }
-  .role {
-    font-size: 28px;
-  }
-  .statement {
-    font-size: 32px;
-  }
-  .resumeButton {
-    font-size: 24px;
-  }
-  .sectionTitle {
-    font-size: 40px;
-  }
 }
 
 @media (max-width: 768px) {
+  .hero {
+    padding: 56px 0 48px;
+  }
   .heroContent {
     padding: 0 20px;
-    gap: 32px;
+    gap: 24px;
   }
-  .name {
-    font-size: 32px;
+  .eyebrow {
+    font-size: 13px;
   }
-  .role {
-    font-size: 20px;
+  .actions {
+    flex-direction: column;
+    gap: 16px;
   }
-  .statement {
-    font-size: 24px;
+  .primaryButton,
+  .secondaryLink {
+    font-size: 18px;
   }
-  .resumeButton {
-    font-size: 20px;
-    padding: 12px 32px;
+  .uiGrid {
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
   .sectionTitle {
-    font-size: 32px;
     margin-bottom: 32px;
   }
 }

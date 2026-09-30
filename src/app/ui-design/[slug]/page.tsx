@@ -7,20 +7,20 @@ import { getProject, projects } from "@/data/projects";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return projects.filter((p) => p.kind === "case-study").map((p) => ({ slug: p.slug }));
+  return projects.filter((p) => p.kind === "ui").map((p) => ({ slug: p.slug }));
 }
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject("case-study", slug);
-  return { title: project ? `${project.title} | Anisa Aulia` : "Case Study" };
+  const project = getProject("ui", slug);
+  return { title: project ? `${project.title} | Anisa Aulia` : "UI Design" };
 }
 
-export default async function CaseStudyPage({ params }: Props) {
+export default async function UIDesignPage({ params }: Props) {
   const { slug } = await params;
-  const project = getProject("case-study", slug);
+  const project = getProject("ui", slug);
   if (!project) notFound();
   return <ProjectPage project={project} />;
 }

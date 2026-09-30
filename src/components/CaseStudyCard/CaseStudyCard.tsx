@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { useRevealOnce } from "@/components/useRevealOnce";
 import styles from "./CaseStudyCard.module.css";
 
 interface CaseStudyCardProps {
@@ -23,25 +23,7 @@ const CaseStudyCard = ({
   link,
   reverse = false,
 }: CaseStudyCardProps) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  // Reveal once when the card scrolls into view
-  useEffect(() => {
-    const card = cardRef.current;
-    if (!card) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          card.dataset.visible = "";
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "0px 0px -100px 0px" }
-    );
-    observer.observe(card);
-    return () => observer.disconnect();
-  }, []);
+  const cardRef = useRevealOnce<HTMLDivElement>();
 
   return (
     <div ref={cardRef} className={`${styles.card} ${reverse ? styles.reverse : ""}`}>

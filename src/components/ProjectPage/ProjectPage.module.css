@@ -87,7 +87,7 @@
 }
 
 .tag {
-  composes: tag from "../../../components/CaseStudyCard/CaseStudyCard.module.css";
+  composes: tag from "../CaseStudyCard/CaseStudyCard.module.css";
 }
 
 .title {
@@ -114,11 +114,11 @@
 }
 
 .prototypeLink {
-  composes: button from "../../../components/CaseStudyCard/CaseStudyCard.module.css";
+  composes: button from "../CaseStudyCard/CaseStudyCard.module.css";
 }
 
 .arrowImg {
-  composes: arrowImg from "../../../components/CaseStudyCard/CaseStudyCard.module.css";
+  composes: arrowImg from "../CaseStudyCard/CaseStudyCard.module.css";
 }
 
 .heroImage {
@@ -802,4 +802,10 @@
   .comingSoon {
     padding: 28px 24px;
   }
+}
+
+/* Hero cover placeholder keeps the cover's proportions, not the figure's */
+.heroImage.figurePlaceholder {
+  aspect-ratio: 442 / 386;
+  border-radius: var(--radius-lg);
 }
