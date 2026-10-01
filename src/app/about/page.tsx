@@ -18,6 +18,11 @@ const experience = [
     group: "Work",
     items: [
       {
+        role: "Co-Founder",
+        org: "GLess",
+        period: "Jul 2026 – Present",
+      },
+      {
         role: "UI/UX Designer",
         org: "Kabinet KM ITB",
         period: "Jul 2026 – Present",
@@ -152,24 +157,17 @@ export default function About() {
           <div className={styles.sectionBody}>
             <div className={styles.prose}>
               <p>
-                I’ve always been naturally curious about how things work and why
-                people behave the way they do. For a long time, I found myself
-                mentally fixing confusing experiences before I even knew what UX
-                design was.
+                I’m an Information Systems and Technology student at ITB, focused
+                on UI/UX design and user research. I turn what I learn from users
+                into clear information architecture, design systems, and
+                high-fidelity prototypes.
               </p>
               <p>
-                Studying Information Systems and Technology at ITB gave that
-                curiosity a purpose. I found my sweet spot in UX—a field where
-                technical logic meets human empathy. I’ve since dedicated myself
-                to mastering the full design cycle, from deep-dive user interviews
-                and usability testing to building high-fidelity prototypes in
-                Figma.
-              </p>
-              <p>
-                What drives me most is the research. I genuinely enjoy untangling
-                messy problems, talking to the people who face them, and
-                discovering the patterns that lead to meaningful, data-driven
-                solutions.
+                My work has won 1st place in a web redesign competition and 2nd
+                place in a UI/UX design competition. On Temu.in, research with 114
+                students and two rounds of testing raised our usability score from
+                72.5 to 90.8. I also joined NTU Singapore’s ASEAN Summer
+                Programme on entrepreneurship.
               </p>
             </div>
           </div>
