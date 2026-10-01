@@ -476,16 +476,26 @@ function PhaseBlock({ block }: { block: Block }) {
                   {i + 1}. {step.label}
                 </span>
                 <p className={styles.processText}>{step.text}</p>
-                {step.points && (
-                  <ul className={styles.bullets}>
-                    {step.points.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
-                )}
               </li>
             ))}
           </ol>
+        </div>
+      );
+
+    case "spotlight":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <div className={styles.spotlight}>
+            <div className={styles.spotlightImage}>
+              <img src={block.src} alt={block.alt} />
+            </div>
+            <ul className={`${styles.bullets} ${styles.spotlightPoints}`}>
+              {block.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       );
 

@@ -49,8 +49,10 @@ export type Block =
   | {
       type: "process";
       title?: string;
-      items: { label: string; text: string; points?: string[]; src: string; alt: string }[];
+      items: { label: string; text: string; src: string; alt: string }[];
     }
+  // One image beside a list of points, e.g. what a logo means
+  | { type: "spotlight"; title?: string; src: string; alt: string; points: string[] }
   // Competitor groups for benchmarking, each with why it was chosen
   | {
       type: "benchmark";
@@ -617,18 +619,24 @@ export const projects: Project[] = [
                 },
                 {
                   label: "Final logo",
-                  text: "Chosen after gathering opinions from several people, including potential users. Its shape carries four ideas:",
-                  points: [
-                    "A chat bubble, because buyers and sellers talk directly to agree on a deal",
-                    "A magnifying glass, since the app is about finding the right item and the right person",
-                    "A smile, which reflects the satisfaction of a good deal on both sides",
-                    "A container that holds second-hand goods, so each item gets a second life",
-                  ],
+                  text: "Chosen after gathering opinions from several people, including potential users.",
                   // Copy of "final logo.png" with uneven transparent margins trimmed,
                   // so it sits centered in its frame
                   src: "/portfolio/Temu.in/logo-making/final-logo.png",
                   alt: "Final Temu.in logo: the wordmark inside a magnifying glass",
                 },
+              ],
+            },
+            {
+              type: "spotlight",
+              title: "What the final logo means",
+              src: "/portfolio/Temu.in/logo-making/final-logo.png",
+              alt: "Final Temu.in logo",
+              points: [
+                "A chat bubble, because buyers and sellers talk directly to agree on a deal",
+                "A magnifying glass, since the app is about finding the right item and the right person",
+                "A smile, which reflects the satisfaction of a good deal on both sides",
+                "A container that holds second-hand goods, so each item gets a second life",
               ],
             },
             {
