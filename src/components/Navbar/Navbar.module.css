@@ -46,9 +46,22 @@
   transition: opacity 0.2s ease;
 }
 
-@media (hover: hover) {
+/* pointer: fine too, so the dimmed hover can't stick after a tap on Android */
+@media (hover: hover) and (pointer: fine) {
   .link:hover {
     opacity: 0.8;
+  }
+}
+
+/* Touch-only press feedback for the logo and LinkedIn icon */
+@media (hover: none), (pointer: coarse) {
+  .logo,
+  .socialLink {
+    transition: opacity 100ms ease;
+  }
+  .logo:active,
+  .socialLink:active {
+    opacity: 0.6;
   }
 }
 

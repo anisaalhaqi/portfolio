@@ -187,3 +187,12 @@
     max-width: 442px;
   }
 }
+
+/* Touch screens: a long press on this control shouldn't select its label */
+@media (hover: none), (pointer: coarse) {
+  .button {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}

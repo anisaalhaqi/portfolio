@@ -46,6 +46,23 @@
   object-fit: contain;
 }
 
+/* Touch-only press feedback (the tap highlight is turned off globally) */
+@media (hover: none), (pointer: coarse) {
+  .email,
+  .socialLink {
+    transition: opacity 100ms ease;
+  }
+  .email:active,
+  .socialLink:active {
+    opacity: 0.6;
+  }
+  .socialLink {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
+
 /* Remove variant specific overrides if they are now identical */
 .blue .divider, .black .divider {
   border-color: #5C8ED5;

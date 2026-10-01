@@ -36,6 +36,35 @@ body {
   color: var(--color-text-dark);
 }
 
+/* Mobile platform fixes. These properties only act on touch browsers, so the
+   desktop layout is unchanged. */
+html {
+  /* No gray/blue flash on tap; every control has its own :active state */
+  -webkit-tap-highlight-color: transparent;
+  /* No font inflation when an iPhone rotates to landscape */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Fire taps immediately instead of waiting to rule out a double-tap zoom */
+a,
+button,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* On touch screens, a long press on a control shouldn't select its label.
+   Content text (paragraphs, the footer email) stays selectable. */
+@media (hover: none), (pointer: coarse) {
+  nav a,
+  button,
+  [role="button"] {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

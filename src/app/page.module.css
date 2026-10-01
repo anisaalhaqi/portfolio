@@ -83,7 +83,7 @@
 }
 
 /* Hover lift only where a real pointer can hover, so it doesn't stick on touch */
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .primaryButton:hover {
     transform: translateY(-2px);
     background-color: #385195;
@@ -265,5 +265,16 @@
   }
   .sectionTitle {
     margin-bottom: 32px;
+  }
+}
+
+/* Touch screens: a long press on this control shouldn't select its label */
+@media (hover: none), (pointer: coarse) {
+  .primaryButton,
+  .secondaryLink,
+  .chip {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
   }
 }

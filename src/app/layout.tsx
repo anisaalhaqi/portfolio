@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, Playfair_Display } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import Cursor from "@/components/Cursor/Cursor";
@@ -20,6 +20,11 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Anisa Aulia | UI/UX Designer & Researcher",
   description: "Portfolio of Anisa Aulia, a UI/UX Designer & Researcher based in Bandung.",
+};
+
+// Tints the mobile browser bar to match the blue navbar at the top of every page
+export const viewport: Viewport = {
+  themeColor: "#4875C8",
 };
 
 export default function RootLayout({

@@ -1166,3 +1166,12 @@
     scroll-margin-top: 104px;
   }
 }
+
+/* Touch screens: a long press on this control shouldn't select its label */
+@media (hover: none), (pointer: coarse) {
+  .backLink {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
