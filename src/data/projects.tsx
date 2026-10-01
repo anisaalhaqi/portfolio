@@ -45,6 +45,12 @@ export type Block =
   | { type: "list"; title: string; items: string[] }
   | { type: "mapping"; title?: string; items: { problem: string; feature: string }[] }
   | { type: "metrics"; title?: string; items: { label: string; before: string; after: string }[] }
+  // Numbered steps with an image each, e.g. how the logo evolved
+  | {
+      type: "process";
+      title?: string;
+      items: { label: string; text: string; points?: string[]; src: string; alt: string }[];
+    }
   // Competitor groups for benchmarking, each with why it was chosen
   | {
       type: "benchmark";
@@ -584,6 +590,50 @@ export const projects: Project[] = [
           blocks: [
             {
               type: "text",
+              title: "Branding",
+              content: (
+                <>
+                  We named it <strong>Temu.in</strong>, from the Indonesian word{" "}
+                  <em>temu</em> (to meet, to find), hoping people can find each
+                  other: sellers meet the students who need their items, and
+                  buyers find sellers offering them at an affordable price.
+                </>
+              ),
+            },
+            {
+              type: "process",
+              items: [
+                {
+                  label: "First direction",
+                  text: "An eye, to show how buyers and sellers find each other. Feedback said it felt made for women, though the app is for everyone.",
+                  src: "/portfolio/Temu.in/logo-making/option%201.png",
+                  alt: "First logo option: an eye with eyelashes",
+                },
+                {
+                  label: "Exploring again",
+                  text: "To keep it gender-neutral, we went back to sketching wordmarks built from the name itself.",
+                  src: "/portfolio/Temu.in/logo-making/brainstorm.png",
+                  alt: "Hand-drawn sketches of Temu.in wordmarks",
+                },
+                {
+                  label: "Final logo",
+                  text: "Chosen after gathering opinions from several people, including potential users. Its shape carries four ideas:",
+                  points: [
+                    "A chat bubble, because buyers and sellers talk directly to agree on a deal",
+                    "A magnifying glass, since the app is about finding the right item and the right person",
+                    "A smile, which reflects the satisfaction of a good deal on both sides",
+                    "A container that holds second-hand goods, so each item gets a second life",
+                  ],
+                  // Copy of "final logo.png" with uneven transparent margins trimmed,
+                  // so it sits centered in its frame
+                  src: "/portfolio/Temu.in/logo-making/final-logo.png",
+                  alt: "Final Temu.in logo: the wordmark inside a magnifying glass",
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "Wireframes and high fidelity",
               content:
                 "We built wireframes to set the information hierarchy and layout, then refined them into high-fidelity designs guided by UX laws and usability heuristics.",
             },

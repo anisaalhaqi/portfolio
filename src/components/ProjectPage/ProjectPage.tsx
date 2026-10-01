@@ -462,6 +462,33 @@ function PhaseBlock({ block }: { block: Block }) {
         </div>
       );
 
+    case "process":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <ol className={styles.process}>
+            {block.items.map((step, i) => (
+              <li key={step.label} className={styles.processStep}>
+                <div className={styles.processImage}>
+                  <img src={step.src} alt={step.alt} />
+                </div>
+                <span className={styles.eyebrow}>
+                  {i + 1}. {step.label}
+                </span>
+                <p className={styles.processText}>{step.text}</p>
+                {step.points && (
+                  <ul className={styles.bullets}>
+                    {step.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      );
+
     case "benchmark":
       return (
         <div className={styles.block}>

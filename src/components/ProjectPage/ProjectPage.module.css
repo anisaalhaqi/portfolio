@@ -1243,3 +1243,51 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Process steps (e.g. logo evolution): image, step label, short text */
+.process {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.processStep {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* White frame with the image contained, so sketches and logos of different
+   sizes line up; images are never upscaled past their natural size */
+.processImage {
+  aspect-ratio: 4 / 3;
+  padding: 16px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgb(72 117 200 / 0.15);
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.processImage img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.processText {
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .process {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
