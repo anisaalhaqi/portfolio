@@ -56,7 +56,20 @@ const experience = [
   },
 ];
 
-const awards = [
+const awards: {
+  place: string;
+  title: string;
+  by: string;
+  note?: string;
+  project?: string;
+  href?: string;
+}[] = [
+  {
+    place: "3rd Place",
+    title: "Data Analytics Dash",
+    by: "COMPFEST 18, Universitas Indonesia",
+    note: "National competition, out of 400+ teams",
+  },
   {
     place: "1st Place",
     title: "Web Redesign Competition",
@@ -214,9 +227,12 @@ export default function About() {
                   <div className={styles.entry}>
                     <p className={styles.role}>{award.title}</p>
                     <p className={styles.org}>by {award.by}</p>
-                    <Link href={award.href} className={styles.entryLink}>
-                      {award.project}
-                    </Link>
+                    {award.note && <p className={styles.org}>{award.note}</p>}
+                    {award.href && (
+                      <Link href={award.href} className={styles.entryLink}>
+                        {award.project}
+                      </Link>
+                    )}
                   </div>
                 </li>
               ))}
