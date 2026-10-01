@@ -1335,3 +1335,358 @@
     width: 180px;
   }
 }
+
+/* Tree diagram (information architecture): root on top, one column per
+   section, nested items hang off a guide line */
+.tree {
+  padding: 24px;
+  border: 1px solid rgb(72 117 200 / 0.2);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.treeRoot {
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.treeColumns {
+  position: relative;
+  width: 100%;
+  margin-top: 28px;
+  padding-top: 20px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Stem down from the root, then the rail joining the five columns */
+.treeColumns::before,
+.treeColumns::after {
+  content: "";
+  position: absolute;
+  background: rgb(72 117 200 / 0.35);
+}
+
+.treeColumns::before {
+  top: -28px;
+  left: 50%;
+  width: 1px;
+  height: 28px;
+}
+
+.treeColumns::after {
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+}
+
+.treeColumn {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Drop from the rail to each section */
+.treeColumn::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 1px;
+  height: 20px;
+  background: rgb(72 117 200 / 0.35);
+}
+
+.treeSection {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Branch lists for both diagrams. Each item draws its own piece of the
+   vertical guide line (as a background), so the line can stop at the last
+   item's branch instead of hanging below it. Branch sits 20px down: 6px item
+   padding + half of a ~29px node. */
+.treeList,
+.flowList {
+  --branch-y: 20px;
+  --line: rgb(72 117 200 / 0.45);
+  list-style: none;
+  margin: 0 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.treeItem,
+.flowItem {
+  position: relative;
+  padding: 6px 0 6px 18px;
+  background: linear-gradient(var(--line), var(--line)) 0 0 / 1.5px 100% no-repeat;
+}
+
+.treeItem:last-child,
+.flowItem:last-child {
+  background-size: 1.5px var(--branch-y);
+}
+
+/* Horizontal branch from the guide line to the item */
+.treeItem::before,
+.flowItem::before {
+  content: "";
+  position: absolute;
+  top: var(--branch-y);
+  left: 0;
+  width: 14px;
+  height: 1.5px;
+  background: var(--line);
+}
+
+/* Nested lists hang under their parent node's left edge */
+.treeItem > .treeList {
+  margin: 0 0 0 10px;
+}
+
+.treeNode {
+  display: block;
+  padding: 6px 8px;
+  border: 1px solid rgb(72 117 200 / 0.15);
+  border-radius: 8px;
+  background: #FFFFFF;
+  color: var(--color-text-card);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+/* Phones: sections stack, so drop the horizontal connectors */
+@media (max-width: 768px) {
+  .tree {
+    padding: 20px;
+    align-items: stretch;
+  }
+  .treeRoot {
+    align-self: center;
+  }
+  .treeColumns {
+    margin-top: 20px;
+    padding-top: 0;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .treeColumns::before,
+  .treeColumns::after,
+  .treeColumn::before {
+    display: none;
+  }
+  .treeSection {
+    text-align: left;
+  }
+}
+
+/* Navigation flowchart. Shapes carry meaning: action = teal capsule (Temu.in's
+   brand teal), screen = blue rectangle, decision = diamond; arrows show
+   direction. The frame and the rail into the tab columns reuse the tree. */
+.flowAction,
+.flowScreen {
+  display: inline-block;
+  padding: 6px 10px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--color-text-card);
+}
+
+.flowAction {
+  border: 1px solid rgb(0 168 166 / 0.55);
+  border-radius: 100px;
+  background: rgb(0 168 166 / 0.08);
+}
+
+.flowScreen {
+  border: 1px solid rgb(72 117 200 / 0.45);
+  border-radius: 6px;
+  background: var(--color-primary-light);
+  font-weight: 500;
+}
+
+.diamond {
+  flex-shrink: 0;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--color-primary);
+  background: #FFFFFF;
+  transform: rotate(45deg);
+}
+
+.legend {
+  align-self: flex-start;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legendSwatch {
+  width: 28px;
+  height: 16px;
+  padding: 0;
+}
+
+.legendArrow {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Sign-in flowchart (SVG): wide on desktop, vertical on phones */
+.entrySvg {
+  width: 100%;
+  margin: 20px 0 0;
+  font-family: var(--font-outfit), sans-serif;
+}
+
+.entryWide {
+  max-width: 800px;
+}
+
+.entryTall {
+  display: none;
+  max-width: 340px;
+}
+
+.svgLine {
+  fill: none;
+  stroke: rgb(72 117 200 / 0.6);
+  stroke-width: 1.5;
+}
+
+.svgArrowHead {
+  fill: rgb(72 117 200 / 0.8);
+}
+
+.svgAction {
+  fill: rgb(0 168 166 / 0.08);
+  stroke: rgb(0 168 166 / 0.55);
+}
+
+.svgScreen {
+  fill: var(--color-primary-light);
+  stroke: rgb(72 117 200 / 0.45);
+}
+
+.svgDecision {
+  fill: #FFFFFF;
+  stroke: var(--color-primary);
+  stroke-width: 1.5;
+}
+
+.svgText,
+.svgDecisionText {
+  fill: var(--color-text-card);
+  font-size: 13px;
+  text-anchor: middle;
+}
+
+.svgDecisionText {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.svgBranch {
+  fill: var(--color-primary);
+  font-size: 11px;
+  font-weight: 600;
+  text-anchor: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Tab columns: the tab screen, then a spine with an arrow into each action */
+.flowTab {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.flowItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* The flowchart's branch ends in an arrowhead pointing at the action */
+.flowItem::after {
+  content: "";
+  position: absolute;
+  top: var(--branch-y);
+  left: 12px;
+  margin-top: -3.25px;
+  border: 4px solid transparent;
+  border-left: 6px solid rgb(72 117 200 / 0.8);
+  border-right: 0;
+}
+
+/* Shorter branch so the arrowhead meets the action's edge */
+.flowItem::before {
+  width: 12px;
+}
+
+/* Action that opens a screen: a short down arrow into that screen */
+.flowGroup {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flowDown {
+  position: relative;
+  width: 1.5px;
+  height: 14px;
+  background: rgb(72 117 200 / 0.45);
+}
+
+.flowDown::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: -3.25px;
+  border: 4px solid transparent;
+  border-top: 6px solid rgb(72 117 200 / 0.8);
+  border-bottom: 0;
+}
+
+.flowDown + .flowScreen {
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .entryWide {
+    display: none;
+  }
+  .entryTall {
+    display: block;
+    align-self: center;
+  }
+}

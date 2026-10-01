@@ -51,6 +51,17 @@ export type Block =
       title?: string;
       items: { label: string; text: string; src: string; alt: string }[];
     }
+  // Hierarchy diagram, e.g. information architecture: a root, then one
+  // column per top-level section with nested children
+  | { type: "tree"; title?: string; root: string; items: TreeNode[] }
+  // Navigation flow: the sign-in path, then the actions available in each tab.
+  // An action with a screen opens that screen.
+  | {
+      type: "flow";
+      title?: string;
+      entry: { start: string; decision: string; no: string[]; yes: string[]; end: string };
+      tabs: { label: string; actions: { label: string; screen?: string }[] }[];
+    }
   // One image beside a list of points, e.g. what a logo means
   | { type: "spotlight"; title?: string; src: string; alt: string; points: string[] }
   // Competitor groups for benchmarking, each with why it was chosen
@@ -67,6 +78,11 @@ export type Block =
       layout?: "grid" | "stack";
       items: { caption: string; src?: string }[];
     };
+
+export interface TreeNode {
+  label: string;
+  children?: TreeNode[];
+}
 
 export interface Phase {
   name: "Empathize" | "Define" | "Ideate" | "Prototype" | "Test";
@@ -571,9 +587,91 @@ export const projects: Project[] = [
                 "Building on the benchmarking, we structured the information architecture so students can reach buying and selling quickly, with a simpler hierarchy.",
             },
             {
-              type: "images",
-              layout: "stack",
-              items: [{ caption: "Information architecture" }],
+              type: "tree",
+              root: "Temu.in",
+              items: [
+                {
+                  label: "Home",
+                  children: [
+                    { label: "Location filter, chat, and cart" },
+                    { label: "Search bar" },
+                    { label: "Product categories" },
+                    { label: "Favorites" },
+                    { label: "Product recommendations" },
+                  ],
+                },
+                {
+                  label: "Activity",
+                  children: [
+                    {
+                      label: "Filter by status",
+                      children: [
+                        { label: "Waiting Confirmation" },
+                        { label: "Waiting Payment" },
+                        { label: "On Progress" },
+                        { label: "Canceled" },
+                        { label: "Completed" },
+                      ],
+                    },
+                    {
+                      label: "Filter by transaction type",
+                      children: [{ label: "Sell" }, { label: "Buy" }],
+                    },
+                  ],
+                },
+                {
+                  label: "Sell",
+                  children: [
+                    { label: "Choose category" },
+                    { label: "Take photo", children: [{ label: "Photo tips" }] },
+                    {
+                      label: "Preview",
+                      children: [{ label: "Retake" }, { label: "Upload (CTA)" }],
+                    },
+                    {
+                      label: "Item details",
+                      children: [
+                        { label: "Photos" },
+                        { label: "AI analysis" },
+                        { label: "Item name" },
+                        { label: "Usage duration" },
+                        { label: "Price" },
+                        { label: "Authenticity" },
+                        { label: "Description" },
+                      ],
+                    },
+                    { label: "Pickup method" },
+                  ],
+                },
+                {
+                  label: "Notifications",
+                  children: [
+                    {
+                      label: "Filter by role",
+                      children: [{ label: "As seller" }, { label: "As buyer" }],
+                    },
+                  ],
+                },
+                {
+                  label: "Profile",
+                  children: [
+                    {
+                      label: "Profile overview",
+                      children: [
+                        { label: "Name" },
+                        { label: "Address" },
+                        { label: "Rating" },
+                        { label: "Member since" },
+                      ],
+                    },
+                    { label: "Edit profile (CTA)" },
+                    { label: "Share profile" },
+                    { label: "Settings" },
+                    { label: "Profile insights" },
+                    { label: "Listed products" },
+                  ],
+                },
+              ],
             },
             {
               type: "text",
@@ -581,9 +679,57 @@ export const projects: Project[] = [
               content: "Finally, we charted the paths users take as they move through the app.",
             },
             {
-              type: "images",
-              layout: "stack",
-              items: [{ caption: "Navigation flow" }],
+              type: "flow",
+              entry: {
+                start: "Open app",
+                decision: "Has an account?",
+                no: ["Sign up", "Email confirmation"],
+                yes: ["Log in"],
+                end: "Welcome screen",
+              },
+              tabs: [
+                {
+                  label: "Home",
+                  actions: [
+                    { label: "Search items by text or photo" },
+                    { label: "Choose search location" },
+                    { label: "View favorite products", screen: "Favorites" },
+                    { label: "View notification history", screen: "Notifications" },
+                    { label: "View catalog recommendations" },
+                    { label: "View item categories" },
+                    { label: "View cart", screen: "Cart" },
+                    { label: "View chat history", screen: "Chat" },
+                  ],
+                },
+                {
+                  label: "Activity",
+                  actions: [
+                    { label: "View messages" },
+                    { label: "Track activity by status" },
+                    { label: "View notifications" },
+                  ],
+                },
+                {
+                  label: "Sell",
+                  actions: [
+                    { label: "Upload or photograph an item" },
+                    { label: "Choose item category" },
+                    { label: "Edit or replace item photos" },
+                    { label: "Add item details" },
+                    { label: "Choose delivery preference" },
+                    { label: "Choose the seller’s campus location" },
+                    { label: "Preview the item listing" },
+                  ],
+                },
+                {
+                  label: "Notifications",
+                  actions: [{ label: "View all notifications" }],
+                },
+                {
+                  label: "Profile",
+                  actions: [{ label: "View item catalog" }, { label: "Edit profile details" }],
+                },
+              ],
             },
           ],
         },

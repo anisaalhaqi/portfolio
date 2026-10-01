@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
-import { PHASE_ORDER, type Block, type Project } from "@/data/projects";
+import { PHASE_ORDER, type Block, type Project, type TreeNode } from "@/data/projects";
 import PhaseStepper from "./PhaseStepper";
 import styles from "./ProjectPage.module.css";
 
@@ -183,6 +183,145 @@ export default function ProjectPage({ project: study }: { project: Project }) {
 
       <Footer variant="blue" />
     </main>
+  );
+}
+
+type FlowEntry = Extract<Block, { type: "flow" }>["entry"];
+
+// Sign-in flowchart: start, decision, Yes/No branches that rejoin at the end
+// screen. Drawn in SVG so arrows and the diamond are exact; a vertical variant
+// replaces the wide one on phones so the text stays readable.
+function EntryFlow({ entry }: { entry: FlowEntry }) {
+  const [signUp, confirm] = entry.no;
+  const [logIn] = entry.yes;
+  const [decisionA, ...decisionRest] = entry.decision.split(" ");
+  const decisionB = decisionRest.join(" ");
+  const label = `Sign-in flow: ${entry.start}, then ${entry.decision} If yes, ${logIn}. If no, ${entry.no.join(", then ")}. Both lead to ${entry.end}.`;
+
+  return (
+    <>
+      <svg className={`${styles.entrySvg} ${styles.entryWide}`} viewBox="70 0 660 284" role="img" aria-label={label}>
+        {/* Start, decision and end sit on the center line x=400, so the stem
+            into the tab columns below drops straight from the end screen */}
+        <FlowDefs id="flow-arrow-wide" />
+        <FlowNode kind="action" x={330} y={8} w={140} h={36} text={entry.start} />
+        <FlowLine m="flow-arrow-wide" d="M400 44 V70" />
+        <polygon className={styles.svgDecision} points="400,72 460,128 400,184 340,128" />
+        <text className={styles.svgDecisionText} x="400" y="124">{decisionA}</text>
+        <text className={styles.svgDecisionText} x="400" y="140">{decisionB}</text>
+
+        <FlowLine m="flow-arrow-wide" d="M340 128 H304" />
+        <text className={styles.svgBranch} x="322" y="118">Yes</text>
+        <FlowNode kind="screen" x={182} y={110} w={120} h={36} text={logIn} />
+
+        <FlowLine m="flow-arrow-wide" d="M460 128 H500" />
+        <text className={styles.svgBranch} x="480" y="118">No</text>
+        <FlowNode kind="screen" x={502} y={110} w={100} h={36} text={signUp} />
+        <FlowLine m="flow-arrow-wide" d="M602 128 H620" />
+        <FlowNode kind="screen" x={622} y={104} w={104} h={48} text={confirm} />
+
+        <path className={styles.svgLine} d="M242 146 V210 M674 152 V210 M242 210 H674" />
+        <FlowLine m="flow-arrow-wide" d="M400 210 V234" />
+        <FlowNode kind="screen" x={325} y={236} w={150} h={40} text={entry.end} />
+      </svg>
+
+      <svg className={`${styles.entrySvg} ${styles.entryTall}`} viewBox="0 0 340 352" role="img" aria-label={label}>
+        <FlowDefs id="flow-arrow-tall" />
+        <FlowNode kind="action" x={100} y={8} w={140} h={36} text={entry.start} />
+        <FlowLine m="flow-arrow-tall" d="M170 44 V70" />
+        <polygon className={styles.svgDecision} points="170,72 230,128 170,184 110,128" />
+        <text className={styles.svgDecisionText} x="170" y="124">{decisionA}</text>
+        <text className={styles.svgDecisionText} x="170" y="140">{decisionB}</text>
+
+        <FlowLine m="flow-arrow-tall" d="M170 184 V218" />
+        <text className={styles.svgBranch} x="186" y="206">Yes</text>
+        <FlowNode kind="screen" x={110} y={220} w={120} h={36} text={logIn} />
+
+        <FlowLine m="flow-arrow-tall" d="M230 128 H244" />
+        <text className={styles.svgBranch} x="238" y="114">No</text>
+        <FlowNode kind="screen" x={246} y={110} w={90} h={36} text={signUp} />
+        <FlowLine m="flow-arrow-tall" d="M291 146 V168" />
+        <FlowNode kind="screen" x={246} y={170} w={90} h={48} text={confirm} />
+
+        <path className={styles.svgLine} d="M291 218 V280 H170 M170 256 V280" />
+        <FlowLine m="flow-arrow-tall" d="M170 280 V302" />
+        <FlowNode kind="screen" x={95} y={304} w={150} h={40} text={entry.end} />
+      </svg>
+    </>
+  );
+}
+
+// Each SVG gets its own marker id: the hidden variant is display:none, and a
+// marker referenced from a hidden SVG would not render in the visible one
+function FlowDefs({ id }: { id: string }) {
+  return (
+    <defs>
+      <marker id={id} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" className={styles.svgArrowHead} />
+      </marker>
+    </defs>
+  );
+}
+
+function FlowLine({ d, m }: { d: string; m: string }) {
+  return <path className={styles.svgLine} d={d} markerEnd={`url(#${m})`} />;
+}
+
+// Action = capsule, screen = rectangle; long labels wrap onto two lines
+function FlowNode({
+  kind,
+  x,
+  y,
+  w,
+  h,
+  text,
+}: {
+  kind: "action" | "screen";
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  text: string;
+}) {
+  const words = text.split(" ");
+  const lines = h > 40 && words.length > 1 ? [words[0], words.slice(1).join(" ")] : [text];
+  const cx = x + w / 2;
+  const cy = y + h / 2;
+  return (
+    <g>
+      <rect
+        className={kind === "action" ? styles.svgAction : styles.svgScreen}
+        x={x}
+        y={y}
+        width={w}
+        height={h}
+        rx={kind === "action" ? h / 2 : 6}
+      />
+      {lines.map((line, i) => (
+        <text
+          key={line}
+          className={styles.svgText}
+          x={cx}
+          y={cy + (i - (lines.length - 1) / 2) * 15 + 4}
+        >
+          {line}
+        </text>
+      ))}
+    </g>
+  );
+}
+
+// Nested branch of the tree diagram; each level indents along a guide line
+function TreeList({ nodes }: { nodes: TreeNode[] }) {
+  return (
+    <ul className={styles.treeList}>
+      {nodes.map((node) => (
+        <li key={node.label} className={styles.treeItem}>
+          <span className={styles.treeNode}>{node.label}</span>
+          {node.children && <TreeList nodes={node.children} />}
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -479,6 +618,73 @@ function PhaseBlock({ block }: { block: Block }) {
               </li>
             ))}
           </ol>
+        </div>
+      );
+
+    case "tree":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <div className={styles.tree}>
+            <span className={styles.treeRoot}>{block.root}</span>
+            <ul className={styles.treeColumns}>
+              {block.items.map((section) => (
+                <li key={section.label} className={styles.treeColumn}>
+                  <span className={styles.treeSection}>{section.label}</span>
+                  {section.children && <TreeList nodes={section.children} />}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      );
+
+    case "flow":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <div className={styles.tree}>
+            <ul className={styles.legend} aria-label="Legend">
+              <li>
+                <span className={`${styles.flowAction} ${styles.legendSwatch}`} /> Action
+              </li>
+              <li>
+                <span className={`${styles.flowScreen} ${styles.legendSwatch}`} /> Screen
+              </li>
+              <li>
+                <span className={styles.diamond} /> Decision
+              </li>
+              <li>
+                <span className={styles.legendArrow} aria-hidden="true">→</span> Flow
+              </li>
+            </ul>
+
+            <EntryFlow entry={block.entry} />
+
+            <ul className={styles.treeColumns}>
+              {block.tabs.map((tab) => (
+                <li key={tab.label} className={styles.treeColumn}>
+                  <span className={`${styles.flowScreen} ${styles.flowTab}`}>{tab.label}</span>
+                  <ul className={styles.flowList}>
+                    {tab.actions.map((action) => (
+                      <li key={action.label} className={styles.flowItem}>
+                        {/* Action and the screen it opens, centered on one axis */}
+                        <span className={styles.flowGroup}>
+                          <span className={styles.flowAction}>{action.label}</span>
+                          {action.screen && (
+                            <>
+                              <span className={styles.flowDown} aria-hidden="true" />
+                              <span className={styles.flowScreen}>{action.screen}</span>
+                            </>
+                          )}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       );
 
