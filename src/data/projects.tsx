@@ -2,7 +2,36 @@ import type { ReactNode } from "react";
 
 // A phase is a list of blocks; each block type has its own layout on the page
 export type Block =
-  | { type: "text"; content: ReactNode }
+  | { type: "text"; title?: string; content: ReactNode }
+  // Side-by-side cards, each with a heading and bullet points
+  | { type: "columns"; title?: string; items: { title: string; points: string[] }[] }
+  | {
+      type: "empathy";
+      title?: string;
+      items: { label: string; says: string[]; thinks: string[]; does: string[]; feels: string[] }[];
+    }
+  | {
+      type: "journey";
+      title?: string;
+      items: {
+        label: string;
+        stages: { stage: string; action: string; feeling: string; pain: string }[];
+      }[];
+    }
+  | {
+      type: "personas";
+      title?: string;
+      items: {
+        name: string;
+        age: number;
+        program: string;
+        role: string;
+        bio: string;
+        trait: string;
+        frustrations: string[];
+        goals: string[];
+      }[];
+    }
   | { type: "findings"; items: { stat: string; text: string }[] }
   | { type: "quotes"; title?: string; items: { quote: string; name: string; role: string }[] }
   // With fixLabel set, each card also shows its fix, or a placeholder until one is written
@@ -16,8 +45,14 @@ export type Block =
   | { type: "list"; title: string; items: string[] }
   | { type: "mapping"; title?: string; items: { problem: string; feature: string }[] }
   | { type: "metrics"; title?: string; items: { label: string; before: string; after: string }[] }
-  // Leave src empty to show a placeholder until the image is exported
-  | { type: "images"; items: { caption: string; src?: string }[] };
+  // Leave src empty to show a placeholder until the image is exported.
+  // "stack" shows each image full width, for large diagrams.
+  | {
+      type: "images";
+      title?: string;
+      layout?: "grid" | "stack";
+      items: { caption: string; src?: string }[];
+    };
 
 export interface Phase {
   name: "Empathize" | "Define" | "Ideate" | "Prototype" | "Test";
@@ -137,6 +172,36 @@ export const projects: Project[] = [
           blocks: [
             {
               type: "text",
+              content:
+                "To hear first-hand how students buy and sell academic gear on campus, and where it goes wrong, we started with a user research plan.",
+            },
+            {
+              type: "columns",
+              title: "User research plan",
+              items: [
+                {
+                  title: "Research goals",
+                  points: [
+                    "Find the gaps in how ITB students buy and sell academic needs",
+                    "Explore how students search for, buy, and sell academic items, especially when time is short and the need is urgent",
+                    "Identify pain points in today’s transactions",
+                    "Understand what students expect from a digital platform for academic items",
+                  ],
+                },
+                {
+                  title: "Target participants",
+                  points: [
+                    "Aged 18–23, mostly female",
+                    "Students from every ITB campus",
+                    "Both active and inactive in looking for and buying academic needs",
+                    "Have bought, or tend to buy, academic items, new or second-hand",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "Survey",
               content: (
                 <>
                   We surveyed <strong>114 ITB students across 28 majors</strong>{" "}
@@ -168,6 +233,7 @@ export const projects: Project[] = [
             },
             {
               type: "text",
+              title: "Interviews",
               content: (
                 <>
                   To validate the survey, we <strong>interviewed 7 ITB students</strong>{" "}
@@ -193,12 +259,137 @@ export const projects: Project[] = [
               ],
             },
             {
-              type: "images",
+              type: "text",
+              title: "Empathy map",
+              content:
+                "We then mapped these insights into empathy maps to see what sellers and buyers say, think, do, and feel when getting academic gear.",
+            },
+            {
+              type: "empathy",
               items: [
-                { caption: "Empathy map" },
-                { caption: "Affinity map" },
-                { caption: "User personas" },
-                { caption: "User journey map" },
+                {
+                  label: "Seller",
+                  says: [
+                    "“I tried posting it on my IG story, but nobody replied.”",
+                    "“I’m afraid it’ll get damaged if I keep it too long.”",
+                    "“I don’t know what price to set. It was so expensive when I bought it.”",
+                  ],
+                  thinks: [
+                    "“Better not to sell it at all than explain every stain and scribble.”",
+                    "“It’s a shame to sell it cheap, but if it’s pricey it won’t sell.”",
+                  ],
+                  does: [
+                    "Relies on a small circle of friends",
+                    "Lets items pile up and gather dust",
+                    "Sells at a loss just to get rid of it, unsure of the market price",
+                  ],
+                  feels: [
+                    "Uncomfortable with unused items piling up",
+                    "Afraid of being scammed, or of items being stolen if left at the honesty canteen",
+                    "Guilty that expensive items are just for display",
+                  ],
+                },
+                {
+                  label: "Buyer",
+                  says: [
+                    "“New gear is so expensive, I’d rather borrow from a senior.”",
+                    "“I fell for a hardcover in the photo, but the pages were crooked when it arrived.”",
+                    "“Sellers only show up at the start of the semester.”",
+                  ],
+                  thinks: [
+                    "“Is this really a student? Hope it’s not a fake account.”",
+                    "“I need it for lab tomorrow, but finding an active seller is so hard.”",
+                  ],
+                  does: [
+                    "Scrolls through messy WhatsApp and X groups by hand",
+                    "Ends up buying new, even for brief use, after failing to find a preloved item in time",
+                  ],
+                  feels: [
+                    "Annoyed at checking prices across many shops and accounts",
+                    "Awkward about borrowing from seniors again and again",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "User journey map",
+              content:
+                "To see how their emotions shift from start to finish, we traced each side’s journey step by step.",
+            },
+            {
+              type: "journey",
+              items: [
+                {
+                  label: "Seller",
+                  stages: [
+                    {
+                      stage: "Awareness",
+                      action: "Notices academic items piling up in their room",
+                      feeling: "Uneasy 😟",
+                      pain: "The pile feels cramped and makes them feel guilty",
+                    },
+                    {
+                      stage: "Preparation",
+                      action: "Checks market prices on Shopee or X, then writes a description by hand",
+                      feeling: "Frustrated 😫",
+                      pain: "The pile feels cramped and makes them feel guilty",
+                    },
+                    {
+                      stage: "Promotion",
+                      action: "Posts on IG Story, the class WhatsApp group, or a spreadsheet",
+                      feeling: "Tired, uncertain 🥲",
+                      pain: "Reach is limited to close friends",
+                    },
+                    {
+                      stage: "Nego & Trust",
+                      action: "Replies to chats asking about the condition",
+                      feeling: "Wary 🤨",
+                      pain: "No clear identity, and a fear of receiving a dud",
+                    },
+                    {
+                      stage: "Outcome",
+                      action: "Gives it to a junior or just leaves it",
+                      feeling: "Resigned 😔",
+                      pain: "The item never turns into money, though it cost a lot",
+                    },
+                  ],
+                },
+                {
+                  label: "Buyer",
+                  stages: [
+                    {
+                      stage: "Need",
+                      action: "Realizes they need a lab tool or TPB book, but new ones are too expensive",
+                      feeling: "Anxious 😰",
+                      pain: "A limited allowance, while lab tools and books are very expensive",
+                    },
+                    {
+                      stage: "Searching",
+                      action: "Scrolls WhatsApp groups and X, or asks seniors one by one",
+                      feeling: "Confused 😵",
+                      pain: "Items get buried in spam chats, or no active seller turns up",
+                    },
+                    {
+                      stage: "Verification",
+                      action: "Asks for detailed photos or videos through DMs",
+                      feeling: "Skeptical 🤨",
+                      pain: "Unclear photos and seasonal sellers raise the fear of a dud",
+                    },
+                    {
+                      stage: "Nego & Meet Up",
+                      action: "Arranges a COD meetup on campus to check the item and pay",
+                      feeling: "Worried 😟",
+                      pain: "Reluctant to share a personal WhatsApp number with strangers",
+                    },
+                    {
+                      stage: "Outcome",
+                      action: "Gets the item, not always as expected, or ends up buying new",
+                      feeling: "Satisfied but tired 😔",
+                      pain: "Feels money was wasted on expensive items barely used",
+                    },
+                  ],
+                },
               ],
             },
           ],
@@ -206,6 +397,57 @@ export const projects: Project[] = [
         {
           name: "Define",
           blocks: [
+            {
+              type: "text",
+              title: "User personas",
+              content:
+                "We distilled the research into two personas, one for each side of the marketplace, to keep their needs in view.",
+            },
+            {
+              type: "personas",
+              items: [
+                {
+                  name: "Kevin",
+                  age: 21,
+                  program: "Informatics ITB ’24",
+                  role: "Seller",
+                  bio: "Has 21 TPB books and a lab coat piling up in his boarding room since last year. He tried selling through his class spreadsheet, but it was unreliable and drew few buyers.",
+                  trait: "Practical, dislikes time-wasting processes, and values efficiency.",
+                  frustrations: [
+                    "Can’t be bothered typing and explaining an item’s condition to many people, again and again",
+                    "Unsure what price to set, afraid of going too high or too low",
+                    "Wastes time comparing prices on other e-commerce sites",
+                    "Bothered by the pile of items, but too lazy to actually sell them",
+                  ],
+                  goals: [
+                    "Automatic price suggestions, so there’s no manual research",
+                    "Automated listing, so uploading an item is instant",
+                    "Data security, with one email per account",
+                    "A Want To Buy (WTB) feature to see buyers’ requests directly",
+                  ],
+                },
+                {
+                  name: "Jessica",
+                  age: 20,
+                  program: "Product Design ITB ’24",
+                  role: "Buyer",
+                  bio: "Often needs specific drawing tools, like paints and A2 bags, that are expensive but barely used. She wants to buy preloved, but sellers are very seasonal.",
+                  trait: "Spends 5 hours a day on social media, and is selective about price and reviews before buying.",
+                  frustrations: [
+                    "Afraid of being misled about condition, so she often asks sellers for photos with sticky notes",
+                    "Afraid of fake or scam accounts",
+                    "Often doesn’t know a tool’s technical name, so she guesses or uses Google Lens",
+                    "Forced to buy expensive new items when no used ones turn up in time",
+                  ],
+                  goals: [
+                    "A Verified Student feature for safety",
+                    "Full transparency on defects and how long an item was used",
+                    "Smart search",
+                    "Flexible delivery, plus mediation if something goes wrong",
+                  ],
+                },
+              ],
+            },
             {
               type: "cards",
               title: "Problem statements",
@@ -221,15 +463,19 @@ export const projects: Project[] = [
               ],
             },
             {
+              type: "text",
+              content: "Solving both problems at once gave us a single goal to design toward.",
+            },
+            {
               type: "statement",
               label: "Goal",
               text: "Create a practical, transparent, and trustworthy way to circulate academic goods through an AI-powered, student-only marketplace, removing the busywork for sellers and the skepticism buyers feel toward preloved items.",
             },
-          ],
-        },
-        {
-          name: "Ideate",
-          blocks: [
+            {
+              type: "text",
+              content:
+                "We then reframed the problems as opportunities, to steer ideation toward the features that matter most.",
+            },
             {
               type: "list",
               title: "How might we…",
@@ -238,6 +484,16 @@ export const projects: Project[] = [
                 "create an objective condition check, so buyers can see every defect up front without inspecting the item again and again?",
                 "create a campus-only marketplace, so students can find the gear they need quickly and safely without sharing personal details on social media?",
               ],
+            },
+          ],
+        },
+        {
+          name: "Ideate",
+          blocks: [
+            {
+              type: "text",
+              content:
+                "To connect each problem to what Temu.in offers, we traced every root cause to a solution and a feature.",
             },
             {
               type: "mapping",
@@ -254,21 +510,41 @@ export const projects: Project[] = [
             },
             {
               type: "text",
+              title: "Benchmarking",
               content: (
                 <>
-                  We <strong>benchmarked 7 competitor platforms</strong> across
-                  three categories to find the flows users already know, then used
-                  the results to shape the information architecture and
-                  navigation.
+                  To find the flows users already know, we{" "}
+                  <strong>benchmarked 7 competitor platforms</strong>, grouped
+                  into primary, secondary, and other competitors by business
+                  model.
                 </>
               ),
             },
             {
               type: "images",
-              items: [
-                { caption: "Information architecture" },
-                { caption: "Navigation flow" },
-              ],
+              layout: "stack",
+              items: [{ caption: "Benchmarking, part 1" }, { caption: "Benchmarking, part 2" }],
+            },
+            {
+              type: "text",
+              title: "Information architecture",
+              content:
+                "Building on the benchmarking, we structured the information architecture so students can reach buying and selling quickly, with a simpler hierarchy.",
+            },
+            {
+              type: "images",
+              layout: "stack",
+              items: [{ caption: "Information architecture" }],
+            },
+            {
+              type: "text",
+              title: "Navigation",
+              content: "Finally, we charted the paths users take as they move through the app.",
+            },
+            {
+              type: "images",
+              layout: "stack",
+              items: [{ caption: "Navigation flow" }],
             },
           ],
         },

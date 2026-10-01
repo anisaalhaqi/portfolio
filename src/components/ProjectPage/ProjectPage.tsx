@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
 import { PHASE_ORDER, type Block, type Project } from "@/data/projects";
+import PhaseStepper from "./PhaseStepper";
 import styles from "./ProjectPage.module.css";
 
 const BACK_LINK = {
@@ -135,28 +136,12 @@ export default function ProjectPage({ project: study }: { project: Project }) {
                 <p>{study.methodology.intro}</p>
               </div>
 
-              <ol className={`${styles.glass} ${styles.steps}`}>
-                {PHASE_ORDER.map((name, i) => {
-                  const ready = phasesWithContent.has(name);
-                  const content = (
-                    <>
-                      <span className={styles.stepIndex}>{i + 1}</span>
-                      <span className={styles.stepName}>{name}</span>
-                    </>
-                  );
-                  return (
-                    <li key={name} className={ready ? styles.stepReady : styles.stepPending}>
-                      {ready ? (
-                        <a href={`#${name.toLowerCase()}`} className={styles.stepLink}>
-                          {content}
-                        </a>
-                      ) : (
-                        <span className={styles.stepLink}>{content}</span>
-                      )}
-                    </li>
-                  );
-                })}
-              </ol>
+              <PhaseStepper
+                phases={PHASE_ORDER.map((name) => ({
+                  name,
+                  ready: phasesWithContent.has(name),
+                }))}
+              />
 
               {study.methodology.phases.map((phase) => (
                 <div key={phase.name} id={phase.name.toLowerCase()} className={styles.phase}>
@@ -206,9 +191,155 @@ function BlockTitle({ title }: { title?: string }) {
 function PhaseBlock({ block }: { block: Block }) {
   switch (block.type) {
     case "text":
+      // A titled text block opens a new sub-part of the phase
       return (
-        <div className={styles.prose}>
-          <p>{block.content}</p>
+        <div className={block.title ? `${styles.block} ${styles.subsection}` : undefined}>
+          <BlockTitle title={block.title} />
+          <div className={styles.prose}>
+            <p>{block.content}</p>
+          </div>
+        </div>
+      );
+
+    case "columns":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <div className={styles.cards}>
+            {block.items.map((item) => (
+              <div key={item.title} className={styles.card}>
+                <p className={styles.cardTitle}>{item.title}</p>
+                <ul className={styles.bullets}>
+                  {item.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
+    case "empathy":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          {block.items.map((map) => (
+            <div key={map.label} className={styles.empathy}>
+              <span className={styles.mapLabel}>{map.label}</span>
+              <div className={styles.empathyGrid}>
+                {(
+                  [
+                    ["Says", map.says],
+                    ["Thinks", map.thinks],
+                    ["Does", map.does],
+                    ["Feels", map.feels],
+                  ] as const
+                ).map(([quadrant, points]) => (
+                  <div key={quadrant} className={styles.quadrant}>
+                    <span className={styles.eyebrow}>{quadrant}</span>
+                    <ul className={styles.bullets}>
+                      {points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+
+    case "journey":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          {block.items.map((journey) => (
+            <div key={journey.label} className={styles.journey}>
+              <span className={styles.mapLabel}>{journey.label}</span>
+              {/* Scrolls sideways on narrow screens instead of squeezing the columns */}
+              <div className={styles.journeyScroll}>
+                <table className={styles.journeyTable}>
+                  <thead>
+                    <tr>
+                      <th scope="col">
+                        <span className={styles.visuallyHidden}>Row</span>
+                      </th>
+                      {journey.stages.map((s) => (
+                        <th key={s.stage} scope="col">
+                          {s.stage}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Actions</th>
+                      {journey.stages.map((s) => (
+                        <td key={s.stage}>{s.action}</td>
+                      ))}
+                    </tr>
+                    <tr className={styles.feelingRow}>
+                      <th scope="row">Feeling</th>
+                      {journey.stages.map((s) => (
+                        <td key={s.stage}>{s.feeling}</td>
+                      ))}
+                    </tr>
+                    <tr>
+                      <th scope="row">Pain points</th>
+                      {journey.stages.map((s) => (
+                        <td key={s.stage}>{s.pain}</td>
+                      ))}
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+
+    case "personas":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          {block.items.map((persona) => (
+            <article key={persona.name} className={`${styles.glass} ${styles.persona}`}>
+              <div className={styles.personaProfile}>
+                <div className={styles.avatar} aria-hidden="true">
+                  {persona.name[0]}
+                </div>
+                <span className={styles.mapLabel}>{persona.role}</span>
+                <p className={styles.personaName}>
+                  {persona.name}, {persona.age}
+                </p>
+                <p className={styles.personaProgram}>{persona.program}</p>
+                <p className={styles.personaTrait}>{persona.trait}</p>
+              </div>
+              <div className={styles.personaDetails}>
+                <p className={styles.personaBio}>{persona.bio}</p>
+                <div className={styles.personaLists}>
+                  <div>
+                    <span className={styles.eyebrow}>Frustrations</span>
+                    <ul className={styles.bullets}>
+                      {persona.frustrations.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <span className={styles.eyebrow}>Goals &amp; needs</span>
+                    <ul className={styles.bullets}>
+                      {persona.goals.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       );
 
@@ -216,7 +347,7 @@ function PhaseBlock({ block }: { block: Block }) {
       return (
         <ul className={styles.findings}>
           {block.items.map((item) => (
-            <li key={item.stat} className={`${styles.glass} ${styles.finding}`}>
+            <li key={item.stat} className={styles.finding}>
               <span className={styles.findingStat}>{item.stat}</span>
               <p>{item.text}</p>
             </li>
@@ -230,7 +361,7 @@ function PhaseBlock({ block }: { block: Block }) {
           <BlockTitle title={block.title} />
           <div className={styles.quotes}>
             {block.items.map((item) => (
-              <figure key={item.name} className={`${styles.glass} ${styles.quote}`}>
+              <figure key={item.name} className={styles.quote}>
                 <blockquote>&ldquo;{item.quote}&rdquo;</blockquote>
                 <figcaption>
                   <span className={styles.quoteName}>{item.name}</span>
@@ -248,7 +379,7 @@ function PhaseBlock({ block }: { block: Block }) {
           <BlockTitle title={block.title} />
           <ul className={styles.cards}>
             {block.items.map((item) => (
-              <li key={item.title} className={`${styles.glass} ${styles.card}`}>
+              <li key={item.title} className={styles.card}>
                 <p className={styles.cardTitle}>{item.title}</p>
                 <p>{item.text}</p>
                 {block.fixLabel && (
@@ -281,7 +412,7 @@ function PhaseBlock({ block }: { block: Block }) {
           <BlockTitle title={block.title} />
           <ol className={styles.numbered}>
             {block.items.map((item, i) => (
-              <li key={i} className={`${styles.glass} ${styles.numberedItem}`}>
+              <li key={i} className={styles.numberedItem}>
                 <span className={styles.numberedIndex}>{i + 1}</span>
                 <p>{item}</p>
               </li>
@@ -294,7 +425,7 @@ function PhaseBlock({ block }: { block: Block }) {
       return (
         <div className={styles.block}>
           <BlockTitle title={block.title} />
-          <div className={`${styles.glass} ${styles.mapping}`}>
+          <div className={styles.mapping}>
             <div className={styles.mappingHead} aria-hidden="true">
               <span>Problem</span>
               <span />
@@ -329,20 +460,34 @@ function PhaseBlock({ block }: { block: Block }) {
         </div>
       );
 
-    case "images":
+    case "images": {
+      const stack = block.layout === "stack";
+      const layoutClass = stack
+        ? styles.imageStack
+        : block.items.length > 1
+          ? styles.imageGrid
+          : undefined;
       return (
-        <div className={block.items.length > 1 ? styles.imageGrid : undefined}>
-          {block.items.map((item) => (
-            <figure key={item.caption} className={styles.figure}>
-              {item.src ? (
-                <img src={item.src} alt={item.caption} className={styles.figureImage} />
-              ) : (
-                <div className={styles.figurePlaceholder}>Image coming soon</div>
-              )}
-              <figcaption>{item.caption}</figcaption>
-            </figure>
-          ))}
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <div className={layoutClass}>
+            {block.items.map((item) => (
+              <figure key={item.caption} className={styles.figure}>
+                {item.src ? (
+                  <img src={item.src} alt={item.caption} className={styles.figureImage} />
+                ) : (
+                  <div
+                    className={`${styles.figurePlaceholder} ${stack ? styles.figurePlaceholderWide : ""}`}
+                  >
+                    Image coming soon
+                  </div>
+                )}
+                <figcaption>{item.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       );
+    }
   }
 }
