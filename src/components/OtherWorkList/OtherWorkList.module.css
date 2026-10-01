@@ -1,0 +1,120 @@
+/* A plain list, not cards: this work supports the case studies, it doesn't
+   compete with them */
+.list {
+  width: min(100% - 40px, var(--content-width));
+  list-style: none;
+  border-bottom: 1px solid rgb(72 117 200 / 0.2);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid rgb(72 117 200 / 0.2);
+  color: inherit;
+}
+
+.type {
+  align-self: start;
+  padding-top: 4px;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  color: var(--color-text-card);
+  font-size: clamp(1.25rem, 0.6vw + 1.05rem, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: color 200ms ease;
+}
+
+.summary {
+  color: var(--color-text-muted);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* External link: the right-pointing arrow turned up-right (↗) */
+.arrow {
+  width: 28px;
+  height: 28px;
+  transform: rotate(-45deg);
+  transition: transform 200ms var(--ease-out);
+}
+
+.soon {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-style: italic;
+}
+
+.linkRow {
+  transition: opacity 100ms ease;
+}
+
+.linkRow:active {
+  opacity: 0.6;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .linkRow:hover .title {
+    color: var(--color-primary);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .linkRow:hover .arrow {
+    transform: rotate(-45deg) translateX(3px);
+  }
+}
+
+/* Touch screens: a long press on a row shouldn't select its text */
+@media (hover: none), (pointer: coarse) {
+  .linkRow {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Phones: type label sits above the title */
+@media (max-width: 768px) {
+  .row {
+    grid-template-columns: 1fr auto;
+    gap: 8px 16px;
+    padding: 20px 0;
+  }
+  .type {
+    grid-column: 1 / -1;
+    padding-top: 0;
+  }
+  .arrow {
+    width: 24px;
+    height: 24px;
+  }
+  .soon {
+    grid-column: 1 / -1;
+  }
+}
