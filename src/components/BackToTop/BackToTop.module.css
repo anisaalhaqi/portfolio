@@ -1,0 +1,91 @@
+/* Solid brand pill, bottom right, clear of the iPhone home indicator.
+   Solid (not glass) so it stands out against the light page. */
+.button {
+  position: fixed;
+  right: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  z-index: 900;
+  height: 48px;
+  padding: 0 20px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 100px;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow:
+    0 1px 2px rgb(26 34 56 / 0.12),
+    0 6px 20px rgb(72 117 200 / 0.35);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  /* Hidden state: slightly lower and smaller, ignores clicks */
+  opacity: 0;
+  transform: translateY(8px) scale(0.95);
+  pointer-events: none;
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out),
+    background-color 200ms ease;
+}
+
+.button[data-visible] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.button[data-visible]:active {
+  background: #385195;
+  transform: scale(0.95);
+  transition-duration: 100ms;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.arrow {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button[data-visible]:hover {
+    background: #385195;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .button[data-visible]:hover .arrow {
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button[data-visible]:active {
+    transform: none;
+  }
+}
+
+/* Phones: icon-only circle to save space (the aria-label still names it) */
+@media (max-width: 768px) {
+  .button {
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    width: 48px;
+    padding: 0;
+    justify-content: center;
+  }
+  .label {
+    display: none;
+  }
+}
