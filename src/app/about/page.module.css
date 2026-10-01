@@ -1,4 +1,4 @@
-/* Shares its layout, chips, and buttons with the home and case study pages */
+/* Shares its layout and buttons with the home and case study pages */
 
 .main {
   width: 100%;
@@ -54,21 +54,6 @@
   font-weight: 600;
   line-height: 1.12;
   letter-spacing: -0.025em;
-}
-
-.achievements {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.chip {
-  composes: chip from "../page.module.css";
-}
-
-.chipLabel {
-  composes: chipLabel from "../page.module.css";
 }
 
 /* Editorial sections: title on the left, content on the right */
@@ -231,9 +216,6 @@
   .heroText {
     align-items: center;
     text-align: center;
-  }
-  .achievements {
-    justify-content: center;
   }
   .status {
     justify-content: center;

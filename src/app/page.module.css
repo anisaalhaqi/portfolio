@@ -115,68 +115,17 @@
   }
 }
 
-/* Proof: awards, each linking to its case study */
-.achievements {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border: 1px solid rgb(72 117 200 / 0.2);
-  border-radius: 100px;
-  background: var(--surface-glass);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  color: var(--color-text-muted);
-  font-size: 15px;
-  transition:
-    border-color 200ms ease,
-    transform 160ms var(--ease-out);
-}
-
-.chipLabel {
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .chip:hover {
-    border-color: rgb(72 117 200 / 0.5);
-  }
-}
-
-.chip:active {
-  transform: scale(0.97);
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .chip {
-    background: #FFFFFF;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-}
-
 /* Hero entrance: staggered rise on first load.
    `backwards` fill only, so the animation releases transform afterwards
    and the buttons' hover/press transforms still work. */
 .eyebrow,
 .headline,
-.actions,
-.achievements {
+.actions {
   animation: heroIn 500ms var(--ease-out) backwards;
 }
 
 .headline { animation-delay: 60ms; }
 .actions { animation-delay: 120ms; }
-.achievements { animation-delay: 180ms; }
 
 @keyframes heroIn {
   from {
@@ -194,8 +143,7 @@
 @media (prefers-reduced-motion: reduce) {
   .eyebrow,
   .headline,
-  .actions,
-  .achievements {
+  .actions {
     animation-name: heroFadeIn;
   }
 }
@@ -277,8 +225,7 @@
 /* Touch screens: a long press on this control shouldn't select its label */
 @media (hover: none), (pointer: coarse) {
   .primaryButton,
-  .secondaryLink,
-  .chip {
+  .secondaryLink {
     -webkit-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;

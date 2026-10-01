@@ -6,11 +6,6 @@ import ContactCard from "@/components/ContactCard/ContactCard";
 const RESUME_URL =
   "https://docs.google.com/document/d/1J8dM-wM57rX83Nr7v8cixy-GKkJYClgmzU_zProBTdc/edit?usp=sharing";
 
-const achievements = [
-  { label: "1st Winner", project: "UC Online Redesign", href: "/case-study/ciputra" },
-  { label: "1st Runner Up", project: "Titipin", href: "/case-study/titipin" },
-  { label: "Gemastik 2026", project: "Temu.in", href: "/case-study/temuin" },
-];
 
 // Role, org, and period only; the full details live in the resume
 const experience = [
@@ -69,6 +64,8 @@ const awards: {
     title: "Data Analytics Dash",
     by: "COMPFEST 18, Universitas Indonesia",
     note: "National competition, out of 400+ teams",
+    project: "View the dashboard",
+    href: "https://public.tableau.com/app/profile/riko.giovanni/viz/1stLombaBareng/Dashboard1OLD2",
   },
   {
     place: "1st Place",
@@ -152,16 +149,6 @@ export default function About() {
               <span className={styles.statusDot} aria-hidden="true" />
               Open to UI/UX internships and freelance projects
             </p>
-            <ul className={styles.achievements} aria-label="Achievements">
-              {achievements.map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href} className={styles.chip}>
-                    <span className={styles.chipLabel}>{item.label}</span>
-                    <span>{item.project}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
 
@@ -228,11 +215,21 @@ export default function About() {
                     <p className={styles.role}>{award.title}</p>
                     <p className={styles.org}>by {award.by}</p>
                     {award.note && <p className={styles.org}>{award.note}</p>}
-                    {award.href && (
-                      <Link href={award.href} className={styles.entryLink}>
-                        {award.project}
-                      </Link>
-                    )}
+                    {award.href &&
+                      (award.href.startsWith("http") ? (
+                        <a
+                          href={award.href}
+                          className={styles.entryLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {award.project}
+                        </a>
+                      ) : (
+                        <Link href={award.href} className={styles.entryLink}>
+                          {award.project}
+                        </Link>
+                      ))}
                   </div>
                 </li>
               ))}

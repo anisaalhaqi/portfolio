@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styles from "./page.module.css";
 import CaseStudyCard from "@/components/CaseStudyCard/CaseStudyCard";
 import UIProjectCard from "@/components/UIProjectCard/UIProjectCard";
@@ -10,12 +9,6 @@ import { otherWork } from "@/data/otherWork";
 
 const uiProjects = projects.filter((project) => project.kind === "ui");
 
-// Proof points shown under the hero, each linking to its case study
-const achievements = [
-  { label: "1st Winner", project: "UC Online Redesign", href: "/case-study/ciputra" },
-  { label: "1st Runner Up", project: "Titipin", href: "/case-study/titipin" },
-  { label: "Gemastik 2026", project: "Temu.in", href: "/case-study/temuin" },
-];
 
 const caseStudies = [
   {
@@ -77,16 +70,6 @@ export default function Home() {
               <img src="/portfolio/icons/arrow-right-blue.png" alt="" className={styles.arrowImg} />
             </a>
           </div>
-          <ul className={styles.achievements} aria-label="Achievements">
-            {achievements.map((item) => (
-              <li key={item.label}>
-                <Link href={item.href} className={styles.chip}>
-                  <span className={styles.chipLabel}>{item.label}</span>
-                  <span>{item.project}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
