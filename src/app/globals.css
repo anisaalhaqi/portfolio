@@ -30,7 +30,9 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  /* clip, not hidden: hidden turns body into a scroll container, which breaks
+     every position: sticky element (navbar, case study phase nav) */
+  overflow-x: clip;
   color: var(--color-text-dark);
 }
 

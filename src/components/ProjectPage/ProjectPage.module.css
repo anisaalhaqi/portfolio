@@ -226,6 +226,20 @@
   letter-spacing: -0.02em;
 }
 
+/* Left column that holds a section title plus extra navigation (Design
+   Methodology's phase list); the whole column sticks while the content scrolls */
+.sectionAside {
+  position: sticky;
+  top: 104px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.sectionAside .sectionTitle {
+  position: static;
+}
+
 .sectionBody {
   min-width: 0;
   display: flex;
@@ -744,6 +758,11 @@
   .sectionTitle {
     position: static;
   }
+  /* One column: unwrap the aside so the stepper can stick for the whole
+     section, back to a horizontal bar under the navbar */
+  .sectionAside {
+    display: contents;
+  }
   .meta {
     grid-template-columns: 1fr 1fr;
   }
@@ -1099,5 +1118,41 @@
   .persona {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+}
+
+/* Desktop: the phase stepper becomes a vertical list in the left column */
+@media (min-width: 1025px) {
+  .stepsWrap {
+    position: static;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  /* Connector runs down through the circle centers (6px padding + 18px radius) */
+  .steps::before {
+    top: 24px;
+    bottom: 24px;
+    left: 17px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+  .stepLink {
+    flex-direction: row;
+    gap: 14px;
+    padding: 6px 0;
+    font-size: 16px;
+  }
+  .phase {
+    scroll-margin-top: 104px;
   }
 }

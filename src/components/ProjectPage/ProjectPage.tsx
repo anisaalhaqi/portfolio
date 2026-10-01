@@ -130,18 +130,20 @@ export default function ProjectPage({ project: study }: { project: Project }) {
 
         {study.methodology && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Design Methodology</h2>
-            <div className={styles.sectionBody}>
-              <div className={styles.prose}>
-                <p>{study.methodology.intro}</p>
-              </div>
-
+            {/* Desktop: title and a vertical phase nav share the sticky left column */}
+            <div className={styles.sectionAside}>
+              <h2 className={styles.sectionTitle}>Design Methodology</h2>
               <PhaseStepper
                 phases={PHASE_ORDER.map((name) => ({
                   name,
                   ready: phasesWithContent.has(name),
                 }))}
               />
+            </div>
+            <div className={styles.sectionBody}>
+              <div className={styles.prose}>
+                <p>{study.methodology.intro}</p>
+              </div>
 
               {study.methodology.phases.map((phase) => (
                 <div key={phase.name} id={phase.name.toLowerCase()} className={styles.phase}>
