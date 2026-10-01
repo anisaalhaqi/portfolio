@@ -15,7 +15,15 @@ export type Block =
       title?: string;
       items: {
         label: string;
-        stages: { stage: string; action: string; feeling: string; pain: string }[];
+        stages: {
+          stage: string;
+          action: string;
+          feeling: string;
+          pain: string;
+          // Optional rows, shown only when the journey has them
+          touchpoint?: string;
+          idea?: string;
+        }[];
       }[];
     }
   | {
@@ -27,9 +35,10 @@ export type Block =
         program: string;
         role: string;
         bio: string;
-        trait: string;
+        trait?: string;
         frustrations: string[];
         goals: string[];
+        habits?: string[];
       }[];
     }
   | { type: "findings"; items: { stat: string; text: string }[] }
@@ -44,7 +53,8 @@ export type Block =
   | { type: "statement"; label: string; text: string }
   | { type: "list"; title: string; items: string[] }
   | { type: "mapping"; title?: string; items: { problem: string; feature: string }[] }
-  | { type: "metrics"; title?: string; items: { label: string; before: string; after: string }[] }
+  // Leave out "before" when there was only one round of testing
+  | { type: "metrics"; title?: string; items: { label: string; before?: string; after: string }[] }
   // Numbered steps with an image each, e.g. how the logo evolved
   | {
       type: "process";
@@ -116,7 +126,7 @@ export interface Project {
     role: string;
     team: string;
     tools: string;
-    timeframe: string;
+    timeframe?: string;
   };
   problemStatement?: string;
   problem?: ReactNode[];
@@ -156,6 +166,503 @@ export const projects: Project[] = [
     summary:
       'A mobile platform designed to streamline campus dining by integrating real-time canteen status, menu management, and a gamified "Spin Wheel" to eliminate decision fatigue. It facilitates a secure peer-to-peer delivery ecosystem within the ITB Ganesha community.',
     imageSrc: "/portfolio/icons/titipin.png",
+    figmaUrl:
+      "https://www.figma.com/proto/7oZmRwqo3iFgluxTTGRrYH/UI-UX---Unma?node-id=623-8295&t=7tcBchAf3dcLXSmm-1&scaling=scale-down&content-scaling=fixed&page-id=5%3A34&starting-point-node-id=361%3A443",
+    glance: {
+      problem:
+        "Students with back-to-back classes skip meals because they can’t tell which canteens are open, what they sell, or how long the queue is.",
+      solution:
+        "A campus food app with real-time canteen status and menus, food delivery between students, and a Spin Wheel that picks a canteen or dish when choosing feels exhausting.",
+      result: { stat: "87.03", label: "SUS score in usability testing" },
+    },
+    meta: {
+      role: "UI/UX Design, User Research, Usability Testing",
+      team: "3 Designers",
+      tools: "Figma, Google Meet",
+    },
+    problemStatement:
+      "Packed class schedules leave ITB students skipping meals, while canteen menus, opening hours, and queues stay invisible until they walk there.",
+    problemHighlights: [
+      { stat: "84.6%", label: "of surveyed students buy food around campus often or very often" },
+      { stat: "38%", label: "of university students report disordered eating, and 57% of them skip meals regularly" },
+      { stat: "16.4×", label: "higher risk of dyspepsia for people who eat irregularly" },
+    ],
+    methodology: {
+      intro: (
+        <>
+          We used the <strong>Design Thinking framework</strong>, iterating
+          through empathy, definition, ideation, prototyping, and testing to
+          keep refining the solution.
+        </>
+      ),
+      phases: [
+        {
+          name: "Empathize",
+          blocks: [
+            {
+              type: "text",
+              content:
+                "To understand how ITB Ganesha students buy food between classes, we started with a user research plan.",
+            },
+            {
+              type: "columns",
+              title: "User research plan",
+              items: [
+                {
+                  title: "Research goals",
+                  points: [
+                    "Explore the challenges students face when looking for food around campus",
+                    "Explore what students do when they need to eat during a packed academic schedule",
+                  ],
+                },
+                {
+                  title: "Target participants",
+                  points: [
+                    "Aged 18–30, male and female",
+                    "Students at ITB Ganesha with access to digital apps",
+                    "Regularly buy food at canteens or food stalls around campus",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "Survey",
+              content: (
+                <>
+                  We ran an online survey with students from{" "}
+                  <strong>10 of ITB’s 12 faculties</strong>, most of them aged
+                  19–20.
+                </>
+              ),
+            },
+            {
+              type: "findings",
+              items: [
+                {
+                  stat: "84.6%",
+                  text: "buy food around campus often or very often, yet 80% stick to canteens within 400 m of their lecture building.",
+                },
+                {
+                  stat: "65.4%",
+                  text: "know where the canteens are, but still feel unsure about the menus at ones they rarely visit (3.23 out of 5).",
+                },
+                {
+                  stat: "3.19/5",
+                  text: "is how confused students feel, on average, when choosing what to eat or where to go.",
+                },
+                {
+                  stat: "19.2%",
+                  text: "ask a friend to buy food for them when their schedule is too packed to go.",
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "Interviews",
+              content: (
+                <>
+                  We then <strong>interviewed 5 students</strong> to dig into their
+                  habits and struggles when buying food on campus.
+                </>
+              ),
+            },
+            {
+              type: "quotes",
+              items: [
+                {
+                  quote:
+                    "I usually hear about a canteen’s menu from friends, but they don’t know the details either. When class is close, I just go to the nearest one. Once I went to the Labtek V canteen and the queue reached outside, so I didn’t buy anything.",
+                  name: "Illona, 20",
+                  role: "ITB student",
+                },
+                {
+                  quote:
+                    "With back-to-back classes, it’s hard to find time to eat. If I can’t make it, I don’t eat at all. I usually walk to a canteen just to see if it’s open, and when it’s closed after walking that far, it feels like a waste of time.",
+                  name: "Keisha, 19",
+                  role: "ITB student",
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "Empathy map",
+              content:
+                "We mapped these insights into an empathy map to see what students say, think, do, and feel when getting food on campus.",
+            },
+            {
+              type: "empathy",
+              items: [
+                {
+                  label: "Student",
+                  says: [
+                    "“It’s so annoying to walk all the way there and find the stall closed.”",
+                    "“Can I put in an order if anyone’s going to the canteen?”",
+                    "“Ganyang is good, but it’s so far. I can’t be bothered to walk.”",
+                  ],
+                  thinks: [
+                    "“Rather than be late for class because of the queue, I’d rather not eat at all.”",
+                    "“I’m scared to try a new canteen when I don’t know its prices.”",
+                    "“Going to a canteen far from my lecture building drains my energy and time.”",
+                  ],
+                  does: [
+                    "Picks canteens within 400 m, even if they aren’t a favorite, to make it to class",
+                    "Asks friends about a canteen’s menu",
+                    "Walks to a canteen just to see if it’s open",
+                  ],
+                  feels: [
+                    "Afraid of losing their break just waiting for food",
+                    "Drained just from choosing what to eat",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "User journey map",
+              content:
+                "We traced a student’s journey from feeling hungry to finishing a meal, to see where it breaks down and where an idea could help.",
+            },
+            {
+              type: "journey",
+              items: [
+                {
+                  label: "Student",
+                  stages: [
+                    {
+                      stage: "Awareness",
+                      action: "Feels hungry and realizes their class schedule is packed",
+                      touchpoint: "None",
+                      feeling: "Worried 😟",
+                      pain: "Can’t buy food in person because time is short",
+                      idea: "Food delivery between students",
+                    },
+                    {
+                      stage: "Consideration",
+                      action: "Picks a canteen and decides what to eat",
+                      touchpoint: "Social media",
+                      feeling: "Neutral 😐",
+                      pain: "Confused about where to eat or what to buy",
+                      idea: "A Spin Wheel to pick a place or dish, and menu info for every canteen",
+                    },
+                    {
+                      stage: "Order",
+                      action: "Buys food at a canteen, or asks a friend to buy it",
+                      touchpoint: "Talking to the seller, cash or QRIS, menu board",
+                      feeling: "Worried 😟",
+                      pain: "The canteen is closed without notice",
+                      idea: "Real-time canteen status",
+                    },
+                    {
+                      stage: "Waiting",
+                      action: "Queues and pays, or waits for a friend to bring the food",
+                      touchpoint: "The physical queue",
+                      feeling: "Frustrated 😣",
+                      pain: "Long queues",
+                      idea: "Food delivery between students",
+                    },
+                    {
+                      stage: "Post-Experience",
+                      action: "Eats, if the canteen was open and the dish was available",
+                      touchpoint: "Canteen table, classroom",
+                      feeling: "Satisfied 😊",
+                      pain: "None",
+                      idea: "None",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Define",
+          blocks: [
+            {
+              type: "text",
+              title: "User persona",
+              content:
+                "We distilled the research into one persona to keep a busy student’s needs in view.",
+            },
+            {
+              type: "personas",
+              items: [
+                {
+                  name: "Keisha",
+                  age: 19,
+                  program: "STEI-K ITB",
+                  role: "Student",
+                  bio: "A fourth-semester student busy with both academic and non-academic activities. She usually buys food on campus because she has no time to pack lunch, but sometimes can’t buy anything at all because of a packed schedule or a canteen that suddenly closes.",
+                  trait: "Cares most about distance and queue time.",
+                  frustrations: [
+                    "Canteens close without notice, even after she’s walked there",
+                    "Breaks between classes are so short that queuing eats up her rest",
+                    "Wants to try a new canteen but doesn’t know its menu",
+                  ],
+                  goals: [
+                    "Buy food without going in person, especially from canteens far from her lecture building, so she can eat more regularly",
+                  ],
+                  habits: [
+                    "Buys food on campus on every class day",
+                    "Tends to skip meals between classes",
+                    "Only goes to canteens close to her lecture building",
+                    "Bored with the menu at her usual canteens",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "cards",
+              title: "Problem statements",
+              items: [
+                {
+                  title: "Menus and opening hours",
+                  text: "Keisha needs a catalog of canteen menus around ITB Ganesha and their opening status, because she feels unsure at canteens she rarely visits and has walked to canteens that turned out to be closed without notice.",
+                },
+                {
+                  title: "Food delivery on campus",
+                  text: "Keisha needs an affordable, easy-to-use food delivery service within campus, because her packed schedule makes it hard to keep regular mealtimes.",
+                },
+                {
+                  title: "Choosing what to eat",
+                  text: "Keisha needs recommendations for where and what to eat, because she often spends too long deciding.",
+                },
+              ],
+            },
+            {
+              type: "list",
+              title: "Hypotheses",
+              items: [
+                "If Keisha can browse canteen menus and opening status, then she’ll be more willing to try canteens she rarely visits and buy food more efficiently.",
+                "If Keisha can use an affordable, easy-to-use delivery service on campus, then she can still eat her favorite food without sacrificing class time or her break.",
+                "If Keisha gets recommendations for where and what to eat, then she’ll save time choosing.",
+              ],
+            },
+            {
+              type: "text",
+              content: "Together, these shaped a single goal to design toward.",
+            },
+            {
+              type: "statement",
+              label: "Goal",
+              text: "An app for ordering from and learning about canteens around ITB Ganesha, with centralized menus, real-time opening status, a Spin Wheel, and food delivery between students, so students with packed schedules can get food without leaving class and with less effort deciding what to eat.",
+            },
+            {
+              type: "text",
+              content:
+                "We then reframed the problems as opportunities to guide ideation.",
+            },
+            {
+              type: "list",
+              title: "How might we…",
+              items: [
+                "build a fully integrated, real-time canteen information system, so students no longer have to check opening status or menus in person?",
+                "remove the risk of skipping meals during a packed schedule with a fast, easy food delivery service between students?",
+                "turn choosing food from confusing and tiring into instant and fun, with an interactive recommendation feature?",
+              ],
+            },
+          ],
+        },
+        {
+          name: "Ideate",
+          blocks: [
+            {
+              type: "text",
+              title: "SWOT analysis",
+              content: (
+                <>
+                  To check the app’s feasibility, we ran a SWOT analysis. Titipin
+                  landed in the <strong>Aggressive Strategy</strong> quadrant of
+                  the SPACE matrix (IFAS 1.7, EFAS 0.6), meaning strong internal
+                  strengths and large market opportunities.
+                </>
+              ),
+            },
+            {
+              type: "columns",
+              items: [
+                {
+                  title: "Strengths",
+                  points: [
+                    "Centralized food information, with menus and prices",
+                    "Real-time canteen opening status",
+                    "A Spin Wheel that eases decision fatigue",
+                  ],
+                },
+                {
+                  title: "Weaknesses",
+                  points: [
+                    "Status and menu accuracy depends on how active users are",
+                    "The number of couriers depends on students’ free time",
+                  ],
+                },
+                {
+                  title: "Opportunities",
+                  points: [
+                    "Packed schedules create demand for food delivery",
+                    "Students already buy food for each other (titip)",
+                    "Room to connect with campus programs that digitize canteens",
+                  ],
+                },
+                {
+                  title: "Threats",
+                  points: [
+                    "Sellers may not keep their information up to date",
+                    "Students may only use the app situationally",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "Competitor analysis",
+              content: (
+                <>
+                  We compared <strong>Grab and Gojek</strong> with a SWOT lens.
+                  We borrowed Grab’s loyalty model (cashback and points) to keep
+                  users motivated, adapted Gojek’s strong bond with Indonesian
+                  users to our persona, and kept their standard reviews and
+                  ratings to build trust between students. Gojek’s heavy app on
+                  low-end phones reminded us to keep Titipin minimal and
+                  intuitive.
+                </>
+              ),
+            },
+            {
+              type: "text",
+              title: "Problem–feature mapping",
+              content:
+                "Every root cause traces back to one problem: students skip meals and risk their health because they don’t have time to go to the canteen.",
+            },
+            {
+              type: "mapping",
+              items: [
+                {
+                  problem: "Packed class schedules",
+                  feature: "Food delivery between students, scheduled and group orders, canteen crowd tracking",
+                },
+                {
+                  problem: "Confusion over where or what to eat",
+                  feature: "Spin Wheel, nearby canteens, reviews & feedback",
+                },
+                {
+                  problem: "No central information on canteen menus",
+                  feature: "Menus, locations, and prices for every canteen",
+                },
+                { problem: "Unclear opening status", feature: "Real-time opening status" },
+                { problem: "Price sensitivity", feature: "Reward points" },
+              ],
+            },
+            {
+              type: "text",
+              title: "User flow",
+              content: "We charted the paths users take through the app, from opening it to ordering and rating food.",
+            },
+            {
+              type: "images",
+              layout: "stack",
+              items: [{ caption: "User flow" }],
+            },
+            {
+              type: "text",
+              title: "Information architecture",
+              content: "We then structured how information is organized across the app’s screens.",
+            },
+            {
+              type: "images",
+              layout: "stack",
+              items: [{ caption: "Information architecture" }],
+            },
+          ],
+        },
+        {
+          name: "Prototype",
+          blocks: [
+            {
+              type: "text",
+              title: "Wireframes and high fidelity",
+              content:
+                "We turned the user flow and information architecture into wireframes, then refined them into high-fidelity screens, referencing Material Design for an intuitive Android experience.",
+            },
+            {
+              type: "images",
+              items: [{ caption: "Wireframes" }, { caption: "High-fidelity screens" }],
+            },
+            {
+              type: "cards",
+              title: "Key features",
+              items: [
+                {
+                  title: "Food delivery between students",
+                  text: "Order food that another student delivers, schedule it ahead, or order for a group, and check how crowded a canteen is in real time.",
+                },
+                {
+                  title: "Spin Wheel and nearby canteens",
+                  text: "Get a random canteen or dish in seconds, see the canteens closest to you, and read reviews from other students.",
+                },
+                {
+                  title: "Menus, locations, and prices",
+                  text: "Details for every canteen in one place.",
+                },
+                {
+                  title: "Real-time opening status",
+                  text: "Know whether a canteen is open before walking there.",
+                },
+                {
+                  title: "Reward points",
+                  text: "Earn points after spending a set amount.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Test",
+          blocks: [
+            {
+              type: "text",
+              content: (
+                <>
+                  We ran <strong>moderated usability tests with 4 ITB Ganesha students</strong>{" "}
+                  on the Figma prototype over Google Meet, asking them to think out
+                  loud through 4 scenarios.
+                </>
+              ),
+            },
+            {
+              type: "metrics",
+              items: [
+                { label: "SUS score", after: "87.03" },
+                { label: "SEQ score", after: "6.875" },
+                { label: "Success rate", after: "81.25%" },
+              ],
+            },
+            {
+              type: "cards",
+              title: "Scenarios",
+              items: [
+                {
+                  title: "Track an ongoing order",
+                  text: "Find order history and show the details of the current order. 3 of 4 participants completed it.",
+                },
+                {
+                  title: "Reorder with “Buy again”",
+                  text: "Reorder yesterday’s food from a past order. Only 2 of 4 completed it, the hardest task in the test.",
+                },
+                {
+                  title: "Let the Spin Wheel decide",
+                  text: "Use the Spin Wheel to pick a canteen, then a dish. All 4 participants completed it.",
+                },
+                {
+                  title: "Find a quiet, well-rated canteen",
+                  text: "Find a canteen with low crowd levels and a rating of at least 4. All 4 participants completed it.",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   },
   {
     slug: "temuin",
@@ -970,4 +1477,21 @@ export function getProject(kind: ProjectKind, slug: string) {
 
 export function projectHref(project: Project) {
   return `${KIND_PATH[project.kind]}/${project.slug}`;
+}
+
+// Display order of case studies, matching the home page. Projects not listed
+// here (e.g. UI projects) keep their order in the array above.
+const CASE_STUDY_ORDER = ["temuin", "titipin", "ciputra"];
+
+// The other projects of the same kind, starting with the one after `current`
+// and wrapping around, so the first card is always the natural "next" one
+export function otherProjects(current: Project, limit = 2) {
+  const sameKind = projects.filter((p) => p.kind === current.kind);
+  const rank = (p: Project) => {
+    const i = CASE_STUDY_ORDER.indexOf(p.slug);
+    return i === -1 ? CASE_STUDY_ORDER.length + sameKind.indexOf(p) : i;
+  };
+  const ordered = [...sameKind].sort((a, b) => rank(a) - rank(b));
+  const start = ordered.findIndex((p) => p.slug === current.slug);
+  return [...ordered.slice(start + 1), ...ordered.slice(0, start)].slice(0, limit);
 }

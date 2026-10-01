@@ -1,0 +1,176 @@
+/* End-of-page quick access to the other projects */
+.more {
+  padding-top: 40px;
+  border-top: 1px solid rgb(72 117 200 / 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.title {
+  color: var(--color-text-card);
+  font-size: clamp(1.625rem, 1vw + 1.25rem, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.allLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary);
+  font-size: 16px;
+  font-weight: 500;
+  transition: opacity 100ms ease;
+}
+
+.allLink:active {
+  opacity: 0.6;
+}
+
+.allArrow {
+  width: 22px;
+  height: auto;
+  transition: transform 200ms var(--ease-out);
+}
+
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* Flat card: image beside the text, hairline frame, no glass */
+.card {
+  height: 100%;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid rgb(72 117 200 / 0.2);
+  border-radius: var(--radius-lg);
+  color: inherit;
+  transition:
+    transform 160ms var(--ease-out),
+    border-color 200ms ease;
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+.cover {
+  aspect-ratio: 442 / 386;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-light);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms var(--ease-out);
+}
+
+.placeholder {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.tag {
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text-card);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.arrow {
+  flex-shrink: 0;
+  width: 22px;
+  height: auto;
+  transition: transform 200ms var(--ease-out);
+}
+
+/* One-line summary, cut off after two lines */
+.summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    border-color: rgb(72 117 200 / 0.45);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .card:hover .image {
+    transform: scale(1.04);
+  }
+  .card:hover .arrow,
+  .allLink:hover .allArrow {
+    transform: translateX(4px);
+  }
+}
+
+/* Touch screens: a long press on a card shouldn't select its text */
+@media (hover: none), (pointer: coarse) {
+  .card,
+  .allLink {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .card {
+    grid-template-columns: 110px 1fr;
+    gap: 16px;
+    padding: 12px;
+  }
+  .cardTitle {
+    font-size: 18px;
+  }
+}

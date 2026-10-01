@@ -2,6 +2,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
 import { PHASE_ORDER, type Block, type Project, type TreeNode } from "@/data/projects";
 import PhaseStepper from "./PhaseStepper";
+import MoreProjects from "@/components/MoreProjects/MoreProjects";
 import styles from "./ProjectPage.module.css";
 
 const BACK_LINK = {
@@ -78,10 +79,12 @@ export default function ProjectPage({ project: study }: { project: Project }) {
               <dt>Tools</dt>
               <dd>{study.meta.tools}</dd>
             </div>
-            <div className={styles.metaItem}>
-              <dt>Timeframe</dt>
-              <dd>{study.meta.timeframe}</dd>
-            </div>
+            {study.meta.timeframe && (
+              <div className={styles.metaItem}>
+                <dt>Timeframe</dt>
+                <dd>{study.meta.timeframe}</dd>
+              </div>
+            )}
           </dl>
         )}
 
@@ -179,6 +182,8 @@ export default function ProjectPage({ project: study }: { project: Project }) {
             <p>I&rsquo;m still writing up the research and design process for this project.</p>
           </div>
         )}
+
+        <MoreProjects current={study} />
       </div>
 
       <Footer variant="blue" />
@@ -421,6 +426,14 @@ function PhaseBlock({ block }: { block: Block }) {
                         <td key={s.stage}>{s.action}</td>
                       ))}
                     </tr>
+                    {journey.stages.some((s) => s.touchpoint) && (
+                      <tr>
+                        <th scope="row">Touch points</th>
+                        {journey.stages.map((s) => (
+                          <td key={s.stage}>{s.touchpoint}</td>
+                        ))}
+                      </tr>
+                    )}
                     <tr className={styles.feelingRow}>
                       <th scope="row">Feeling</th>
                       {journey.stages.map((s) => (
@@ -433,6 +446,14 @@ function PhaseBlock({ block }: { block: Block }) {
                         <td key={s.stage}>{s.pain}</td>
                       ))}
                     </tr>
+                    {journey.stages.some((s) => s.idea) && (
+                      <tr>
+                        <th scope="row">Ideas</th>
+                        {journey.stages.map((s) => (
+                          <td key={s.stage}>{s.idea}</td>
+                        ))}
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -456,7 +477,7 @@ function PhaseBlock({ block }: { block: Block }) {
                   {persona.name}, {persona.age}
                 </p>
                 <p className={styles.personaProgram}>{persona.program}</p>
-                <p className={styles.personaTrait}>{persona.trait}</p>
+                {persona.trait && <p className={styles.personaTrait}>{persona.trait}</p>}
               </div>
               <div className={styles.personaDetails}>
                 <p className={styles.personaBio}>{persona.bio}</p>
@@ -477,6 +498,16 @@ function PhaseBlock({ block }: { block: Block }) {
                       ))}
                     </ul>
                   </div>
+                  {persona.habits && (
+                    <div>
+                      <span className={styles.eyebrow}>Behaviour &amp; habits</span>
+                      <ul className={styles.bullets}>
+                        {persona.habits.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             </article>
@@ -594,7 +625,9 @@ function PhaseBlock({ block }: { block: Block }) {
               <li key={item.label} className={`${styles.glass} ${styles.metric}`}>
                 <span className={styles.eyebrow}>{item.label}</span>
                 <span className={styles.metricAfter}>{item.after}</span>
-                <span className={styles.metricBefore}>from {item.before} in iteration 1</span>
+                {item.before && (
+                  <span className={styles.metricBefore}>from {item.before} in iteration 1</span>
+                )}
               </li>
             ))}
           </ul>
