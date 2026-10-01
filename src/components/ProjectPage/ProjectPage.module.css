@@ -1175,3 +1175,71 @@
     -webkit-touch-callout: none;
   }
 }
+
+/* Benchmarking: three competitor groups side by side, each with its reason */
+.benchmark {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.benchmarkGroup {
+  padding-top: 16px;
+  border-top: 1px solid rgb(72 117 200 / 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.benchmarkReason {
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.logos {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 12px;
+  margin-top: 8px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* White tile so logos with their own white background blend in.
+   Logos are shown at most at their natural size, never upscaled. */
+.logoTile {
+  height: 64px;
+  min-width: 72px;
+  padding: 0 14px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgb(72 117 200 / 0.15);
+  border-radius: 14px;
+  background: #FFFFFF;
+}
+
+.logoImg {
+  max-width: 110px;
+  max-height: 40px;
+  width: auto;
+  height: auto;
+}
+
+.logoName {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .benchmark {
+    grid-template-columns: 1fr;
+  }
+}

@@ -45,6 +45,12 @@ export type Block =
   | { type: "list"; title: string; items: string[] }
   | { type: "mapping"; title?: string; items: { problem: string; feature: string }[] }
   | { type: "metrics"; title?: string; items: { label: string; before: string; after: string }[] }
+  // Competitor groups for benchmarking, each with why it was chosen
+  | {
+      type: "benchmark";
+      title?: string;
+      items: { category: string; reason: string; logos: { name: string; src: string }[] }[];
+    }
   // Leave src empty to show a placeholder until the image is exported.
   // "stack" shows each image full width, for large diagrams.
   | {
@@ -515,15 +521,40 @@ export const projects: Project[] = [
                 <>
                   To find the flows users already know, we{" "}
                   <strong>benchmarked 7 competitor platforms</strong>, grouped
-                  into primary, secondary, and other competitors by business
-                  model.
+                  into three categories by how closely they match Temu.in’s
+                  business model and users.
                 </>
               ),
             },
             {
-              type: "images",
-              layout: "stack",
-              items: [{ caption: "Benchmarking, part 1" }, { caption: "Benchmarking, part 2" }],
+              type: "benchmark",
+              items: [
+                {
+                  category: "Primary",
+                  reason: "Same business model: peer-to-peer marketplaces for second-hand goods.",
+                  logos: [
+                    { name: "OLX", src: "/portfolio/Temu.in/benchmarking-logo/OLX.webp" },
+                    { name: "Carousell", src: "/portfolio/Temu.in/benchmarking-logo/carousell.webp" },
+                  ],
+                },
+                {
+                  category: "Secondary",
+                  reason: "Same user persona: buy-and-sell platforms used mostly by the same people Temu.in is designed for.",
+                  logos: [
+                    { name: "Tokopedia", src: "/portfolio/Temu.in/benchmarking-logo/Tokopedia.webp" },
+                    { name: "Instagram", src: "/portfolio/Temu.in/benchmarking-logo/instagram.webp" },
+                  ],
+                },
+                {
+                  category: "Others",
+                  reason: "Same business model, different user persona: second-hand marketplaces abroad.",
+                  logos: [
+                    { name: "eBay", src: "/portfolio/Temu.in/benchmarking-logo/eBay.webp" },
+                    { name: "Mercari", src: "/portfolio/Temu.in/benchmarking-logo/Mercari.webp" },
+                    { name: "Depop", src: "/portfolio/Temu.in/benchmarking-logo/Depop.webp" },
+                  ],
+                },
+              ],
             },
             {
               type: "text",

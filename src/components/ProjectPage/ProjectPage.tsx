@@ -462,6 +462,31 @@ function PhaseBlock({ block }: { block: Block }) {
         </div>
       );
 
+    case "benchmark":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <ul className={styles.benchmark}>
+            {block.items.map((group) => (
+              <li key={group.category} className={styles.benchmarkGroup}>
+                <span className={styles.eyebrow}>{group.category}</span>
+                <p className={styles.benchmarkReason}>{group.reason}</p>
+                <ul className={styles.logos}>
+                  {group.logos.map((logo) => (
+                    <li key={logo.name} className={styles.logo}>
+                      <span className={styles.logoTile}>
+                        <img src={logo.src} alt="" className={styles.logoImg} />
+                      </span>
+                      <span className={styles.logoName}>{logo.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+
     case "images": {
       const stack = block.layout === "stack";
       const layoutClass = stack
