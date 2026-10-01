@@ -1,11 +1,10 @@
 import Link from "next/link";
 import styles from "./page.module.css";
 import Footer from "@/components/Footer/Footer";
+import ContactCard from "@/components/ContactCard/ContactCard";
 
 const RESUME_URL =
   "https://docs.google.com/document/d/1J8dM-wM57rX83Nr7v8cixy-GKkJYClgmzU_zProBTdc/edit?usp=sharing";
-const LINKEDIN_URL = "https://www.linkedin.com/in/anisa-aulia-alhaqi-39b119388/";
-const EMAIL = "anisaalhaqi@gmail.com";
 
 const achievements = [
   { label: "1st Winner", project: "UC Online Redesign", href: "/case-study/ciputra" },
@@ -13,36 +12,105 @@ const achievements = [
   { label: "Gemastik 2026", project: "Temu.in", href: "/case-study/temuin" },
 ];
 
+// Role, org, and period only; the full details live in the resume
+const experience = [
+  {
+    group: "Work",
+    items: [
+      {
+        role: "UI/UX Designer",
+        org: "Kabinet KM ITB",
+        period: "Jul 2026 – Present",
+      },
+      {
+        role: "Product Designer",
+        org: "Inkubator IT HMIF ITB",
+        period: "Jun 2026 – Present",
+      },
+      {
+        role: "UI/UX Design Curriculum Associate",
+        org: "Google Developer Groups on Campus ITB",
+        period: "May 2026 – Present",
+      },
+      {
+        role: "UI/UX Designer",
+        org: "P3RI Salman ITB",
+        period: "Jan – Feb 2026",
+      },
+    ],
+  },
+  {
+    group: "Leadership",
+    items: [
+      {
+        role: "Vice Head of UXVidia Division",
+        org: "Arkavidia 11.0",
+        period: "May 2026 – Present",
+      },
+    ],
+  },
+];
+
+const awards = [
+  {
+    place: "1st Place",
+    title: "Web Redesign Competition",
+    by: "Universitas Ciputra",
+    project: "Universitas Ciputra Online Web Redesign",
+    href: "/case-study/ciputra",
+  },
+  {
+    place: "2nd Place",
+    title: "UI/UX Design Competition",
+    by: "HMIF Universitas Majalengka",
+    project: "Titipin",
+    href: "/case-study/titipin",
+  },
+];
+
 const skillGroups = [
+  {
+    title: "Research Methods",
+    items: [
+      "Mixed-Methods Research",
+      "User Interviews",
+      "Survey Design",
+      "Usability Testing",
+      "Heuristic Evaluation",
+      "Cognitive Task Analysis",
+      "Competitive Benchmarking",
+      "SUS & SEQ Scoring",
+    ],
+  },
+  {
+    title: "Synthesis & Strategy",
+    items: [
+      "Affinity Map",
+      "Empathy Map",
+      "User Persona",
+      "User Journey Map",
+      "Problem–Feature Mapping",
+      "Information Architecture",
+      "User Flow",
+    ],
+  },
   {
     title: "UI Design",
     items: [
       "Wireframing",
       "High-Fidelity Prototyping",
-      "Logo",
+      "Design Systems",
       "Micro-interactions",
-      "Design System",
-    ],
-  },
-  {
-    title: "UX Research",
-    items: [
-      "User Interviews",
-      "Survey Design",
-      "Usability Testing",
-      "SUS & SEQ Scoring",
-      "Heuristic Evaluation",
-      "Affinity Map",
-      "User Persona",
-      "User Journey Map",
-      "User Flow",
-      "Features Benchmark & UI Design",
-      "Problem Feature Mapping",
+      "Logo Design",
     ],
   },
   {
     title: "Tools",
     items: ["Figma", "FigJam", "Google Meet", "Google Form"],
+  },
+  {
+    title: "Languages",
+    items: ["Indonesian (Native)", "English (Professional Working Proficiency)"],
   },
 ];
 
@@ -60,8 +128,12 @@ export default function About() {
             <p className={styles.eyebrow}>About</p>
             <h1 className={styles.headline}>
               UI/UX Designer &amp; Researcher with a background in Information
-              System and Technology
+              Systems and Technology
             </h1>
+            <p className={styles.status}>
+              <span className={styles.statusDot} aria-hidden="true" />
+              Open to UI/UX internships and freelance projects
+            </p>
             <ul className={styles.achievements} aria-label="Achievements">
               {achievements.map((item) => (
                 <li key={item.label}>
@@ -104,10 +176,61 @@ export default function About() {
         </section>
 
         <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Experience</h2>
+          <div className={styles.sectionBody}>
+            {experience.map((group) => (
+              <div key={group.group} className={styles.group}>
+                <h3 className={styles.groupTitle}>{group.group}</h3>
+                <ul className={styles.timeline}>
+                  {group.items.map((item) => (
+                    <li key={`${item.role}-${item.org}`} className={styles.timelineItem}>
+                      <span className={styles.period}>{item.period}</span>
+                      <div className={styles.entry}>
+                        <p className={styles.role}>{item.role}</p>
+                        <p className={styles.org}>{item.org}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            <a
+              href={RESUME_URL}
+              className={styles.secondaryLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Full details in my resume</span>
+              <img src="/portfolio/icons/arrow-right-blue.png" alt="" className={styles.arrowImg} />
+            </a>
+          </div>
+        </section>
+
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Awards</h2>
+          <div className={styles.sectionBody}>
+            <ul className={styles.timeline}>
+              {awards.map((award) => (
+                <li key={award.title} className={styles.timelineItem}>
+                  <span className={styles.period}>{award.place}</span>
+                  <div className={styles.entry}>
+                    <p className={styles.role}>{award.title}</p>
+                    <p className={styles.org}>by {award.by}</p>
+                    <Link href={award.href} className={styles.entryLink}>
+                      {award.project}
+                    </Link>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Skills</h2>
           <div className={styles.sectionBody}>
             {skillGroups.map((group) => (
-              <div key={group.title} className={styles.skillGroup}>
+              <div key={group.title} className={styles.group}>
                 <h3 className={styles.groupTitle}>{group.title}</h3>
                 <ul className={styles.pills}>
                   {group.items.map((item) => (
@@ -124,42 +247,26 @@ export default function About() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Education</h2>
           <div className={styles.sectionBody}>
-            <div className={styles.education}>
-              <p className={styles.degree}>Information System and Technology</p>
-              <p className={styles.school}>Institut Teknologi Bandung · 2024–2028</p>
-            </div>
+            <ul className={styles.timeline}>
+              <li className={styles.timelineItem}>
+                <span className={styles.period}>2024 – 2028</span>
+                <div className={styles.entry}>
+                  <p className={styles.role}>B.E. in Information Systems and Technology</p>
+                  <p className={styles.org}>Institut Teknologi Bandung · GPA 3.95/4.00</p>
+                </div>
+              </li>
+              <li className={styles.timelineItem}>
+                <span className={styles.period}>Jun – Jul 2026</span>
+                <div className={styles.entry}>
+                  <p className={styles.role}>ASEAN Summer Programme: Venturing Into Entrepreneurship</p>
+                  <p className={styles.org}>Nanyang Technological University, Singapore</p>
+                </div>
+              </li>
+            </ul>
           </div>
         </section>
 
-        <section className={`${styles.glass} ${styles.contact}`}>
-          <h2 className={styles.contactTitle}>Let’s work together</h2>
-          <p className={styles.contactText}>
-            Have a project or a role in mind? I’d love to hear about it.
-          </p>
-          <div className={styles.actions}>
-            <a href={`mailto:${EMAIL}`} className={styles.primaryButton}>
-              Email Me
-            </a>
-            <a
-              href={RESUME_URL}
-              className={styles.secondaryLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>View Resume</span>
-              <img src="/portfolio/icons/arrow-right-blue.png" alt="" className={styles.arrowImg} />
-            </a>
-            <a
-              href={LINKEDIN_URL}
-              className={styles.secondaryLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>LinkedIn</span>
-              <img src="/portfolio/icons/arrow-right-blue.png" alt="" className={styles.arrowImg} />
-            </a>
-          </div>
-        </section>
+        <ContactCard />
       </div>
 
       <Footer variant="black" />

@@ -210,6 +210,12 @@
   scroll-margin-top: 72px;
 }
 
+/* Closing contact card: same width as the content above it */
+.contactWrap {
+  width: min(100% - 40px, var(--content-width));
+  padding: 32px 0 96px;
+}
+
 /* UI Design: two-column grid of image-first cards */
 .uiGrid {
   width: min(100% - 40px, var(--content-width));

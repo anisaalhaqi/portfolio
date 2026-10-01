@@ -16,10 +16,6 @@
   gap: 112px;
 }
 
-.glass {
-  composes: glass from "../../components/ProjectPage/ProjectPage.module.css";
-}
-
 /* Hero: photo and text share one left-aligned reading axis */
 .hero {
   display: grid;
@@ -92,11 +88,88 @@
   composes: prose from "../../components/ProjectPage/ProjectPage.module.css";
 }
 
-/* Skills as scannable pill groups instead of long one-per-line lists */
-.skillGroup {
+/* Availability, right under the headline */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text-card);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.statusDot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2FB36B;
+  box-shadow: 0 0 0 4px rgb(47 179 107 / 0.18);
+}
+
+/* A titled group inside a section (Work / Leadership, skill categories) */
+.group {
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+/* Experience, awards, education: dates on the left, details on the right */
+.timeline {
+  list-style: none;
+  border-bottom: 1px solid rgb(72 117 200 / 0.2);
+}
+
+.timelineItem {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 24px;
+  padding: 20px 0;
+  border-top: 1px solid rgb(72 117 200 / 0.2);
+}
+
+.period {
+  padding-top: 3px;
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.role {
+  color: var(--color-text-card);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.org {
+  color: var(--color-text-muted);
+  font-size: 16px;
+}
+
+.entryLink {
+  align-self: flex-start;
+  margin-top: 8px;
+  color: var(--color-primary);
+  font-size: 16px;
+  font-weight: 500;
+  transition: opacity 100ms ease;
+}
+
+.entryLink:active {
+  opacity: 0.6;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .entryLink:hover {
+    text-decoration: underline;
+  }
 }
 
 .groupTitle {
@@ -122,65 +195,17 @@
   line-height: 1.3;
 }
 
-.education {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.degree {
-  color: var(--color-text-card);
-  font-size: clamp(1.25rem, 0.6vw + 1.05rem, 1.5rem);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-
-.school {
-  color: var(--color-text-muted);
-  font-size: 17px;
-  font-weight: 300;
-}
-
-/* Closing call to action */
-.contact {
-  padding: 56px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  text-align: center;
-}
-
-.contactTitle {
-  color: var(--color-text-card);
-  font-size: clamp(1.75rem, 1.5vw + 1.25rem, 2.5rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.contactText {
-  color: var(--color-text-muted);
-  font-size: 18px;
-  font-weight: 300;
-}
-
-.actions {
-  composes: actions from "../page.module.css";
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 16px;
-}
-
-.primaryButton {
-  composes: primaryButton from "../page.module.css";
-}
-
 .secondaryLink {
   composes: secondaryLink from "../page.module.css";
 }
 
 .arrowImg {
   composes: arrowImg from "../page.module.css";
+}
+
+/* "Full details in my resume" under Experience: as wide as its text */
+.sectionBody > .secondaryLink {
+  align-self: flex-start;
 }
 
 @media (max-width: 1024px) {
@@ -210,7 +235,12 @@
   .achievements {
     justify-content: center;
   }
-  .contact {
-    padding: 40px 24px;
+  .status {
+    justify-content: center;
+  }
+  /* Date sits above the details on phones */
+  .timelineItem {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 }

@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import CaseStudyCard from "@/components/CaseStudyCard/CaseStudyCard";
 import UIProjectCard from "@/components/UIProjectCard/UIProjectCard";
 import OtherWorkList from "@/components/OtherWorkList/OtherWorkList";
+import ContactCard from "@/components/ContactCard/ContactCard";
 import Footer from "@/components/Footer/Footer";
 import { projectHref, projects } from "@/data/projects";
 import { otherWork } from "@/data/otherWork";
@@ -122,6 +123,10 @@ export default function Home() {
           <OtherWorkList items={otherWork} />
         </section>
       )}
+
+      <div className={styles.contactWrap}>
+        <ContactCard />
+      </div>
 
       <Footer variant="blue" />
     </main>
