@@ -52,7 +52,13 @@ export type Block =
     }
   | { type: "statement"; label: string; text: string }
   | { type: "list"; title: string; items: string[] }
-  | { type: "mapping"; title?: string; items: { problem: string; feature: string }[] }
+  // Column headings default to Problem and Feature; id and role tag a row, e.g. T1 and buyer or seller
+  | {
+      type: "mapping";
+      title?: string;
+      labels?: [string, string];
+      items: { id?: string; problem: string; feature: string; role?: string }[];
+    }
   // Functional requirements, each collapsible: the user goal, the tasks to
   // reach it, and how the interaction is designed
   | {
@@ -73,7 +79,26 @@ export type Block =
       }[];
     }
   // Leave out "before" when there was only one round of testing
-  | { type: "metrics"; title?: string; items: { label: string; before?: string; after: string }[] }
+  | {
+      type: "metrics";
+      title?: string;
+      items: { label: string; before?: string; after: string; target?: string }[];
+    }
+  // Short label and value pairs, e.g. the setup of a usability test
+  | { type: "facts"; title?: string; items: { label: string; value: string }[] }
+  // Task scenarios behind one collapsible row, grouped by user role
+  | {
+      type: "tasks";
+      title: string;
+      groups: { label: string; items: { id: string; text: string }[] }[];
+    }
+  // One collapsible row per change, showing the screen before and after it.
+  // The first row starts open. Leave before or after empty to show a placeholder.
+  | {
+      type: "compare";
+      title?: string;
+      items: { id: string; title: string; role?: string; before?: string; after?: string; alt: string }[];
+    }
   // Numbered steps with an image each, e.g. how the logo evolved
   | {
       type: "process";
@@ -107,11 +132,12 @@ export type Block =
       items: { category: string; reason: string; logos: { name: string; src: string }[] }[];
     }
   // Leave src empty to show a placeholder until the image is exported.
-  // "stack" shows each image full width, for large diagrams.
+  // "stack" shows each image full width, for large diagrams; "phones" keeps
+  // portrait phone screens small, side by side.
   | {
       type: "images";
       title?: string;
-      layout?: "grid" | "stack";
+      layout?: "grid" | "stack" | "phones";
       items: { caption: string; src?: string }[];
     };
 
@@ -700,7 +726,8 @@ export const projects: Project[] = [
     summary:
       "An SSO-verified marketplace for ITB students to resell academic gear, with AI auto-listing and price suggestions. Currently in development.",
     imageSrc: "/portfolio/Temu.in/Cover%20Temu.in.webp",
-    figmaUrl: "https://www.figma.com/design/SQtmDbAQDuEDAEzmrF6MwS/Temu.in---Gemastik?node-id=78-30116",
+    figmaUrl:
+      "https://www.figma.com/proto/VPCpLjxOEDtbpgJ6szwpxV/Temu.in---FindIT?node-id=1646-38350&t=Kbuw14pB2Y5h9k0K-0&scaling=scale-down&content-scaling=fixed&page-id=1646%3A36011&starting-point-node-id=1646%3A38319&show-proto-sidebar=1",
     youtubeId: "6BsO53MYzQU",
     glance: {
       problem:
@@ -1493,40 +1520,40 @@ export const projects: Project[] = [
             },
             {
               type: "text",
-              title: "Wireframes and high fidelity",
+              title: "Wireframes",
               content:
-                "We built wireframes to set the information hierarchy and layout, then refined them into high-fidelity designs guided by UX laws and usability heuristics.",
+                "We built wireframes to set the information hierarchy and layout before moving to high-fidelity designs. Shown here are three of the key screens.",
             },
             {
               type: "images",
+              layout: "phones",
               items: [
-                { caption: "Wireframes" },
-                { caption: "High-fidelity screens" },
+                { caption: "Home", src: "/portfolio/Temu.in/wireframes/Wireframe%20-%20Home.png" },
+                { caption: "Product detail", src: "/portfolio/Temu.in/wireframes/Wireframe%20-%20Detail%20Produk.png" },
+                { caption: "Activity", src: "/portfolio/Temu.in/wireframes/Wireframe%20-%20Aktivitas.png" },
               ],
             },
             {
-              type: "cards",
+              type: "showcase",
               title: "Design principles applied",
               items: [
                 {
                   title: "Law of Proximity",
                   text: "Product photo, price, and seller rating sit together in one card with consistent spacing, so they read as a single unit.",
+                  src: "/portfolio/Temu.in/design-principles/Law%20of%20Proximity.png",
+                  alt: "Product card with the photo, price, and seller rating grouped together",
                 },
                 {
                   title: "Hick’s Law",
                   text: "The long listing form is split into short, AI-assisted steps, cutting the choices users face at once.",
+                  src: "/portfolio/Temu.in/design-principles/Hick's%20Law.png",
+                  alt: "Listing form split into short AI-assisted steps",
                 },
                 {
                   title: "Miller’s Law",
                   text: "Filters show a small set of categories instead of dozens of faculties at once.",
-                },
-                {
-                  title: "Consistency and Standards",
-                  text: "A blue primary color and a bottom navigation bar on every page, so users never have to relearn the app.",
-                },
-                {
-                  title: "User Control and Freedom",
-                  text: "Undo, delete, and edit options in the cart and listing drafts, so a mistake never means starting over.",
+                  src: "/portfolio/Temu.in/design-principles/Miller's%20Law.png",
+                  alt: "Filter sheet showing a small set of categories",
                 },
               ],
             },
@@ -1545,43 +1572,166 @@ export const projects: Project[] = [
               ),
             },
             {
+              type: "facts",
+              items: [
+                {
+                  label: "Method",
+                  value: "Moderated think-aloud and interview, online with Figma and Google Meet",
+                },
+                {
+                  label: "Participants",
+                  value:
+                    "ITB students aged 18 to 23. Test 1: 7 people (3 buyers, 4 sellers). Test 2: 6 people (3 buyers, 3 sellers)",
+                },
+                { label: "Tasks", value: "13 scenarios: 7 for buyers and 6 for sellers" },
+              ],
+            },
+            {
               type: "metrics",
               items: [
-                { label: "SUS score", before: "72.5", after: "90.8" },
-                { label: "SEQ score", before: "6.27", after: "6.61" },
-                { label: "Success rate", before: "98.8%", after: "100%" },
+                { label: "SUS score", before: "72.5", after: "90.8", target: "above 78" },
+                { label: "SEQ score", before: "6.27", after: "6.61", target: "above 5.5" },
+                { label: "Success rate", before: "98.8%", after: "100%", target: "at least 80%" },
               ],
             },
             {
-              type: "cards",
-              title: "What testers told us",
-              fixLabel: "What we changed",
+              type: "tasks",
+              title: "See the 13 task scenarios",
+              groups: [
+                {
+                  label: "Buyer",
+                  items: [
+                    { id: "B01", text: "You need a microcontroller but don’t know its exact name. Search the catalog with camera search." },
+                    { id: "B02", text: "Add one microcontroller listing to favorites and to the cart." },
+                    { id: "B03", text: "Follow that seller and check their overall rating." },
+                    { id: "B04", text: "Search for a lab coat with the search bar, add it to favorites and the cart, then make an offer on it." },
+                    { id: "B05", text: "Order both items to ITB Ganesha, with meetup delivery and cash on delivery." },
+                    { id: "B06", text: "Go to Favorites, filter items by availability, then search for the lab coat." },
+                    { id: "B07", text: "Mark all notifications as read." },
+                  ],
+                },
+                {
+                  label: "Seller",
+                  items: [
+                    { id: "J01", text: "You have a lab coat you no longer use. Upload it and try to sell it." },
+                    { id: "J02", text: "Mark the lab coat offer notification as read, then open the buyer’s profile and read their reviews." },
+                    { id: "J03", text: "Counter the offer with Rp31,000." },
+                    { id: "J04", text: "Give a review to the customer who bought the lab coat." },
+                    { id: "J05", text: "Change the lab coat’s status to “Sold”." },
+                    { id: "J06", text: "Complete your own profile." },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "mapping",
+              title: "Usability test 1: what we changed",
+              labels: ["Tester feedback", "What we changed"],
               items: [
                 {
-                  title: "Counter-offer and decline were hard to find",
-                  text: "Both were tucked behind a “More” button. Users expected Accept, Counter, and Decline side by side.",
+                  id: "T1",
+                  role: "Buyer & seller",
+                  problem: "Counter and Decline were hidden behind “More”",
+                  feature: "Accept, Decline, and Counter now sit together in one card",
                 },
                 {
-                  title: "The cart icon was hard to find",
-                  text: "Following a competitor, we placed the cart inside Favorites. Users expected it on the home page.",
+                  id: "T2",
+                  role: "Buyer",
+                  problem: "The cart was inside Favorites, but users looked for it on the home page",
+                  feature: "Cart added to the home page, with its items shown there. The favorites icon moved to make room",
                 },
                 {
-                  title: "The offer flow wasn’t explicit",
-                  text: "There was no field to enter an offer amount, so users felt they had no control over the price.",
+                  id: "T3",
+                  role: "Buyer",
+                  problem: "The product page showed one photo, and “Used for 1 year” told too little",
+                  feature: "Arrows to slide through several photos, and a date range for how long the item has been used",
                 },
                 {
-                  title: "Notifications were tiring to clear",
-                  text: "Without “Mark all as read”, users had to open every message just to clear the badge.",
+                  id: "T4",
+                  role: "Seller",
+                  problem: "Reviews could only be given through chat",
+                  feature: "A button on the buyer’s profile to give a review",
                 },
                 {
-                  title: "Reviews didn’t look tappable",
-                  text: "The reviews section on profiles had no visual cue that it opens the full testimonials.",
+                  id: "T5",
+                  role: "Seller",
+                  problem: "“Sold” was hidden behind the three-dot icon",
+                  feature: "The main button on the seller’s product page now changes the status, replacing item performance",
                 },
               ],
             },
             {
-              type: "images",
-              items: [{ caption: "Before and after iteration" }],
+              type: "compare",
+              title: "Usability test 1: before and after",
+              items: [
+                {
+                  id: "T1",
+                  title: "Accept, Decline, and Counter in one card",
+                  role: "Buyer & seller",
+                  before: "/portfolio/Temu.in/testing/T1%20-%20Initial.png",
+                  after: "/portfolio/Temu.in/testing/T1%20-%20Update.png",
+                  alt: "the offer card",
+                },
+                {
+                  id: "T2",
+                  title: "Cart on the home page",
+                  role: "Buyer",
+                  before: "/portfolio/Temu.in/testing/T2%20-%20Initial.png",
+                  after: "/portfolio/Temu.in/testing/T2%20-%20Update.png",
+                  alt: "the home page",
+                },
+                {
+                  id: "T3",
+                  title: "Photo arrows and a usage date range",
+                  role: "Buyer",
+                  before: "/portfolio/Temu.in/testing/T3%20-%20Initial.png",
+                  after: "/portfolio/Temu.in/testing/T3%20-%20Update.png",
+                  alt: "the product page",
+                },
+                {
+                  id: "T4",
+                  title: "Give a review from the profile",
+                  role: "Seller",
+                  before: "/portfolio/Temu.in/testing/T4%20-%20Initial.png",
+                  after: "/portfolio/Temu.in/testing/T4%20-%20Update.png",
+                  alt: "the buyer’s profile",
+                },
+                {
+                  id: "T5",
+                  title: "Status button on the seller’s product page",
+                  role: "Seller",
+                  before: "/portfolio/Temu.in/testing/T5%20-%20Initial.png",
+                  after: "/portfolio/Temu.in/testing/T5%20-%20Update.png",
+                  alt: "the seller’s product page",
+                },
+              ],
+            },
+            {
+              type: "mapping",
+              title: "Usability test 2: what we changed",
+              labels: ["Tester feedback", "What we changed"],
+              items: [
+                {
+                  id: "U1",
+                  role: "Buyer",
+                  problem: "Notifications took one tap each to clear",
+                  feature: "A “Mark all as read” option on the notifications page",
+                },
+              ],
+            },
+            {
+              type: "compare",
+              title: "Usability test 2: before and after",
+              items: [
+                {
+                  id: "U1",
+                  title: "Mark all as read in notifications",
+                  role: "Buyer",
+                  before: "/portfolio/Temu.in/testing/U1%20-%20Initial.png",
+                  after: "/portfolio/Temu.in/testing/U1%20-%20Update.png",
+                  alt: "the notifications page",
+                },
+              ],
             },
           ],
         },

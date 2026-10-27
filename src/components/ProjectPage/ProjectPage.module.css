@@ -555,6 +555,29 @@
   line-height: 1.55;
 }
 
+.mappingMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.mappingId {
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.mappingRole {
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: var(--color-primary-light);
+  color: var(--color-text-accent);
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .card .cardTitle {
   color: var(--color-text-card);
   font-size: 18px;
@@ -730,6 +753,34 @@
   }
 }
 
+/* Before and after screens, phone-sized, inside an open requirement row */
+.compareBody {
+  padding: 4px 0 28px 60px;
+  display: flex;
+  gap: 32px;
+}
+
+/* Phone-shaped, but small, until the screenshot is exported */
+.compareFigure .figurePlaceholder {
+  width: 130px;
+  margin: 0 auto;
+  aspect-ratio: 450 / 907;
+  padding: 0 8px;
+  text-align: center;
+}
+
+.compareFigure {
+  flex: 0 1 260px;
+  min-width: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
 .requirementBody {
   padding: 4px 0 28px 60px;
   display: flex;
@@ -825,8 +876,12 @@
     order: 1;
     margin-left: 0;
   }
-  .requirementBody {
+  .requirementBody,
+  .compareBody {
     padding-left: 0;
+  }
+  .compareBody {
+    gap: 16px;
   }
   .requirementGrid {
     grid-template-columns: 1fr;
@@ -863,6 +918,50 @@
 .metricBefore {
   color: var(--color-text-muted);
   font-size: 14px;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px 32px;
+  color: var(--color-text-card);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.facts dd {
+  margin-top: 6px;
+}
+
+/* Task scenarios: one collapsed row, two lists inside */
+.tasksBody {
+  padding: 4px 0 28px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 40px;
+}
+
+.taskList {
+  margin-top: 12px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.taskList li {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .facts,
+  .tasksBody {
+    grid-template-columns: 1fr;
+  }
 }
 
 .cardFix {
@@ -1290,6 +1389,19 @@
 }
 
 /* Large full-width diagrams */
+/* Portrait phone screens, kept small and side by side */
+.imagePhones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 220px));
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .imagePhones {
+    gap: 12px;
+  }
+}
+
 .imageStack {
   display: flex;
   flex-direction: column;
@@ -1503,6 +1615,11 @@
   gap: 32px;
 }
 
+/* Until the screenshot is exported, keep the placeholder small */
+.showcaseRowEmpty {
+  grid-template-columns: 240px minmax(0, 1fr);
+}
+
 .showcaseText {
   display: flex;
   flex-direction: column;
@@ -1520,9 +1637,13 @@
 }
 
 @media (max-width: 768px) {
-  .showcaseRow {
+  .showcaseRow,
+  .showcaseRowEmpty {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+  .showcaseRowEmpty .figurePlaceholder {
+    max-width: 240px;
   }
 }
 

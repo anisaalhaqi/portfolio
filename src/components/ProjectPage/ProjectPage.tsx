@@ -614,20 +614,71 @@ function PhaseBlock({ block }: { block: Block }) {
           <BlockTitle title={block.title} />
           <div className={styles.mapping}>
             <div className={styles.mappingHead} aria-hidden="true">
-              <span>Problem</span>
+              <span>{block.labels?.[0] ?? "Problem"}</span>
               <span />
-              <span>Feature</span>
+              <span>{block.labels?.[1] ?? "Feature"}</span>
             </div>
             <ul>
               {block.items.map((item) => (
                 <li key={item.problem} className={styles.mappingRow}>
-                  <span className={styles.mappingProblem}>{item.problem}</span>
+                  <span className={styles.mappingProblem}>
+                    {(item.id || item.role) && (
+                      <span className={styles.mappingMeta}>
+                        {item.id && <span className={styles.mappingId}>{item.id}</span>}
+                        {item.role && <span className={styles.mappingRole}>{item.role}</span>}
+                      </span>
+                    )}
+                    {item.problem}
+                  </span>
                   <img src="/portfolio/icons/arrow-right-blue.png" alt="leads to" className={styles.mappingArrow} />
                   <span className={styles.mappingFeature}>{item.feature}</span>
                 </li>
               ))}
             </ul>
           </div>
+        </div>
+      );
+
+    case "compare":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <ul className={styles.requirements}>
+            {block.items.map((item, i) => (
+              <li key={item.id}>
+                <details className={styles.requirement} open={i === 0}>
+                  <summary className={styles.requirementSummary}>
+                    <span className={styles.requirementId}>{item.id}</span>
+                    <span className={styles.requirementTitle}>{item.title}</span>
+                    {item.role && <span className={styles.requirementRole}>{item.role}</span>}
+                    <span className={styles.requirementChevron} aria-hidden="true" />
+                  </summary>
+                  <div className={styles.compareBody}>
+                    <figure className={styles.compareFigure}>
+                      {item.before ? (
+                        <img src={item.before} alt={`Before: ${item.alt}`} className={styles.figureImage} />
+                      ) : (
+                        <div className={styles.figurePlaceholder} role="img" aria-label={`Before: ${item.alt}`}>
+                          Image coming soon
+                        </div>
+                      )}
+                      <figcaption>Before</figcaption>
+                    </figure>
+                    <figure className={styles.compareFigure}>
+                      {item.after ? (
+                        <img src={item.after} alt={`After: ${item.alt}`} className={styles.figureImage} />
+                      ) : (
+                        <div className={styles.figurePlaceholder} role="img" aria-label={`After: ${item.alt}`}>
+                          Image coming soon
+                        </div>
+                      )}
+                      <figcaption>After</figcaption>
+                    </figure>
+                  </div>
+                </details>
+              </li>
+            ))}
+          </ul>
         </div>
       );
 
@@ -721,9 +772,52 @@ function PhaseBlock({ block }: { block: Block }) {
                 {item.before && (
                   <span className={styles.metricBefore}>from {item.before} in iteration 1</span>
                 )}
+                {item.target && <span className={styles.metricBefore}>Target: {item.target}</span>}
               </li>
             ))}
           </ul>
+        </div>
+      );
+
+    case "facts":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <dl className={styles.facts}>
+            {block.items.map((item) => (
+              <div key={item.label}>
+                <dt className={styles.eyebrow}>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      );
+
+    case "tasks":
+      return (
+        <div className={styles.block}>
+          <details className={styles.requirement}>
+            <summary className={styles.requirementSummary}>
+              <span className={styles.requirementTitle}>{block.title}</span>
+              <span className={styles.requirementChevron} aria-hidden="true" />
+            </summary>
+            <div className={styles.tasksBody}>
+              {block.groups.map((group) => (
+                <div key={group.label}>
+                  <span className={styles.eyebrow}>{group.label}</span>
+                  <ul className={styles.taskList}>
+                    {group.items.map((task) => (
+                      <li key={task.id}>
+                        <span className={styles.requirementId}>{task.id}</span>
+                        <span>{task.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </details>
         </div>
       );
 
@@ -824,7 +918,7 @@ function PhaseBlock({ block }: { block: Block }) {
           <BlockTitle title={block.title} />
           <ul className={styles.showcase}>
             {block.items.map((item) => (
-              <li key={item.title} className={styles.showcaseRow}>
+              <li key={item.title} className={`${styles.showcaseRow} ${item.src ? "" : styles.showcaseRowEmpty}`}>
                 {item.src ? (
                   <img src={item.src} alt={item.alt} className={styles.figureImage} />
                 ) : (
@@ -888,9 +982,11 @@ function PhaseBlock({ block }: { block: Block }) {
       const stack = block.layout === "stack";
       const layoutClass = stack
         ? styles.imageStack
-        : block.items.length > 1
-          ? styles.imageGrid
-          : undefined;
+        : block.layout === "phones"
+          ? styles.imagePhones
+          : block.items.length > 1
+            ? styles.imageGrid
+            : undefined;
       return (
         <div className={styles.block}>
           <BlockTitle title={block.title} />
