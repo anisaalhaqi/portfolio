@@ -53,6 +53,25 @@ export type Block =
   | { type: "statement"; label: string; text: string }
   | { type: "list"; title: string; items: string[] }
   | { type: "mapping"; title?: string; items: { problem: string; feature: string }[] }
+  // Functional requirements, each collapsible: the user goal, the tasks to
+  // reach it, and how the interaction is designed
+  | {
+      type: "requirements";
+      title?: string;
+      items: {
+        id: string;
+        title: string;
+        role: string;
+        goal: string;
+        tasks: string[];
+        interaction: string;
+        metaphor?: string;
+        pain?: string;
+        screens: string[];
+        usability?: string[];
+        ux?: string[];
+      }[];
+    }
   // Leave out "before" when there was only one round of testing
   | { type: "metrics"; title?: string; items: { label: string; before?: string; after: string }[] }
   // Numbered steps with an image each, e.g. how the logo evolved
@@ -1043,6 +1062,177 @@ export const projects: Project[] = [
                 { problem: "Unsafe communication", feature: "In-app chat & offers, ITB SSO verification" },
                 { problem: "Limited logistics and mobility", feature: "COD or courier delivery options" },
                 { problem: "No updates on availability", feature: "Real-time order status alerts" },
+              ],
+            },
+            {
+              type: "text",
+              title: "Functional requirements",
+              content:
+                "We broke the features into functional requirements, each with a user goal, the tasks to reach it, and the interaction type behind its screens.",
+            },
+            {
+              type: "requirements",
+              items: [
+                {
+                  id: "F01",
+                  title: "ITB identity verification",
+                  role: "Buyer & seller",
+                  goal: "Prove they are an ITB student, so outsiders can’t use the app.",
+                  tasks: [
+                    "Sign up with an ITB account through Microsoft SSO",
+                    "Agree to the terms and conditions",
+                    "Complete and check the profile",
+                  ],
+                  interaction: "Instructing",
+                  metaphor: "Showing a student ID at the campus gate before going in.",
+                  pain: "Microsoft Authenticator sometimes doesn’t send the code, and sign-in fails for users who haven’t changed their email password.",
+                  screens: ["Onboarding", "Terms and conditions", "Profile", "Edit profile"],
+                  usability: ["Efficient", "Easy to learn", "Safe"],
+                  ux: ["Credible", "Reassuring"],
+                },
+                {
+                  id: "F02",
+                  title: "AI auto-listing",
+                  role: "Seller",
+                  goal: "List an unused item without researching prices or typing its condition by hand.",
+                  tasks: [
+                    "Choose a category and photograph the item",
+                    "Check the AI analysis: item name, condition, and suggested price",
+                    "Add usage duration and a description",
+                    "Choose a pickup method and publish",
+                  ],
+                  interaction: "Instructing",
+                  pain: "Sellers don’t know what price to set, and explaining every defect by hand is a chore.",
+                  screens: ["Choose category", "Take photo", "Preview", "Item details", "Pickup method"],
+                },
+                {
+                  id: "F03",
+                  title: "Search, filters, and catalog",
+                  role: "Buyer",
+                  goal: "Find the item they need within their budget, even without knowing its name.",
+                  tasks: [
+                    "Search by name, or by photo with the camera",
+                    "Filter by category and condition",
+                    "Sort by price, and choose a campus",
+                  ],
+                  interaction: "Instructing",
+                  metaphor: "Walking store aisles with clear category labels.",
+                  pain: "Users know the item by a different name, or don’t know its name at all.",
+                  screens: [
+                    "Home & categories",
+                    "Text search",
+                    "Camera search",
+                    "Text results",
+                    "Camera results",
+                    "Filtered by condition",
+                    "Filtered by category",
+                    "Favorites",
+                  ],
+                  usability: ["Effective", "Efficient", "Easy to learn"],
+                  ux: ["Satisfying", "Engaging"],
+                },
+                {
+                  id: "F04",
+                  title: "Price negotiation",
+                  role: "Buyer",
+                  goal: "Get the item at a fair price through an offer or a bid.",
+                  tasks: [
+                    "Send a price offer to the seller",
+                    "Accept the seller’s counter-offer, or send one back",
+                    "Track the status and history of offers until a price is agreed",
+                  ],
+                  interaction: "Conversing",
+                  metaphor: "Haggling at a market stall.",
+                  pain: "Slow sellers stall the purchase, and buyers lose interest.",
+                  screens: [
+                    "Make an offer",
+                    "Counter-offer",
+                    "Offer details",
+                    "Bid history",
+                    "Place a bid",
+                    "Review bid",
+                    "Bid status",
+                    "My offers",
+                  ],
+                  usability: ["Efficient", "Good utility"],
+                  ux: ["Engaging"],
+                },
+                {
+                  id: "F05",
+                  title: "In-app chat",
+                  role: "Buyer",
+                  goal: "Confirm the item’s condition before meeting, so there’s no regret after buying.",
+                  tasks: [
+                    "Open a chat from the product page",
+                    "Ask about the item’s condition",
+                    "Arrange a meet-up time when the seller delivers",
+                  ],
+                  interaction: "Conversing",
+                  metaphor: "Talking at a stall without swapping phone numbers.",
+                  pain: "Unresponsive sellers slow the purchase down.",
+                  screens: ["Chat list", "Conversation"],
+                  usability: ["Safe"],
+                  ux: ["Trustworthy"],
+                },
+                {
+                  id: "F06",
+                  title: "Checkout and delivery",
+                  role: "Buyer",
+                  goal: "Buy the item and agree on a delivery method that suits both sides.",
+                  tasks: [
+                    "Buy now, or add the item to the cart",
+                    "Choose a payment method",
+                    "Choose a campus meet-up or courier delivery",
+                    "Pay before the timer runs out",
+                    "Track the order until the item arrives",
+                  ],
+                  interaction: "Instructing",
+                  metaphor: "A cashier, then a parcel counter.",
+                  pain: "Last-minute plans force meet-ups to be rescheduled, and free time is hard to match.",
+                  screens: [
+                    "Product details",
+                    "Cart",
+                    "Payment & total",
+                    "Delivery & confirmation",
+                    "Payment timer",
+                    "Payment result",
+                    "Order status",
+                    "Live tracking",
+                  ],
+                  usability: ["Efficient", "Safe", "Good utility"],
+                  ux: ["Reassuring", "Trust"],
+                },
+                {
+                  id: "F07",
+                  title: "Reviews and ratings",
+                  role: "Buyer",
+                  goal: "Help sellers build a reputation, so other buyers know who to trust.",
+                  tasks: [
+                    "Review the seller’s behaviour during the transaction",
+                    "Rate and review the product",
+                  ],
+                  interaction: "Instructing",
+                  metaphor: "Signing a guestbook after a visit.",
+                  pain: "Once the item arrives, buyers tend to forget to leave a review.",
+                  screens: ["Ratings & reviews", "Write a review", "Report a review"],
+                  usability: ["Efficient", "Easy to remember"],
+                  ux: ["Satisfying", "Engaging"],
+                },
+                {
+                  id: "F08",
+                  title: "Notifications",
+                  role: "Buyer",
+                  goal: "Know where every order and offer stands without checking each one.",
+                  tasks: [
+                    "Get real-time updates on orders and delivery",
+                    "Get updates on price offers",
+                  ],
+                  interaction: "Exploring",
+                  metaphor: "An inbox that keeps every receipt.",
+                  screens: ["All notifications", "Transaction status", "Offer status"],
+                  usability: ["Efficient", "Safe"],
+                  ux: ["Reassuring"],
+                },
               ],
             },
             {

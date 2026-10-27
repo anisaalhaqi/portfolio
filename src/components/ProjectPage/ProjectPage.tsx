@@ -616,6 +616,84 @@ function PhaseBlock({ block }: { block: Block }) {
         </div>
       );
 
+    case "requirements":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <ul className={styles.requirements}>
+            {block.items.map((item) => (
+              <li key={item.id}>
+                <details className={styles.requirement}>
+                  <summary className={styles.requirementSummary}>
+                    <span className={styles.requirementId}>{item.id}</span>
+                    <span className={styles.requirementTitle}>{item.title}</span>
+                    <span className={styles.requirementRole}>{item.role}</span>
+                    <span className={styles.requirementChevron} aria-hidden="true" />
+                  </summary>
+                  <div className={styles.requirementBody}>
+                    <div className={styles.requirementGoal}>
+                      <span className={styles.eyebrow}>User goal</span>
+                      <p>{item.goal}</p>
+                    </div>
+                    <div className={styles.requirementGrid}>
+                      <div>
+                        <span className={styles.eyebrow}>User tasks</span>
+                        <ol className={styles.requirementTasks}>
+                          {item.tasks.map((task) => (
+                            <li key={task}>{task}</li>
+                          ))}
+                        </ol>
+                      </div>
+                      <dl className={styles.requirementFacts}>
+                        <div>
+                          <dt className={styles.eyebrow}>Interaction type</dt>
+                          <dd>{item.interaction}</dd>
+                        </div>
+                        {item.metaphor && (
+                          <div>
+                            <dt className={styles.eyebrow}>Metaphor</dt>
+                            <dd>{item.metaphor}</dd>
+                          </div>
+                        )}
+                        {item.pain && (
+                          <div>
+                            <dt className={styles.eyebrow}>Pain point</dt>
+                            <dd>{item.pain}</dd>
+                          </div>
+                        )}
+                      </dl>
+                    </div>
+                    <div className={styles.requirementChipGroups}>
+                      {(
+                        [
+                          ["Screens", item.screens],
+                          ["Usability goals", item.usability],
+                          ["UX goals", item.ux],
+                        ] as const
+                      ).map(
+                        ([label, chips]) =>
+                          chips && (
+                            <div key={label}>
+                              <span className={styles.eyebrow}>{label}</span>
+                              <ul className={styles.chips}>
+                                {chips.map((chip) => (
+                                  <li key={chip} className={styles.chip}>
+                                    {chip}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ),
+                      )}
+                    </div>
+                  </div>
+                </details>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+
     case "metrics":
       return (
         <div className={styles.block}>

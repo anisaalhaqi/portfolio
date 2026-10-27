@@ -638,6 +638,188 @@
   height: 22px;
 }
 
+/* Functional requirements: one collapsible row each, styled like the
+   mapping table's hairlines */
+.requirements {
+  list-style: none;
+  border-bottom: 1px solid rgb(72 117 200 / 0.2);
+}
+
+.requirement {
+  border-top: 1px solid rgb(72 117 200 / 0.2);
+}
+
+.requirementSummary {
+  padding: 18px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.requirementSummary::-webkit-details-marker {
+  display: none;
+}
+
+.requirementSummary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.requirementId {
+  flex-shrink: 0;
+  min-width: 44px;
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.requirementTitle {
+  flex: 1;
+  color: var(--color-text-card);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.requirementRole {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: var(--color-primary-light);
+  color: var(--color-text-accent);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Chevron drawn with borders, pointing down when closed and up when open */
+.requirementChevron {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin: 0 6px 4px;
+  border-right: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  transform: rotate(45deg);
+}
+
+.requirement[open] .requirementChevron {
+  margin-bottom: -4px;
+  transform: rotate(-135deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .requirementChevron {
+    transition: transform 200ms var(--ease-out), margin 200ms var(--ease-out);
+  }
+}
+
+.requirementBody {
+  padding: 4px 0 28px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.requirementGoal {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--color-text-card);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.requirementGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 40px;
+}
+
+.requirementGrid > div,
+.requirementFacts > div,
+.requirementChipGroups > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.requirementTasks {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.requirementTasks li::marker {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.requirementFacts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.requirementFacts dd {
+  color: var(--color-text-muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.requirementChipGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 6px 12px;
+  border: 1px solid rgb(72 117 200 / 0.25);
+  border-radius: 100px;
+  color: var(--color-text-card);
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+  .requirementSummary {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+  .requirementId {
+    min-width: 0;
+  }
+  .requirementTitle {
+    flex-basis: calc(100% - 80px);
+  }
+  .requirementRole {
+    order: 1;
+    margin-left: 0;
+  }
+  .requirementBody {
+    padding-left: 0;
+  }
+  .requirementGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Test metrics */
 .metrics {
   list-style: none;
