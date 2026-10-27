@@ -699,7 +699,7 @@ export const projects: Project[] = [
     title: "Temu.in",
     summary:
       "An SSO-verified marketplace for ITB students to resell academic gear, with AI auto-listing and price suggestions. Currently in development.",
-    imageSrc: "/portfolio/icons/temuin.png",
+    imageSrc: "/portfolio/Temu.in/Cover%20Temu.in.webp",
     figmaUrl: "https://www.figma.com/design/SQtmDbAQDuEDAEzmrF6MwS/Temu.in---Gemastik?node-id=78-30116",
     youtubeId: "6BsO53MYzQU",
     glance: {
