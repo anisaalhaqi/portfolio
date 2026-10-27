@@ -46,6 +46,14 @@ html {
   text-size-adjust: 100%;
 }
 
+/* Glide to in-page anchors such as View Work → #case-studies. Next turns this
+   off while changing pages, so route changes still jump straight to the top. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Fire taps immediately instead of waiting to rule out a double-tap zoom */
 a,
 button,
