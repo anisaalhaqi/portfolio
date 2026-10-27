@@ -1747,6 +1747,34 @@ export const projects: Project[] = [
                 },
               ],
             },
+            {
+              type: "columns",
+              title: "What’s next",
+              items: [
+                {
+                  title: "Agreed price in checkout",
+                  points: [
+                    "Carry the accepted offer into the cart and order total",
+                    "Let buyers type their own offer amount",
+                    "Confirm before accepting an offer",
+                  ],
+                },
+                {
+                  title: "Elements that look tappable",
+                  points: [
+                    "Make reviews on a profile look clickable, an issue also raised in test 1",
+                    "Link the seller’s name on a product page to their profile, with their rating",
+                  ],
+                },
+                {
+                  title: "Clear counts and states",
+                  points: [
+                    "Unread badges on notifications and the cart",
+                    "A stronger highlight for the chosen payment method",
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
