@@ -4,7 +4,7 @@ import Footer from "@/components/Footer/Footer";
 import ContactCard from "@/components/ContactCard/ContactCard";
 
 const RESUME_URL =
-  "https://docs.google.com/document/d/1J8dM-wM57rX83Nr7v8cixy-GKkJYClgmzU_zProBTdc/edit?usp=sharing";
+  "https://docs.google.com/document/d/18nzNV1R1QyReWaSZqOrylJnctgO0aryxVlHg1V6rOQE/edit?tab=t.0";
 
 
 // Role, org, and period only; the full details live in the resume

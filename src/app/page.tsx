@@ -61,7 +61,7 @@ export default function Home() {
               View Work
             </a>
             <a
-              href="https://docs.google.com/document/d/1J8dM-wM57rX83Nr7v8cixy-GKkJYClgmzU_zProBTdc/edit?usp=sharing"
+              href="https://docs.google.com/document/d/18nzNV1R1QyReWaSZqOrylJnctgO0aryxVlHg1V6rOQE/edit?tab=t.0"
               className={styles.secondaryLink}
               target="_blank"
               rel="noopener noreferrer"
