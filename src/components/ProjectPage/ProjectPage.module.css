@@ -131,6 +131,19 @@
   composes: arrowImg from "../CaseStudyCard/CaseStudyCard.module.css";
 }
 
+.liveLink {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.liveNote {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
 .heroImage {
   width: 100%;
   height: auto;
@@ -1475,6 +1488,44 @@
 }
 
 /* Spotlight: one image beside the points that explain it */
+/* Screenshot beside the decision it shows */
+.showcase {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.showcaseRow {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: center;
+  gap: 32px;
+}
+
+.showcaseText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.showcaseText .cardTitle {
+  color: var(--color-text-card);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+@media (max-width: 768px) {
+  .showcaseRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
 .spotlight {
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -1545,7 +1596,7 @@
   padding-top: 20px;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--cols, 5), minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -1565,9 +1616,10 @@
 }
 
 .treeColumns::after {
+  /* Rail spans from the first column's center to the last one's */
   top: 0;
-  left: 10%;
-  right: 10%;
+  left: calc(50% / var(--cols, 5));
+  right: calc(50% / var(--cols, 5));
   height: 1px;
 }
 

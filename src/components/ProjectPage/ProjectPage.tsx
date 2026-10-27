@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
 import { PHASE_ORDER, type Block, type Project, type TreeNode } from "@/data/projects";
@@ -39,6 +40,20 @@ export default function ProjectPage({ project: study }: { project: Project }) {
                 <span>View in Figma</span>
                 <img src="/portfolio/icons/arrow-right-blue.png" alt="" className={styles.arrowImg} />
               </a>
+            )}
+            {study.live && (
+              <div className={styles.liveLink}>
+                <a
+                  href={study.live.url}
+                  className={styles.prototypeLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>Visit live site</span>
+                  <img src="/portfolio/icons/arrow-right-blue.png" alt="" className={styles.arrowImg} />
+                </a>
+                {study.live.note && <p className={styles.liveNote}>{study.live.note}</p>}
+              </div>
             )}
           </div>
           {study.imageSrc ? (
@@ -738,7 +753,11 @@ function PhaseBlock({ block }: { block: Block }) {
           <BlockTitle title={block.title} />
           <div className={styles.tree}>
             <span className={styles.treeRoot}>{block.root}</span>
-            <ul className={styles.treeColumns}>
+            {/* One column per top-level section */}
+            <ul
+              className={styles.treeColumns}
+              style={{ "--cols": block.items.length } as CSSProperties}
+            >
               {block.items.map((section) => (
                 <li key={section.label} className={styles.treeColumn}>
                   <span className={styles.treeSection}>{section.label}</span>
@@ -796,6 +815,30 @@ function PhaseBlock({ block }: { block: Block }) {
               ))}
             </ul>
           </div>
+        </div>
+      );
+
+    case "showcase":
+      return (
+        <div className={styles.block}>
+          <BlockTitle title={block.title} />
+          <ul className={styles.showcase}>
+            {block.items.map((item) => (
+              <li key={item.title} className={styles.showcaseRow}>
+                {item.src ? (
+                  <img src={item.src} alt={item.alt} className={styles.figureImage} />
+                ) : (
+                  <div className={styles.figurePlaceholder} role="img" aria-label={item.alt}>
+                    Image coming soon
+                  </div>
+                )}
+                <div className={styles.showcaseText}>
+                  <p className={styles.cardTitle}>{item.title}</p>
+                  <p>{item.text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       );
 

@@ -91,6 +91,13 @@ export type Block =
       entry: { start: string; decision: string; no: string[]; yes: string[]; end: string };
       tabs: { label: string; actions: { label: string; screen?: string }[] }[];
     }
+  // Rows of a screenshot beside the decision it shows. Leave src empty to show
+  // a placeholder until the image is exported.
+  | {
+      type: "showcase";
+      title?: string;
+      items: { title: string; text: string; src?: string; alt: string }[];
+    }
   // One image beside a list of points, e.g. what a logo means
   | { type: "spotlight"; title?: string; src: string; alt: string; points: string[] }
   // Competitor groups for benchmarking, each with why it was chosen
@@ -135,6 +142,8 @@ export interface Project {
   // Leave empty to show a placeholder until the cover image is ready
   imageSrc?: string;
   figmaUrl?: string;
+  // Deployed site; the note says when visitors can't see everything, e.g. a login
+  live?: { url: string; note?: string };
   youtubeId?: string;
   glance?: {
     problem: string;
@@ -1579,7 +1588,424 @@ export const projects: Project[] = [
       ],
     },
   },
-  ...[1, 2].map((n): Project => uiPlaceholder(`ui-project-${n}`, `UI Project ${n}`)),
+  {
+    slug: "km-itb-shortener",
+    kind: "ui",
+    tag: "KM ITB",
+    title: "KM ITB Link Shortener",
+    summary:
+      "A revamp of KM ITB’s internal link shortener, where each kemenkoan creates short links on the official KM ITB domain and admins manage every account and link.",
+    live: {
+      url: "https://km.itb.ac.id/s/",
+      note: "Internal tool: everything past the login page needs a KM ITB account.",
+    },
+    meta: {
+      role: "UI Design, UX Writing, Design Handoff",
+      team: "1 Designer",
+      tools: "Figma",
+      timeframe: "3 months",
+    },
+    sections: [
+      {
+        title: "Overview",
+        blocks: [
+          {
+            type: "text",
+            content:
+              "Each kemenkoan under the KM ITB cabinet shares one account. After logging in, they paste a long URL, pick an alias, and get a short link for forms, documents, and events. The revamp brings the shortener in line with the KM ITB website and makes it work on desktop and mobile.",
+          },
+          {
+            type: "columns",
+            title: "Who uses it",
+            items: [
+              {
+                title: "Kemenkoan account",
+                points: [
+                  "Creates short links with a custom alias",
+                  "Copies, opens, or deletes its own links",
+                  "Only sees links made by its own account",
+                ],
+              },
+              {
+                title: "Administrator",
+                points: [
+                  "Sees every account and every link",
+                  "Activates, deactivates, or deletes links",
+                  "Creates and edits kemenkoan accounts",
+                ],
+              },
+              {
+                title: "Link visitor",
+                points: [
+                  "Opens a short link and lands on the target URL",
+                  "Sees an info page if the link is missing or inactive",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Pages & States",
+        blocks: [
+          {
+            type: "metrics",
+            items: [
+              { label: "Pages", after: "8" },
+              { label: "States", after: "41" },
+              { label: "Toast notifications", after: "23" },
+            ],
+          },
+          {
+            type: "text",
+            content:
+              "Every error, empty, and loading state in the spec has its own screen, so developers don’t have to guess.",
+          },
+          {
+            type: "tree",
+            root: "KM ITB Link Shortener",
+            items: [
+              {
+                label: "Login",
+                children: [
+                  { label: "Default" },
+                  { label: "Password shown" },
+                  { label: "Password hidden" },
+                  { label: "Empty field" },
+                  { label: "Invalid input" },
+                  { label: "Inactive account" },
+                  { label: "Authentication error pop-up" },
+                  { label: "Account problem pop-up" },
+                ],
+              },
+              {
+                label: "Shortener",
+                children: [
+                  { label: "Default" },
+                  { label: "Filled" },
+                  { label: "Link created and copied" },
+                  { label: "Empty field" },
+                  { label: "Alias already taken" },
+                  { label: "Creation failed pop-up" },
+                ],
+              },
+              {
+                label: "History",
+                children: [
+                  { label: "Default" },
+                  { label: "Search filled" },
+                  { label: "No search results" },
+                  { label: "No links yet" },
+                  { label: "Loading" },
+                  { label: "Confirm delete" },
+                  { label: "Session expired" },
+                  { label: "+ 5 toasts" },
+                ],
+              },
+              {
+                label: "Profile",
+                children: [
+                  { label: "Default" },
+                  { label: "Photo uploading" },
+                  { label: "Confirm log out" },
+                  { label: "Session expired" },
+                  { label: "Failed to load" },
+                  { label: "+ 4 toasts" },
+                ],
+              },
+              {
+                label: "Admin",
+                children: [
+                  {
+                    label: "Dashboard",
+                    children: [
+                      { label: "Default" },
+                      { label: "Profile dropdown" },
+                      { label: "Kemenkoan filter" },
+                      { label: "Filter applied" },
+                      { label: "No search results" },
+                      { label: "No links yet" },
+                      { label: "Confirm delete" },
+                      { label: "Confirm deactivate" },
+                      { label: "Confirm activate" },
+                      { label: "+ 6 toasts" },
+                    ],
+                  },
+                  {
+                    label: "Account management",
+                    children: [
+                      { label: "Default" },
+                      { label: "Confirm activate or deactivate" },
+                      { label: "Edit account" },
+                      { label: "Add account" },
+                      { label: "Empty field" },
+                      { label: "Unsaved changes" },
+                      { label: "+ 8 toasts" },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Visitor pages",
+                children: [{ label: "Link not found" }, { label: "Link inactive" }],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Design Decisions",
+        blocks: [
+          {
+            type: "showcase",
+            items: [
+              {
+                title: "Preview the short link before creating it",
+                text: "Based on TinyURL, the form shows the final link as the user types an alias, so they know what they’ll share before submitting.",
+                alt: "Shortener form with a preview of the short link under the alias field",
+              },
+              {
+                title: "Status as a toggle, with a confirmation",
+                text: "A link or account is either active or inactive, so a toggle fits. Every switch asks for confirmation first, in case the admin taps it by accident.",
+                alt: "Admin table with a status toggle and its confirmation pop-up",
+              },
+              {
+                title: "Warn before losing unsaved changes",
+                text: "Closing the add or edit account modal asks first, and explains that the changes will be lost.",
+                alt: "Unsaved changes confirmation over the edit account modal",
+              },
+              {
+                title: "Initials instead of a personal photo",
+                text: "One account belongs to a whole kemenkoan, so the default avatar uses the first letters of the first and last words of the ministry’s name.",
+                alt: "Profile card with a two-letter avatar of the ministry’s initials",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Handoff Notes",
+        blocks: [
+          {
+            type: "text",
+            content:
+              "I annotated how each kind of feedback behaves, so it stays consistent across pages.",
+          },
+          {
+            type: "cards",
+            items: [
+              {
+                title: "Toasts",
+                text: "Bottom right, 24px from the screen edge. A toast closes after 4 seconds or when the user taps the close icon. Users can keep clicking other elements while it’s open.",
+              },
+              {
+                title: "Confirmation pop-ups",
+                text: "Centered, used for actions like log out. They close only through the close icon, Cancel, or the confirm button, so an accidental click outside doesn’t change anything.",
+              },
+              {
+                title: "Blocking pop-ups",
+                text: "Session expired and failed to load have no close icon on purpose. The user has to log in again or reload to keep using the app, so the only way out is the button.",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "kemenwir-merch-store",
+    kind: "ui",
+    tag: "Inkubator IT ITB",
+    title: "Kementerian Kewirausahaan KM ITB Merch Store",
+    imageSrc: "/portfolio/Kemenwir/Cover%20Kemenwir.webp",
+    summary:
+      "An online store for KM ITB merchandise, with checkout through Midtrans, pick-up or delivery, and an admin side for products and orders.",
+    meta: {
+      role: "UI Design, Design System",
+      team: "2 Designers",
+      tools: "Figma",
+      timeframe: "2 weeks",
+    },
+    sections: [
+      {
+        title: "Overview",
+        blocks: [
+          {
+            type: "text",
+            content:
+              "Kementerian Kewirausahaan KM ITB sells merchandise to students and the public. Buyers browse the catalog, pay through Midtrans, and either get the order shipped or pick it up on campus. Admins manage products and update each order’s status by hand. I designed three of the features, plus the shared design system.",
+          },
+          {
+            type: "columns",
+            title: "My scope",
+            items: [
+              {
+                title: "Account",
+                points: [
+                  "Register as a student or the public",
+                  "Log in with email or Google",
+                ],
+              },
+              {
+                title: "Catalog",
+                points: [
+                  "Search, filter, and product detail for buyers",
+                  "Product management for admins",
+                ],
+              },
+              {
+                title: "Order tracking",
+                points: [
+                  "Order timeline and pick-up QR code for buyers",
+                  "Order list, QR scanning, and status updates for admins",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Design System",
+        blocks: [
+          {
+            type: "text",
+            content:
+              "The client had no brand guidelines, only a color palette with red as the primary color. Red usually means error, so I set rules to keep primary actions and dangerous actions apart.",
+          },
+          {
+            type: "cards",
+            items: [
+              {
+                title: "Buttons",
+                text: "Red fill for primary, red outline for secondary, and blue fill for CTAs. Each page has only one primary button.",
+              },
+              {
+                title: "Dangerous actions",
+                text: "Delete and other destructive actions use a darker red than the primary, so they don’t read as the main action.",
+              },
+              {
+                title: "Status chips",
+                text: "Yellow for pre-order, green for ready stock, dark red for sold out, and gray for everything else.",
+              },
+              {
+                title: "Filter chips and dropdowns",
+                text: "Filter chips are gray by default and primary red when selected. Dropdown items turn pink on hover.",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Pages & States",
+        blocks: [
+          {
+            type: "tree",
+            root: "Kementerian Kewirausahaan KM ITB",
+            items: [
+              {
+                label: "Account",
+                children: [
+                  { label: "Log in" },
+                  {
+                    label: "Register",
+                    children: [
+                      { label: "Select role" },
+                      { label: "Personal details" },
+                      { label: "Shipping address" },
+                      { label: "Summary" },
+                      { label: "Terms pop-up" },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Catalog",
+                children: [
+                  { label: "Default" },
+                  { label: "Search results" },
+                  { label: "No search results" },
+                  { label: "Filter panel" },
+                  { label: "Filter applied" },
+                ],
+              },
+              {
+                label: "Product detail",
+                children: [{ label: "Default" }, { label: "Size chart pop-up" }],
+              },
+              {
+                label: "My orders",
+                children: [
+                  { label: "Order list" },
+                  { label: "Delivery timeline" },
+                  { label: "Pick-up QR code" },
+                  { label: "Cancelled" },
+                ],
+              },
+              {
+                label: "Admin",
+                children: [
+                  {
+                    label: "Product management",
+                    children: [
+                      { label: "Product table" },
+                      { label: "No products yet" },
+                      { label: "Add product" },
+                      { label: "Edit product" },
+                      { label: "Confirm delete" },
+                    ],
+                  },
+                  {
+                    label: "Order management",
+                    children: [
+                      { label: "Order table" },
+                      { label: "Scan QR" },
+                      { label: "Order detail" },
+                      { label: "Update status" },
+                      { label: "Receipt" },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Design Decisions",
+        blocks: [
+          {
+            type: "showcase",
+            items: [
+              {
+                title: "Registration split into steps",
+                text: "Registering asks for far more than logging in: role, personal details, and shipping addresses. I split it into steps so the card stays as small as a login card. The address step takes one address, and more can be added on the summary, so no step gets crowded.",
+                src: "/portfolio/Kemenwir/Design%20Decision%201%20-%20Kemenwir.webp",
+                alt: "Registration card on step 1 of 3, personal details, with Google sign-up above the form",
+              },
+              {
+                title: "Color swatches, from admin form to catalog",
+                text: "When adding a product, the admin enters a hex code for each color, or ticks a checkbox if the product has no color variants. Buyers then see a dot of the exact color on every color chip, in the filter and on the product page, instead of guessing from a name like “sage”.",
+                src: "/portfolio/Kemenwir/Design%20Decision%202%20-%20Kemenwir.webp",
+                alt: "Add product form with a hex code field for each color and a no-color-variants checkbox",
+              },
+              {
+                title: "Filter count on the filter button",
+                text: "Based on Shopee. After applying filters, the button shows how many are active, so buyers know the catalog is filtered once the panel closes.",
+                src: "/portfolio/Kemenwir/Design%20Decision%203%20-%20Kemenwir.webp",
+                alt: "Catalog with the filter button showing three active filters",
+              },
+              {
+                title: "A way out when a QR code fails",
+                text: "At pick-up, a successful scan shows the order ID and buyer’s name, with a button to open the order. If the code isn’t recognized, the admin can type the order ID or scan again.",
+                src: "/portfolio/Kemenwir/Design%20Decision%204%20-%20Kemenwir.webp",
+                alt: "Scan failed pop-up with Scan again and Type order ID buttons",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 // Template content for a UI project; copy it and replace the text when the real
