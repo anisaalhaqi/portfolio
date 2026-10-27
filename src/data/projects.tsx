@@ -1593,6 +1593,7 @@ export const projects: Project[] = [
     kind: "ui",
     tag: "KM ITB",
     title: "KM ITB Link Shortener",
+    imageSrc: "/portfolio/KM%20ITB/Cover%20KM%20ITB.webp",
     summary:
       "A revamp of KM ITB’s internal link shortener, where each kemenkoan creates short links on the official KM ITB domain and admins manage every account and link.",
     live: {
@@ -1762,22 +1763,26 @@ export const projects: Project[] = [
               {
                 title: "Preview the short link before creating it",
                 text: "Based on TinyURL, the form shows the final link as the user types an alias, so they know what they’ll share before submitting.",
-                alt: "Shortener form with a preview of the short link under the alias field",
+                src: "/portfolio/KM%20ITB/Design%20Decision%201%20-%20KM%20ITB.webp",
+                alt: "Shortener form with the short link previewed in pink under the alias field",
               },
               {
                 title: "Status as a toggle, with a confirmation",
                 text: "A link or account is either active or inactive, so a toggle fits. Every switch asks for confirmation first, in case the admin taps it by accident.",
-                alt: "Admin table with a status toggle and its confirmation pop-up",
+                src: "/portfolio/KM%20ITB/Design%20Decision%202%20-%20KM%20ITB.webp",
+                alt: "Admin table with status toggles and a pop-up asking to confirm deactivating a link",
               },
               {
                 title: "Warn before losing unsaved changes",
                 text: "Closing the add or edit account modal asks first, and explains that the changes will be lost.",
-                alt: "Unsaved changes confirmation over the edit account modal",
+                src: "/portfolio/KM%20ITB/Design%20Decision%203%20-%20KM%20ITB.webp",
+                alt: "Cancel changes pop-up over the edit account modal",
               },
               {
                 title: "Initials instead of a personal photo",
                 text: "One account belongs to a whole kemenkoan, so the default avatar uses the first letters of the first and last words of the ministry’s name.",
-                alt: "Profile card with a two-letter avatar of the ministry’s initials",
+                src: "/portfolio/KM%20ITB/Design%20Decision%204%20-%20KM%20ITB.webp",
+                alt: "Profile card with a KK initials avatar for Kementerian Kewirausahaan",
               },
             ],
           },
