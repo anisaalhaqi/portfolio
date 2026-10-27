@@ -12,10 +12,10 @@ const uiProjects = projects.filter((project) => project.kind === "ui");
 
 const caseStudies = [
   {
-    tag: "Gemastik 2026",
+    tag: "FindIT UGM 2026",
     title: "Temu.in",
     description:
-      "An AI-powered marketplace designed to simplify the reselling of second-hand academic goods by integrating AI Auto-Listing, Price Suggestion, and SSO ITB verification to reduce user skepticism. It promotes responsible consumption within the ITB community, in line with SDG 12.",
+      "A campus marketplace for ITB students to resell academic gear, with ITB SSO verification, AI auto-listing, and price suggestions. Two rounds of usability testing raised the SUS score from 72.5 to 90.8.",
     bgColor: "#C5FFF7",
     imageSrc: "/portfolio/Temu.in/Cover%20Temu.in.webp",
     link: "/case-study/temuin",

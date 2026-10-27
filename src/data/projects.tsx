@@ -97,7 +97,15 @@ export type Block =
   | {
       type: "compare";
       title?: string;
-      items: { id: string; title: string; role?: string; before?: string; after?: string; alt: string }[];
+      items: {
+        id: string;
+        title: string;
+        role?: string;
+        before?: string;
+        after?: string;
+        beforeAlt: string;
+        afterAlt: string;
+      }[];
     }
   // Numbered steps with an image each, e.g. how the logo evolved
   | {
@@ -721,10 +729,10 @@ export const projects: Project[] = [
   {
     slug: "temuin",
     kind: "case-study",
-    tag: "Gemastik 2026",
+    tag: "FindIT UGM 2026",
     title: "Temu.in",
     summary:
-      "An SSO-verified marketplace for ITB students to resell academic gear, with AI auto-listing and price suggestions. Currently in development.",
+      "A campus marketplace for ITB students to resell academic gear, with ITB SSO verification, AI auto-listing, and price suggestions. Two rounds of usability testing raised the SUS score from 72.5 to 90.8.",
     imageSrc: "/portfolio/Temu.in/Cover%20Temu.in.webp",
     figmaUrl:
       "https://www.figma.com/proto/VPCpLjxOEDtbpgJ6szwpxV/Temu.in---FindIT?node-id=1646-38350&t=Kbuw14pB2Y5h9k0K-0&scaling=scale-down&content-scaling=fixed&page-id=1646%3A36011&starting-point-node-id=1646%3A38319&show-proto-sidebar=1",
@@ -1591,7 +1599,7 @@ export const projects: Project[] = [
               items: [
                 { label: "SUS score", before: "72.5", after: "90.8", target: "above 78" },
                 { label: "SEQ score", before: "6.27", after: "6.61", target: "above 5.5" },
-                { label: "Success rate", before: "98.8%", after: "100%", target: "at least 80%" },
+                { label: "Success rate", before: "98.9%", after: "100%", target: "at least 80%" },
               ],
             },
             {
@@ -1602,10 +1610,10 @@ export const projects: Project[] = [
                   label: "Buyer",
                   items: [
                     { id: "B01", text: "You need a microcontroller but don’t know its exact name. Search the catalog with camera search." },
-                    { id: "B02", text: "Add one microcontroller listing to favorites and to the cart." },
+                    { id: "B02", text: "Add one microcontroller listing to favorites and to the cart. Test 2: favorites only." },
                     { id: "B03", text: "Follow that seller and check their overall rating." },
-                    { id: "B04", text: "Search for a lab coat with the search bar, add it to favorites and the cart, then make an offer on it." },
-                    { id: "B05", text: "Order both items to ITB Ganesha, with meetup delivery and cash on delivery." },
+                    { id: "B04", text: "Search for a lab coat with the search bar, add it to favorites and the cart, then make an offer on it. Test 2: cart only." },
+                    { id: "B05", text: "Order both items to ITB Ganesha, with meetup delivery and cash on delivery. Test 2: the lab coat only." },
                     { id: "B06", text: "Go to Favorites, filter items by availability, then search for the lab coat." },
                     { id: "B07", text: "Mark all notifications as read." },
                   ],
@@ -1631,26 +1639,26 @@ export const projects: Project[] = [
                 {
                   id: "T1",
                   role: "Buyer & seller",
-                  problem: "Counter and Decline were hidden behind “More”",
-                  feature: "Accept, Decline, and Counter now sit together in one card",
+                  problem: "Counter and Decline were hidden behind “More”, and the offer didn’t show how far it was from the price",
+                  feature: "Accept, Decline, and Counter now sit together in one card, with a note on how much lower the offer is",
                 },
                 {
                   id: "T2",
                   role: "Buyer",
                   problem: "The cart was inside Favorites, but users looked for it on the home page",
-                  feature: "Cart added to the home page, with its items shown there. The favorites icon moved to make room",
+                  feature: "A cart icon in the home header. Favorites left the header and now show as a row on the home page",
                 },
                 {
                   id: "T3",
                   role: "Buyer",
-                  problem: "The product page showed one photo, and “Used for 1 year” told too little",
+                  problem: "Photos had only small dots to browse them, and “Used for 1 semester” told too little",
                   feature: "Arrows to slide through several photos, and a date range for how long the item has been used",
                 },
                 {
                   id: "T4",
-                  role: "Seller",
-                  problem: "Reviews could only be given through chat",
-                  feature: "A button on the buyer’s profile to give a review",
+                  role: "Buyer & seller",
+                  problem: "Reviews could only be given through chat, profiles didn’t show when the user was last active, and the “Status” filter was unclear",
+                  feature: "A button on the profile to give a review, a “last active” line, and the filter renamed to “Availability”",
                 },
                 {
                   id: "T5",
@@ -1670,7 +1678,8 @@ export const projects: Project[] = [
                   role: "Buyer & seller",
                   before: "/portfolio/Temu.in/testing/T1%20-%20Initial.png",
                   after: "/portfolio/Temu.in/testing/T1%20-%20Update.png",
-                  alt: "the offer card",
+                  beforeAlt: "Offer card in Activity with only “Lainnya” (More) and “Terima” (Accept) buttons",
+                  afterAlt: "Offer card with “Terima” (Accept), “Tawar Balik” (Counter), and “Tolak” (Decline) buttons, and a note that the offer is Rp10,000 below the original price",
                 },
                 {
                   id: "T2",
@@ -1678,7 +1687,8 @@ export const projects: Project[] = [
                   role: "Buyer",
                   before: "/portfolio/Temu.in/testing/T2%20-%20Initial.png",
                   after: "/portfolio/Temu.in/testing/T2%20-%20Update.png",
-                  alt: "the home page",
+                  beforeAlt: "Home page with a favorites icon in the header and no cart",
+                  afterAlt: "Home page with a cart icon in the header and a row of favorite items",
                 },
                 {
                   id: "T3",
@@ -1686,15 +1696,17 @@ export const projects: Project[] = [
                   role: "Buyer",
                   before: "/portfolio/Temu.in/testing/T3%20-%20Initial.png",
                   after: "/portfolio/Temu.in/testing/T3%20-%20Update.png",
-                  alt: "the product page",
+                  beforeAlt: "Product page with small photo dots and “Dipakai selama 1 semester” (used for 1 semester)",
+                  afterAlt: "Product page with left and right photo arrows and “Pemakaian Sept 2024–Juli 2025” (used Sept 2024 to July 2025)",
                 },
                 {
                   id: "T4",
-                  title: "Give a review from the profile",
-                  role: "Seller",
+                  title: "Review button, last active time, and the Availability filter",
+                  role: "Buyer & seller",
                   before: "/portfolio/Temu.in/testing/T4%20-%20Initial.png",
                   after: "/portfolio/Temu.in/testing/T4%20-%20Update.png",
-                  alt: "the buyer’s profile",
+                  beforeAlt: "Buyer profile with a rating, listings, and a “Status” filter, but no way to leave a review",
+                  afterAlt: "Buyer profile with “Terakhir aktif 10 jam yang lalu” (last active 10 hours ago), a “Berikan Ulasan” (Give a review) button under the rating, and a “Ketersediaan” (Availability) filter",
                 },
                 {
                   id: "T5",
@@ -1702,7 +1714,8 @@ export const projects: Project[] = [
                   role: "Seller",
                   before: "/portfolio/Temu.in/testing/T5%20-%20Initial.png",
                   after: "/portfolio/Temu.in/testing/T5%20-%20Update.png",
-                  alt: "the seller’s product page",
+                  beforeAlt: "Seller’s product page with “Lihat Performa” (View performance) as the main button",
+                  afterAlt: "Seller’s product page with “Ubah Status Barang” (Change item status) as the main button",
                 },
               ],
             },
@@ -1729,7 +1742,8 @@ export const projects: Project[] = [
                   role: "Buyer",
                   before: "/portfolio/Temu.in/testing/U1%20-%20Initial.png",
                   after: "/portfolio/Temu.in/testing/U1%20-%20Update.png",
-                  alt: "the notifications page",
+                  beforeAlt: "Notifications page with no option to mark all as read",
+                  afterAlt: "Notifications page with “Tandai Baca Semua” (Mark all as read) above the list",
                 },
               ],
             },

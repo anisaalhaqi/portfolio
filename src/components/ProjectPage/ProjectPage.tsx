@@ -656,9 +656,9 @@ function PhaseBlock({ block }: { block: Block }) {
                   <div className={styles.compareBody}>
                     <figure className={styles.compareFigure}>
                       {item.before ? (
-                        <img src={item.before} alt={`Before: ${item.alt}`} className={styles.figureImage} />
+                        <img src={item.before} alt={item.beforeAlt} className={styles.figureImage} />
                       ) : (
-                        <div className={styles.figurePlaceholder} role="img" aria-label={`Before: ${item.alt}`}>
+                        <div className={styles.figurePlaceholder} role="img" aria-label={item.beforeAlt}>
                           Image coming soon
                         </div>
                       )}
@@ -666,9 +666,9 @@ function PhaseBlock({ block }: { block: Block }) {
                     </figure>
                     <figure className={styles.compareFigure}>
                       {item.after ? (
-                        <img src={item.after} alt={`After: ${item.alt}`} className={styles.figureImage} />
+                        <img src={item.after} alt={item.afterAlt} className={styles.figureImage} />
                       ) : (
-                        <div className={styles.figurePlaceholder} role="img" aria-label={`After: ${item.alt}`}>
+                        <div className={styles.figurePlaceholder} role="img" aria-label={item.afterAlt}>
                           Image coming soon
                         </div>
                       )}
