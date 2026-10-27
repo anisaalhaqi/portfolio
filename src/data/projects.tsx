@@ -1460,21 +1460,21 @@ export const projects: Project[] = [
                 {
                   label: "First direction",
                   text: "An eye, to show how buyers and sellers find each other. Feedback said it felt made for women, though the app is for everyone.",
-                  src: "/portfolio/Temu.in/logo-making/option%201.png",
+                  src: "/portfolio/Temu.in/logo-making/option%201.webp",
                   alt: "First logo option: an eye with eyelashes",
                 },
                 {
                   label: "Exploring again",
                   text: "To keep it gender-neutral, we went back to sketching wordmarks built from the name itself.",
-                  src: "/portfolio/Temu.in/logo-making/brainstorm.png",
+                  src: "/portfolio/Temu.in/logo-making/brainstorm.webp",
                   alt: "Hand-drawn sketches of Temu.in wordmarks",
                 },
                 {
                   label: "Final logo",
                   text: "Chosen after gathering opinions from several people, including potential users.",
-                  // Copy of "final logo.png" with uneven transparent margins trimmed,
+                  // Copy of "final logo.webp" with uneven transparent margins trimmed,
                   // so it sits centered in its frame
-                  src: "/portfolio/Temu.in/logo-making/final-logo.png",
+                  src: "/portfolio/Temu.in/logo-making/final-logo.webp",
                   alt: "Final Temu.in logo: the wordmark inside a magnifying glass",
                 },
               ],
@@ -1482,7 +1482,7 @@ export const projects: Project[] = [
             {
               type: "spotlight",
               title: "What the final logo means",
-              src: "/portfolio/Temu.in/logo-making/final-logo.png",
+              src: "/portfolio/Temu.in/logo-making/final-logo.webp",
               alt: "Final Temu.in logo",
               points: [
                 "A chat bubble, because buyers and sellers talk directly to agree on a deal",
