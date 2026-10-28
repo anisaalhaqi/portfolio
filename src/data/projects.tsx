@@ -19,8 +19,8 @@ export type Block =
           stage: string;
           action: string;
           feeling: string;
-          pain: string;
           // Optional rows, shown only when the journey has them
+          pain?: string;
           touchpoint?: string;
           idea?: string;
         }[];
@@ -214,11 +214,442 @@ export const projects: Project[] = [
   {
     slug: "ciputra",
     kind: "case-study",
-    tag: "1st Winner",
+    tag: "1st Winner · UC Online",
     title: "Web Redesign Ciputra Online University",
     summary:
       "A website redesign aimed at simplifying the path to enrollment by restructuring a cluttered information hierarchy and streamlining a complex enrollment flow to reduce user drop-off. It reshapes the primary digital gateway for prospective students of Universitas Ciputra Online.",
-    imageSrc: "/portfolio/icons/redesign-uc.png",
+    imageSrc: "/portfolio/UC%20Web/Cover%20UC%20Web.png",
+    figmaUrl:
+      "https://www.figma.com/proto/7lPVte6UCPPDIIGMFWODjM/UI-UX---UC-Web?node-id=378-57185&p=f&t=5m2ZGxGXeHGKrlY1-0&scaling=scale-down&content-scaling=fixed&page-id=1%3A3&starting-point-node-id=378%3A57185&show-proto-sidebar=1",
+    glance: {
+      problem:
+        "Prospective students can’t easily find tuition, deadlines, and entry requirements, and the Register button leads to two different pages.",
+      solution:
+        "A UX audit backed by a 23-person survey, leading to simpler navigation: one Register path to a single form, accreditation on the home page, and a direct link to scholarships.",
+      result: { stat: "1st", label: "Winner" },
+    },
+    meta: {
+      role: "UX Audit, User Research",
+      team: "3 Designers",
+      tools: "Figma, Google Form",
+      timeframe: "2 weeks",
+    },
+    problemStatement:
+      "Prospective students can’t easily find tuition, deadlines, and entry requirements on the Universitas Ciputra Online website, so they hesitate to click Register.",
+    problemHighlights: [
+      { stat: "43.5%", label: "of respondents were only fairly interested in going past the home page" },
+      { stat: "47.8%", label: "couldn’t easily find enrollment deadlines and entry requirements" },
+      { stat: "13%", label: "never found the tuition breakdown" },
+    ],
+    methodology: {
+      intro: (
+        <>
+          We used the <strong>Design Thinking framework</strong>, moving
+          through empathy, definition, ideation, and prototyping to shape the
+          redesign around what prospective students need.
+        </>
+      ),
+      phases: [
+        {
+          name: "Empathize",
+          blocks: [
+            {
+              type: "text",
+              content:
+                "To see how prospective students look for program information on the website, and what stops them from registering, we started with a user research plan.",
+            },
+            {
+              type: "columns",
+              title: "User research plan",
+              items: [
+                {
+                  title: "Research goals",
+                  points: [
+                    "Understand how prospective students look for program information on a university website",
+                    "Evaluate the navigation, the clarity of tuition and enrollment information, and the site’s visual impression",
+                    "Find what stops or pushes users to continue to enrollment",
+                  ],
+                },
+                {
+                  title: "Target participants",
+                  points: [
+                    "Aged 16–30, male and female",
+                    "Anywhere in Indonesia, with internet access, looking up universities online",
+                    "Inclined to apply to a university",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "Survey",
+              content: (
+                <>
+                  We ran an online survey with <strong>23 respondents</strong>,
+                  most of them university students. 60.9% were aged 19–22,
+                  the age group most likely to apply to a university.
+                </>
+              ),
+            },
+            {
+              type: "findings",
+              items: [
+                {
+                  stat: "43.5%",
+                  text: "were only fairly interested in going past the home page. Respondents ranked text clarity as the first thing to fix, followed by design consistency, content density, and color.",
+                },
+                {
+                  stat: "47.8%",
+                  text: "couldn’t easily find key information such as enrollment deadlines and entry requirements, and had to read closely to find it. Tuition was easy to find, but its breakdown was confusing or incomplete.",
+                },
+                {
+                  stat: "13%",
+                  text: "never found the tuition breakdown. Another 13% said the site’s animation pulled their focus away from the information.",
+                },
+                {
+                  stat: "74%",
+                  text: "said a clear enrollment schedule would help convince them to register, and 56.5% prefer short summaries with a “Read more” option.",
+                },
+              ],
+            },
+            {
+              type: "text",
+              content:
+                "Interest in clicking Register averaged 3.6 out of 5. Respondents who held back wanted to compare campuses first, weren’t sure about career prospects, or found program and scholarship information unclear. Most expected Register to open a form, but it led to other pages, so they couldn’t tell which button actually starts enrollment.",
+            },
+            {
+              type: "quotes",
+              items: [
+                {
+                  quote:
+                    "On my phone, the registration box is so big that it stands out more than the word “Pendaftaran” above it. The animation and that box shouldn’t pull focus away from people who want to register.",
+                  name: "Respondent",
+                  role: "University student, 19–22",
+                },
+                {
+                  quote:
+                    "I’m on mobile. When I looked for registration, which I only found at the very bottom, it was covered by a pop-up I couldn’t close, so I had to switch my phone to desktop mode.",
+                  name: "Respondent",
+                  role: "University student, 19–22",
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "Empathy map",
+              content:
+                "We mapped the survey results into an empathy map to see what prospective students say, think, do, and feel when using the website.",
+            },
+            {
+              type: "empathy",
+              items: [
+                {
+                  label: "Prospective student",
+                  says: [
+                    "“The registration box is too big on my phone, I can’t even see the word ‘Pendaftaran’.”",
+                    "“The information is there, but the details are confusing or incomplete.”",
+                    "“Put the registration guide first, not below the form.”",
+                    "“Just say ‘Daftar’. ‘Buy Voucher’ is ambiguous.”",
+                  ],
+                  thinks: [
+                    "“What happens after I click this? Do I pay, fill in my details, or get sent to WhatsApp?”",
+                    "“The site looks modern, but the animation distracts from the important information.”",
+                    "“I need to compare this campus with others before I register.”",
+                  ],
+                  does: [
+                    "Mostly browses on a smartphone",
+                    "Looks for Registration, Scholarships, and the list of programs first",
+                    "Skims for key points instead of reading full paragraphs",
+                  ],
+                  feels: [
+                    "Hesitant, because the information isn’t fully detailed",
+                    "Confused by visuals that are inconsistent, unintuitive, and too dense",
+                    "Skeptical, because important information isn’t highlighted",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "User journey map",
+              content:
+                "To see how their feelings shift on the way to registering for a program, we traced the journey step by step.",
+            },
+            {
+              type: "journey",
+              items: [
+                {
+                  label: "Prospective student",
+                  stages: [
+                    {
+                      stage: "Opening the website",
+                      action: "Looks at the visual design and animation, and checks the university’s accreditation",
+                      feeling: "Impatient 😤",
+                      idea: "Clearer text and a consistent design",
+                    },
+                    {
+                      stage: "Looking for information",
+                      action: "Looks for tuition costs and admission paths",
+                      feeling: "Satisfied if it’s easy, frustrated if not 😐",
+                      idea: "Intuitive menus and more detailed information",
+                    },
+                    {
+                      stage: "Registering",
+                      action: "Clicks “Daftar Sekarang” (Register now) and tries to understand the next steps",
+                      feeling: "Hesitant, afraid of a wrong step 😟",
+                      idea: "Send users straight to the registration form",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Define",
+          blocks: [
+            {
+              type: "text",
+              title: "User personas",
+              content:
+                "We distilled the research into two personas: a high school student choosing a campus, and a university student considering a master’s degree.",
+            },
+            {
+              type: "personas",
+              items: [
+                {
+                  name: "Mark",
+                  age: 17,
+                  program: "Grade 12 student",
+                  role: "Prospective undergraduate",
+                  bio: "In his final year of high school, looking for a campus that fits his goals and interests.",
+                  frustrations: [
+                    "Inconsistent design and unclear text",
+                    "Takes too long to find key information, such as entry requirements and admission paths",
+                    "Tuition estimates are hard to understand",
+                  ],
+                  goals: [
+                    "Find scholarship information and admission paths",
+                    "Understand the details of each program the university offers",
+                  ],
+                },
+                {
+                  name: "Chiquita",
+                  age: 19,
+                  program: "Third-semester university student",
+                  role: "Prospective master’s student",
+                  bio: "Weighing her plans after graduating, including going on to a master’s degree.",
+                  frustrations: [
+                    "Inconsistent design and unclear text",
+                    "Too much information packed into one page",
+                    "Takes too long to find entry requirements, tuition estimates, and admission paths",
+                  ],
+                  goals: [
+                    "Find tuition, scholarship, and admission information",
+                    "Understand the accreditation of each program",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "cards",
+              title: "Problem statement",
+              items: [
+                {
+                  title: "Enrollment and tuition information",
+                  text: "Prospective students need a short yet detailed view of enrollment and tuition information without distracting visuals, because on phones, oversized elements hide key text, and the tuition breakdown is confusing and incomplete.",
+                },
+              ],
+            },
+            {
+              type: "list",
+              title: "Hypothesis",
+              items: [
+                "If prospective students use a website with a consistent visual hierarchy and transparent tuition information, then they’ll find key information faster, without being distracted by animation or oversized boxes.",
+              ],
+            },
+            {
+              type: "text",
+              content: "Together, these shaped a single goal to design toward.",
+            },
+            {
+              type: "statement",
+              label: "Goal",
+              text: "A university website where prospective students can quickly find tuition, entry requirements, and how to enroll, with content that is short but still detailed, so they can gather information and compare campuses efficiently.",
+            },
+            {
+              type: "text",
+              content:
+                "We planned to measure it by the click rate on “Daftar Sekarang” and the drop-off rate on the tuition page.",
+            },
+          ],
+        },
+        {
+          name: "Ideate",
+          blocks: [
+            {
+              type: "text",
+              content: "We then reframed the problem as an opportunity to guide ideation.",
+            },
+            {
+              type: "list",
+              title: "How might we…",
+              items: [
+                "make the home page informative and well directed, with a visual hierarchy that puts users’ main needs first?",
+              ],
+            },
+          ],
+        },
+        {
+          name: "Prototype",
+          blocks: [
+            {
+              type: "text",
+              title: "Navigation",
+              content:
+                "“Daftar Sekarang” (Register now) used to lead to two different pages. We recommend it lead to a single page with the registration form. We didn’t design the form itself, since that needs a discussion with Universitas Ciputra Online stakeholders about what the two existing pages do.",
+            },
+            {
+              type: "text",
+              content:
+                "We also removed two redirects from the home page. The screenshots show the website as we audited it.",
+            },
+            {
+              type: "text",
+              title: "Accreditation behind “Lebih Lanjut”",
+              content:
+                "“Terakreditasi Unggul” (accredited Excellent) sat on a separate page, opened only through “Lebih Lanjut” (Read more), so users who didn’t click never saw it, even though respondents ranked accreditation as the most important information. We moved it onto the home page.",
+            },
+            {
+              type: "images",
+              items: [
+                {
+                  caption: "From: the “Kemudahan dan Fleksibilitas” section on the home page, with “Lebih Lanjut”",
+                  src: "/portfolio/UC%20Web/Tujuan%20-%202.png",
+                },
+                {
+                  caption: "To: a separate “Terakreditasi Unggul” page",
+                  src: "/portfolio/UC%20Web/Asal%20-%202.png",
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "“Program Bergelar” repeated the home page",
+              content:
+                "A button on the home page opened a “Program Bergelar” (Degree programs) page whose content was exactly the same as what the home page already showed.",
+            },
+            {
+              type: "images",
+              items: [
+                {
+                  caption: "From: the “UC Online Menjangkau Lebih Luas” section on the home page",
+                  src: "/portfolio/UC%20Web/Asal%20-%201.png",
+                },
+                {
+                  caption: "To: the “Program Bergelar” page",
+                  src: "/portfolio/UC%20Web/Tujuan%20-%201.png",
+                },
+              ],
+            },
+            {
+              type: "text",
+              content:
+                "The home page already covers the degree programs in two places, so we removed the redirect.",
+            },
+            {
+              type: "images",
+              items: [
+                {
+                  caption: "The hero, offering S1 and S2 degrees fully online",
+                  src: "/portfolio/UC%20Web/Degree%20Programs%201.png",
+                },
+                {
+                  caption: "The program banner, listing IBM, IMT, and MEM",
+                  src: "/portfolio/UC%20Web/Degree%20Programs%202.png",
+                },
+              ],
+            },
+            {
+              type: "text",
+              title: "Information architecture",
+              content:
+                "We then restructured the navigation from the moment a user opens the website.",
+            },
+            {
+              type: "tree",
+              root: "Website",
+              items: [
+                {
+                  label: "Home",
+                  children: [
+                    { label: "Register", children: [{ label: "Registration form" }] },
+                    { label: "View scholarship details", children: [{ label: "Scholarship page (new)" }] },
+                    { label: "Claim free voucher" },
+                    {
+                      label: "View programs",
+                      children: [
+                        { label: "S1 Management" },
+                        { label: "S2 Management" },
+                        { label: "S1 Informatics" },
+                      ],
+                    },
+                    { label: "Contact a consultant" },
+                  ],
+                },
+                {
+                  label: "S2 Management",
+                  children: [
+                    { label: "Register", children: [{ label: "Registration form" }] },
+                    { label: "Claim free voucher" },
+                  ],
+                },
+                {
+                  label: "S1 Informatics",
+                  children: [
+                    { label: "Register", children: [{ label: "Registration form" }] },
+                    { label: "Claim free voucher" },
+                  ],
+                },
+                {
+                  label: "S1 Management",
+                  children: [
+                    { label: "Register", children: [{ label: "Registration form" }] },
+                    { label: "Claim free voucher" },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "columns",
+              title: "What’s next",
+              items: [
+                {
+                  title: "Test the new navigation",
+                  points: [
+                    "Run usability tests on the restructured navigation",
+                  ],
+                },
+                {
+                  title: "Design the registration form",
+                  points: [
+                    "Discuss with Universitas Ciputra Online stakeholders what the two existing registration pages do",
+                    "Design the single form page that “Daftar Sekarang” leads to",
+                  ],
+                },
+                {
+                  title: "Measure the impact",
+                  points: [
+                    "Track the click rate on “Daftar Sekarang”",
+                    "Track the drop-off rate on the tuition page",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   },
   {
     slug: "titipin",

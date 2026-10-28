@@ -544,6 +544,11 @@
   gap: 28px 40px;
 }
 
+/* A single card fills the row instead of leaving the second column empty */
+.cards > :only-child {
+  grid-column: 1 / -1;
+}
+
 .quote {
   margin: 0;
   padding: 4px 0 4px 20px;

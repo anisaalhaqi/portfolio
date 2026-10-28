@@ -32,12 +32,12 @@ const caseStudies = [
     reverse: true,
   },
   {
-    tag: "1st Winner",
+    tag: "1st Winner · UC Online",
     title: "Web Redesign Ciputra Online University",
     description:
       "A website redesign aimed at simplifying the path to enrollment by restructuring a cluttered information hierarchy and streamlining a complex enrollment flow to reduce user drop-off. It reshapes the primary digital gateway for prospective students of Universitas Ciputra Online.",
     bgColor: "#FFE5D4",
-    imageSrc: "/portfolio/icons/redesign-uc.png",
+    imageSrc: "/portfolio/UC%20Web/Cover%20UC%20Web.png",
     link: "/case-study/ciputra",
     reverse: false,
   },

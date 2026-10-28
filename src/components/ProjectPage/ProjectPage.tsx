@@ -455,12 +455,14 @@ function PhaseBlock({ block }: { block: Block }) {
                         <td key={s.stage}>{s.feeling}</td>
                       ))}
                     </tr>
-                    <tr>
-                      <th scope="row">Pain points</th>
-                      {journey.stages.map((s) => (
-                        <td key={s.stage}>{s.pain}</td>
-                      ))}
-                    </tr>
+                    {journey.stages.some((s) => s.pain) && (
+                      <tr>
+                        <th scope="row">Pain points</th>
+                        {journey.stages.map((s) => (
+                          <td key={s.stage}>{s.pain}</td>
+                        ))}
+                      </tr>
+                    )}
                     {journey.stages.some((s) => s.idea) && (
                       <tr>
                         <th scope="row">Ideas</th>
@@ -548,7 +550,7 @@ function PhaseBlock({ block }: { block: Block }) {
           <BlockTitle title={block.title} />
           <div className={styles.quotes}>
             {block.items.map((item) => (
-              <figure key={item.name} className={styles.quote}>
+              <figure key={item.quote} className={styles.quote}>
                 <blockquote>&ldquo;{item.quote}&rdquo;</blockquote>
                 <figcaption>
                   <span className={styles.quoteName}>{item.name}</span>
