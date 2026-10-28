@@ -15,7 +15,7 @@ const caseStudies = [
     tag: "FindIT UGM 2026",
     title: "Temu.in",
     description:
-      "A campus marketplace for ITB students to resell academic gear, with ITB SSO verification, AI auto-listing, and price suggestions. Two rounds of usability testing raised the SUS score from 72.5 to 90.8.",
+      "A mobile marketplace designed to simplify reselling second-hand academic gear by integrating ITB SSO verification, AI auto-listing, and price suggestions to reduce doubt between buyers and sellers. It gives unused academic items a second life within the ITB community.",
     bgColor: "#C5FFF7",
     imageSrc: "/portfolio/Temu.in/Cover%20Temu.in.webp",
     link: "/case-study/temuin",
@@ -27,7 +27,7 @@ const caseStudies = [
     description:
       'A mobile platform designed to streamline campus dining by integrating real-time canteen status, menu management, and a gamified "Spin Wheel" to eliminate decision fatigue. It facilitates a secure peer-to-peer delivery ecosystem within the ITB Ganesha community.',
     bgColor: "#D7FFE9",
-    imageSrc: "/portfolio/icons/titipin.png",
+    imageSrc: "/portfolio/Titipin/Cover%20Titipin.png",
     link: "/case-study/titipin",
     reverse: true,
   },

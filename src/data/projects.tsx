@@ -227,7 +227,7 @@ export const projects: Project[] = [
     title: "Titipin",
     summary:
       'A mobile platform designed to streamline campus dining by integrating real-time canteen status, menu management, and a gamified "Spin Wheel" to eliminate decision fatigue. It facilitates a secure peer-to-peer delivery ecosystem within the ITB Ganesha community.',
-    imageSrc: "/portfolio/icons/titipin.png",
+    imageSrc: "/portfolio/Titipin/Cover%20Titipin.png",
     figmaUrl:
       "https://www.figma.com/proto/7oZmRwqo3iFgluxTTGRrYH/UI-UX---Unma?node-id=623-8295&t=7tcBchAf3dcLXSmm-1&scaling=scale-down&content-scaling=fixed&page-id=5%3A34&starting-point-node-id=361%3A443",
     glance: {
@@ -512,6 +512,11 @@ export const projects: Project[] = [
             {
               type: "text",
               content:
+                "We planned to measure it by how often students use delivery between students, and how satisfied they are with the accuracy of canteen status.",
+            },
+            {
+              type: "text",
+              content:
                 "We then reframed the problems as opportunities to guide ideation.",
             },
             {
@@ -616,24 +621,249 @@ export const projects: Project[] = [
               ],
             },
             {
+              type: "facts",
+              title: "Scope",
+              items: [
+                { label: "Platform", value: "Android, following Material Design" },
+                { label: "Area", value: "ITB Ganesha only, to get one campus right first" },
+                { label: "Needs", value: "An internet connection, and GPS to show nearby canteens" },
+              ],
+            },
+            {
+              type: "columns",
+              title: "Business model",
+              items: [
+                {
+                  title: "Platform fee",
+                  points: ["A small fee on every transaction"],
+                },
+                {
+                  title: "Advertising",
+                  points: ["Promotion space for canteens and third parties"],
+                },
+                {
+                  title: "Subscription",
+                  points: ["Unlimited Spin Wheel", "No ads", "Exclusive vouchers"],
+                },
+              ],
+            },
+            {
               type: "text",
               title: "User flow",
               content: "We charted the paths users take through the app, from opening it to ordering and rating food.",
             },
             {
-              type: "images",
-              layout: "stack",
-              items: [{ caption: "User flow" }],
+              type: "flow",
+              entry: {
+                start: "Open app",
+                decision: "Has an account?",
+                no: ["Sign up", "Email confirmation"],
+                yes: ["Log in"],
+                end: "Welcome screen",
+              },
+              tabs: [
+                {
+                  label: "Home",
+                  actions: [
+                    { label: "Use feature shortcuts" },
+                    { label: "Search for food", screen: "Canteen recommendations" },
+                    { label: "View canteen details", screen: "Canteen info" },
+                  ],
+                },
+                {
+                  label: "Activity",
+                  actions: [
+                    { label: "View order history" },
+                    { label: "Order again", screen: "Order food" },
+                    { label: "Or view the past order", screen: "Order details" },
+                  ],
+                },
+                {
+                  label: "What’s Near Me?",
+                  actions: [
+                    { label: "Pick a random canteen", screen: "Spin Wheel" },
+                    { label: "Search for food", screen: "Canteen recommendations" },
+                    { label: "View crowd level, reviews, hours, and distance", screen: "Canteen info" },
+                    { label: "Add food to the cart", screen: "Cart" },
+                    { label: "Choose delivery location, payment, promo, and time" },
+                    { label: "Place the order", screen: "Track courier" },
+                    { label: "If no courier is found, a pop-up leads back to the cart" },
+                    { label: "If an item runs out, agree on a swap with the courier", screen: "Chat" },
+                    { label: "Wait as the order is prepared, delivered, and arrives", screen: "Order progress" },
+                    { label: "Rate the order" },
+                  ],
+                },
+                {
+                  label: "Chat",
+                  actions: [{ label: "View past chats" }, { label: "Contact the courier" }],
+                },
+                {
+                  label: "Profile",
+                  actions: [
+                    { label: "View e-wallet balance" },
+                    { label: "View orders, deliveries, and rating" },
+                    { label: "Set location" },
+                    { label: "Edit profile" },
+                    { label: "View order history" },
+                    { label: "Manage notifications" },
+                    { label: "Manage settings" },
+                  ],
+                },
+              ],
             },
             {
               type: "text",
               title: "Information architecture",
-              content: "We then structured how information is organized across the app’s screens.",
+              content:
+                "We then structured how information is organized across the app’s screens. After onboarding, sign-in or sign-up, and personalization, the app opens on these sections.",
             },
             {
-              type: "images",
-              layout: "stack",
-              items: [{ caption: "Information architecture" }],
+              type: "tree",
+              root: "Titipin",
+              items: [
+                {
+                  label: "Home",
+                  children: [
+                    {
+                      label: "Titipin Pro",
+                      children: [
+                        { label: "Benefits" },
+                        { label: "Plans: 1 week, 1 month, 3 months" },
+                        { label: "Free trial (CTA)" },
+                      ],
+                    },
+                    { label: "Wallet and top-up" },
+                    {
+                      label: "Search",
+                      children: [{ label: "Results by canteen, price, or menu" }],
+                    },
+                    { label: "Food recommendations" },
+                    {
+                      label: "Spin Wheel",
+                      children: [
+                        { label: "Category filter" },
+                        { label: "Spin (CTA)" },
+                        { label: "Order the result (CTA)" },
+                      ],
+                    },
+                    { label: "Courier board" },
+                    { label: "Order history" },
+                  ],
+                },
+                {
+                  label: "Explore",
+                  children: [
+                    { label: "Titipin Pro, Spin Wheel, and search" },
+                    {
+                      label: "Filters",
+                      children: [
+                        { label: "Under 20k" },
+                        { label: "Favorite canteens" },
+                        { label: "Underrated" },
+                        { label: "On campus" },
+                      ],
+                    },
+                    { label: "Canteen recommendations" },
+                    {
+                      label: "Canteen info",
+                      children: [
+                        { label: "Location and rating" },
+                        { label: "Opening status and hours" },
+                        { label: "Menu and prices" },
+                        { label: "Order (CTA)" },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: "Order",
+                  children: [
+                    {
+                      label: "Order details",
+                      children: [
+                        { label: "Items, prices, and quantity" },
+                        { label: "Delivery location" },
+                        { label: "Deliver now or later" },
+                        { label: "Payment: Cuan, QRIS, or cash" },
+                        { label: "Promo and summary" },
+                        { label: "Split the bill (CTA)" },
+                        { label: "Place order (CTA)" },
+                      ],
+                    },
+                    {
+                      label: "QRIS payment",
+                      children: [
+                        { label: "Deadline and QR code" },
+                        { label: "Download or share" },
+                        { label: "Confirm payment (CTA)" },
+                      ],
+                    },
+                    {
+                      label: "Order tracking",
+                      children: [
+                        { label: "Courier info" },
+                        { label: "Chat or call (CTA)" },
+                        { label: "Price breakdown" },
+                        { label: "Cancel order (CTA)" },
+                      ],
+                    },
+                    {
+                      label: "Rating",
+                      children: [
+                        { label: "Rate food and courier" },
+                        { label: "Repeat order (CTA)" },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: "Activity",
+                  children: [
+                    {
+                      label: "History",
+                      children: [
+                        { label: "Canceled and completed orders" },
+                        { label: "Repeat order (CTA)" },
+                      ],
+                    },
+                    {
+                      label: "In progress",
+                      children: [{ label: "Ongoing orders" }, { label: "Track (CTA)" }],
+                    },
+                    {
+                      label: "Scheduled",
+                      children: [{ label: "Scheduled orders" }, { label: "Track (CTA)" }],
+                    },
+                  ],
+                },
+                {
+                  label: "Chat",
+                  children: [
+                    { label: "Chat list" },
+                    { label: "Chat room", children: [{ label: "Call (CTA)" }] },
+                  ],
+                },
+                {
+                  label: "Profile",
+                  children: [
+                    { label: "Overview and statistics" },
+                    { label: "Wallet and top-up" },
+                    { label: "Location" },
+                    { label: "Edit profile" },
+                    { label: "Help center" },
+                    { label: "Order history" },
+                    { label: "Notifications" },
+                    {
+                      label: "Settings",
+                      children: [
+                        { label: "Profile" },
+                        { label: "App" },
+                        { label: "Privacy and security" },
+                      ],
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
@@ -687,7 +917,7 @@ export const projects: Project[] = [
                 <>
                   We ran <strong>moderated usability tests with 4 ITB Ganesha students</strong>{" "}
                   on the Figma prototype over Google Meet, asking them to think out
-                  loud through 4 scenarios.
+                  loud through 4 scenarios. Tasks took about 10 seconds on average.
                 </>
               ),
             },
@@ -732,7 +962,7 @@ export const projects: Project[] = [
     tag: "FindIT UGM 2026",
     title: "Temu.in",
     summary:
-      "A campus marketplace for ITB students to resell academic gear, with ITB SSO verification, AI auto-listing, and price suggestions. Two rounds of usability testing raised the SUS score from 72.5 to 90.8.",
+      "A mobile marketplace designed to simplify reselling second-hand academic gear by integrating ITB SSO verification, AI auto-listing, and price suggestions to reduce doubt between buyers and sellers. It gives unused academic items a second life within the ITB community.",
     imageSrc: "/portfolio/Temu.in/Cover%20Temu.in.webp",
     figmaUrl:
       "https://www.figma.com/proto/VPCpLjxOEDtbpgJ6szwpxV/Temu.in---FindIT?node-id=1646-38350&t=Kbuw14pB2Y5h9k0K-0&scaling=scale-down&content-scaling=fixed&page-id=1646%3A36011&starting-point-node-id=1646%3A38319&show-proto-sidebar=1",
