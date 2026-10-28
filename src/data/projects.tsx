@@ -223,13 +223,13 @@ export const projects: Project[] = [
   {
     slug: "titipin",
     kind: "case-study",
-    tag: "1st Runner Up",
+    tag: "1st Runner Up · Unma 2026",
     title: "Titipin",
     summary:
       'A mobile platform designed to streamline campus dining by integrating real-time canteen status, menu management, and a gamified wheel called GachaIn to eliminate decision fatigue. It facilitates QuesTip, a secure peer-to-peer delivery ecosystem within the ITB Ganesha community.',
     imageSrc: "/portfolio/Titipin/Cover%20Titipin.png",
     figmaUrl:
-      "https://www.figma.com/proto/7oZmRwqo3iFgluxTTGRrYH/UI-UX---Unma?node-id=623-8295&t=7tcBchAf3dcLXSmm-1&scaling=scale-down&content-scaling=fixed&page-id=5%3A34&starting-point-node-id=361%3A443",
+      "https://www.figma.com/proto/7oZmRwqo3iFgluxTTGRrYH/UI-UX---Unma?node-id=361-443&p=f&t=6VuzukGZuo1xHmwy-0&scaling=scale-down&content-scaling=fixed&page-id=5%3A34&starting-point-node-id=361%3A443",
     glance: {
       problem:
         "Students with back-to-back classes skip meals because they can’t tell which canteens are open, what they sell, or how long the queue is.",
@@ -293,9 +293,8 @@ export const projects: Project[] = [
               title: "Survey",
               content: (
                 <>
-                  We ran an online survey with students from{" "}
-                  <strong>10 of ITB’s 12 faculties</strong>, most of them aged
-                  19–20.
+                  We ran an online survey with <strong>26 students</strong> from 10
+                  of ITB’s 12 faculties, most of them aged 19–20.
                 </>
               ),
             },
@@ -336,14 +335,14 @@ export const projects: Project[] = [
                 {
                   quote:
                     "I usually hear about a canteen’s menu from friends, but they don’t know the details either. When class is close, I just go to the nearest one. Once I went to the Labtek V canteen and the queue reached outside, so I didn’t buy anything.",
-                  name: "Illona, 20",
-                  role: "ITB student",
+                  name: "Student, 20",
+                  role: "STEI-K ITB",
                 },
                 {
                   quote:
                     "With back-to-back classes, it’s hard to find time to eat. If I can’t make it, I don’t eat at all. I usually walk to a canteen just to see if it’s open, and when it’s closed after walking that far, it feels like a waste of time.",
-                  name: "Keisha, 19",
-                  role: "ITB student",
+                  name: "Student, 19",
+                  role: "STEI-K ITB",
                 },
               ],
             },
@@ -618,7 +617,6 @@ export const projects: Project[] = [
                   feature: "Menus, locations, and prices for every canteen",
                 },
                 { problem: "Unclear opening status", feature: "Real-time opening status" },
-                { problem: "Price sensitivity", feature: "Reward points" },
               ],
             },
             {
@@ -694,7 +692,7 @@ export const projects: Project[] = [
                         { label: "Items, prices, and quantity" },
                         { label: "Delivery location" },
                         { label: "Deliver now or later" },
-                        { label: "Payment: Cuan, QRIS, or cash" },
+                        { label: "Payment: Cuan wallet, QRIS, or cash" },
                         { label: "Promo and summary" },
                         { label: "Split the bill (CTA)" },
                         { label: "Place order (CTA)" },
@@ -861,7 +859,7 @@ export const projects: Project[] = [
               items: [
                 {
                   title: "Home",
-                  text: "One place for shortcuts to QuesTip, the canteen catalog, and GachaIn, plus your Cuan balance and points. Applies Jakob’s Law, Miller’s Law, and Fitts’s Law.",
+                  text: "One place for shortcuts to QuesTip, the canteen catalog, and GachaIn, plus your balance in Cuan, the in-app wallet, and your points. Applies Jakob’s Law, Miller’s Law, and Fitts’s Law.",
                   alt: "Home screen with promos, Cuan balance and points, and shortcuts to food, canteens, and other features",
                 },
                 {
@@ -1074,7 +1072,7 @@ export const projects: Project[] = [
                   points: ["Promotion space for canteens and third parties"],
                 },
                 {
-                  title: "Subscription",
+                  title: "Subscription (Titipin Pro)",
                   points: ["Unlimited GachaIn spins", "No ads", "Exclusive vouchers"],
                 },
               ],

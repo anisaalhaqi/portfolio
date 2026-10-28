@@ -22,7 +22,7 @@ const caseStudies = [
     reverse: false,
   },
   {
-    tag: "1st Runner Up",
+    tag: "1st Runner Up · Unma 2026",
     title: "Titipin",
     description:
       'A mobile platform designed to streamline campus dining by integrating real-time canteen status, menu management, and a gamified wheel called GachaIn to eliminate decision fatigue. It facilitates QuesTip, a secure peer-to-peer delivery ecosystem within the ITB Ganesha community.',
