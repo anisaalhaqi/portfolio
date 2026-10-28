@@ -226,7 +226,7 @@ export const projects: Project[] = [
     tag: "1st Runner Up",
     title: "Titipin",
     summary:
-      'A mobile platform designed to streamline campus dining by integrating real-time canteen status, menu management, and a gamified "Spin Wheel" to eliminate decision fatigue. It facilitates a secure peer-to-peer delivery ecosystem within the ITB Ganesha community.',
+      'A mobile platform designed to streamline campus dining by integrating real-time canteen status, menu management, and a gamified wheel called GachaIn to eliminate decision fatigue. It facilitates QuesTip, a secure peer-to-peer delivery ecosystem within the ITB Ganesha community.',
     imageSrc: "/portfolio/Titipin/Cover%20Titipin.png",
     figmaUrl:
       "https://www.figma.com/proto/7oZmRwqo3iFgluxTTGRrYH/UI-UX---Unma?node-id=623-8295&t=7tcBchAf3dcLXSmm-1&scaling=scale-down&content-scaling=fixed&page-id=5%3A34&starting-point-node-id=361%3A443",
@@ -234,13 +234,14 @@ export const projects: Project[] = [
       problem:
         "Students with back-to-back classes skip meals because they can’t tell which canteens are open, what they sell, or how long the queue is.",
       solution:
-        "A campus food app with real-time canteen status and menus, food delivery between students, and a Spin Wheel that picks a canteen or dish when choosing feels exhausting.",
-      result: { stat: "87.03", label: "SUS score in usability testing" },
+        "A campus food app with real-time canteen status and menus, QuesTip for food delivery between students, and GachaIn, a wheel that picks a canteen or dish when choosing feels exhausting.",
+      result: { stat: "88.5", label: "SUS score, up from 87.03" },
     },
     meta: {
       role: "UI/UX Design, User Research, Usability Testing",
       team: "3 Designers",
       tools: "Figma, Google Meet",
+      timeframe: "1 month",
     },
     problemStatement:
       "Packed class schedules leave ITB students skipping meals, while canteen menus, opening hours, and queues stay invisible until they walk there.",
@@ -397,7 +398,7 @@ export const projects: Project[] = [
                       touchpoint: "None",
                       feeling: "Worried 😟",
                       pain: "Can’t buy food in person because time is short",
-                      idea: "Food delivery between students",
+                      idea: "QuesTip, food delivery between students",
                     },
                     {
                       stage: "Consideration",
@@ -405,7 +406,7 @@ export const projects: Project[] = [
                       touchpoint: "Social media",
                       feeling: "Neutral 😐",
                       pain: "Confused about where to eat or what to buy",
-                      idea: "A Spin Wheel to pick a place or dish, and menu info for every canteen",
+                      idea: "GachaIn to pick a place or dish, and menu info for every canteen",
                     },
                     {
                       stage: "Order",
@@ -421,7 +422,7 @@ export const projects: Project[] = [
                       touchpoint: "The physical queue",
                       feeling: "Frustrated 😣",
                       pain: "Long queues",
-                      idea: "Food delivery between students",
+                      idea: "QuesTip, food delivery between students",
                     },
                     {
                       stage: "Post-Experience",
@@ -507,12 +508,12 @@ export const projects: Project[] = [
             {
               type: "statement",
               label: "Goal",
-              text: "An app for ordering from and learning about canteens around ITB Ganesha, with centralized menus, real-time opening status, a Spin Wheel, and food delivery between students, so students with packed schedules can get food without leaving class and with less effort deciding what to eat.",
+              text: "An app for ordering from and learning about canteens around ITB Ganesha, with centralized menus, real-time opening status, GachaIn, and QuesTip for food delivery between students, so students with packed schedules can get food without leaving class and with less effort deciding what to eat.",
             },
             {
               type: "text",
               content:
-                "We planned to measure it by how often students use delivery between students, and how satisfied they are with the accuracy of canteen status.",
+                "We planned to measure it by how often students use QuesTip, and how satisfied they are with the accuracy of canteen status.",
             },
             {
               type: "text",
@@ -553,7 +554,7 @@ export const projects: Project[] = [
                   points: [
                     "Centralized food information, with menus and prices",
                     "Real-time canteen opening status",
-                    "A Spin Wheel that eases decision fatigue",
+                    "GachaIn, which eases decision fatigue",
                   ],
                 },
                 {
@@ -606,11 +607,11 @@ export const projects: Project[] = [
               items: [
                 {
                   problem: "Packed class schedules",
-                  feature: "Food delivery between students, scheduled and group orders, canteen crowd tracking",
+                  feature: "QuesTip food delivery, scheduled and group orders, canteen crowd tracking",
                 },
                 {
                   problem: "Confusion over where or what to eat",
-                  feature: "Spin Wheel, nearby canteens, reviews & feedback",
+                  feature: "GachaIn, nearby canteens, reviews & feedback",
                 },
                 {
                   problem: "No central information on canteen menus",
@@ -621,101 +622,10 @@ export const projects: Project[] = [
               ],
             },
             {
-              type: "facts",
-              title: "Scope",
-              items: [
-                { label: "Platform", value: "Android, following Material Design" },
-                { label: "Area", value: "ITB Ganesha only, to get one campus right first" },
-                { label: "Needs", value: "An internet connection, and GPS to show nearby canteens" },
-              ],
-            },
-            {
-              type: "columns",
-              title: "Business model",
-              items: [
-                {
-                  title: "Platform fee",
-                  points: ["A small fee on every transaction"],
-                },
-                {
-                  title: "Advertising",
-                  points: ["Promotion space for canteens and third parties"],
-                },
-                {
-                  title: "Subscription",
-                  points: ["Unlimited Spin Wheel", "No ads", "Exclusive vouchers"],
-                },
-              ],
-            },
-            {
-              type: "text",
-              title: "User flow",
-              content: "We charted the paths users take through the app, from opening it to ordering and rating food.",
-            },
-            {
-              type: "flow",
-              entry: {
-                start: "Open app",
-                decision: "Has an account?",
-                no: ["Sign up", "Email confirmation"],
-                yes: ["Log in"],
-                end: "Welcome screen",
-              },
-              tabs: [
-                {
-                  label: "Home",
-                  actions: [
-                    { label: "Use feature shortcuts" },
-                    { label: "Search for food", screen: "Canteen recommendations" },
-                    { label: "View canteen details", screen: "Canteen info" },
-                  ],
-                },
-                {
-                  label: "Activity",
-                  actions: [
-                    { label: "View order history" },
-                    { label: "Order again", screen: "Order food" },
-                    { label: "Or view the past order", screen: "Order details" },
-                  ],
-                },
-                {
-                  label: "What’s Near Me?",
-                  actions: [
-                    { label: "Pick a random canteen", screen: "Spin Wheel" },
-                    { label: "Search for food", screen: "Canteen recommendations" },
-                    { label: "View crowd level, reviews, hours, and distance", screen: "Canteen info" },
-                    { label: "Add food to the cart", screen: "Cart" },
-                    { label: "Choose delivery location, payment, promo, and time" },
-                    { label: "Place the order", screen: "Track courier" },
-                    { label: "If no courier is found, a pop-up leads back to the cart" },
-                    { label: "If an item runs out, agree on a swap with the courier", screen: "Chat" },
-                    { label: "Wait as the order is prepared, delivered, and arrives", screen: "Order progress" },
-                    { label: "Rate the order" },
-                  ],
-                },
-                {
-                  label: "Chat",
-                  actions: [{ label: "View past chats" }, { label: "Contact the courier" }],
-                },
-                {
-                  label: "Profile",
-                  actions: [
-                    { label: "View e-wallet balance" },
-                    { label: "View orders, deliveries, and rating" },
-                    { label: "Set location" },
-                    { label: "Edit profile" },
-                    { label: "View order history" },
-                    { label: "Manage notifications" },
-                    { label: "Manage settings" },
-                  ],
-                },
-              ],
-            },
-            {
               type: "text",
               title: "Information architecture",
               content:
-                "We then structured how information is organized across the app’s screens. After onboarding, sign-in or sign-up, and personalization, the app opens on these sections.",
+                "We structured how information is organized across the app’s screens. After onboarding, sign-in or sign-up, and personalization, the app opens on these sections.",
             },
             {
               type: "tree",
@@ -739,21 +649,21 @@ export const projects: Project[] = [
                     },
                     { label: "Food recommendations" },
                     {
-                      label: "Spin Wheel",
+                      label: "GachaIn",
                       children: [
                         { label: "Category filter" },
                         { label: "Spin (CTA)" },
                         { label: "Order the result (CTA)" },
                       ],
                     },
-                    { label: "Courier board" },
+                    { label: "QuesTip board" },
                     { label: "Order history" },
                   ],
                 },
                 {
                   label: "Explore",
                   children: [
-                    { label: "Titipin Pro, Spin Wheel, and search" },
+                    { label: "Titipin Pro, GachaIn, and search" },
                     {
                       label: "Filters",
                       children: [
@@ -865,6 +775,70 @@ export const projects: Project[] = [
                 },
               ],
             },
+            {
+              type: "text",
+              title: "Navigation",
+              content: "Finally, we charted the paths users take through the app, from opening it to ordering and rating food.",
+            },
+            {
+              type: "flow",
+              entry: {
+                start: "Open app",
+                decision: "Has an account?",
+                no: ["Sign up", "Email confirmation"],
+                yes: ["Log in"],
+                end: "Welcome screen",
+              },
+              tabs: [
+                {
+                  label: "Home",
+                  actions: [
+                    { label: "Use feature shortcuts" },
+                    { label: "Search for food", screen: "Canteen recommendations" },
+                    { label: "View canteen details", screen: "Canteen info" },
+                  ],
+                },
+                {
+                  label: "Activity",
+                  actions: [
+                    { label: "View order history" },
+                    { label: "Order again", screen: "Order food" },
+                    { label: "Or view the past order", screen: "Order details" },
+                  ],
+                },
+                {
+                  label: "What’s Near Me?",
+                  actions: [
+                    { label: "Pick a random canteen", screen: "GachaIn" },
+                    { label: "Search for food", screen: "Canteen recommendations" },
+                    { label: "View crowd level, reviews, hours, and distance", screen: "Canteen info" },
+                    { label: "Add food to the cart", screen: "Cart" },
+                    { label: "Choose delivery location, payment, promo, and time" },
+                    { label: "Place the order", screen: "Track courier" },
+                    { label: "If no courier is found, a pop-up leads back to the cart" },
+                    { label: "If an item runs out, agree on a swap with the courier", screen: "Chat" },
+                    { label: "Wait as the order is prepared, delivered, and arrives", screen: "Order progress" },
+                    { label: "Rate the order" },
+                  ],
+                },
+                {
+                  label: "Chat",
+                  actions: [{ label: "View past chats" }, { label: "Contact the courier" }],
+                },
+                {
+                  label: "Profile",
+                  actions: [
+                    { label: "View e-wallet balance" },
+                    { label: "View orders, deliveries, and rating" },
+                    { label: "Set location" },
+                    { label: "Edit profile" },
+                    { label: "View order history" },
+                    { label: "Manage notifications" },
+                    { label: "Manage settings" },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
@@ -872,37 +846,43 @@ export const projects: Project[] = [
           blocks: [
             {
               type: "text",
-              title: "Wireframes and high fidelity",
+              title: "Wireframes",
               content:
-                "We turned the user flow and information architecture into wireframes, then refined them into high-fidelity screens, referencing Material Design for an intuitive Android experience.",
+                "We built wireframes from the information architecture and navigation, referencing Material Design for Android, before moving to high-fidelity designs. Shown here are three of the key screens.",
             },
             {
               type: "images",
-              items: [{ caption: "Wireframes" }, { caption: "High-fidelity screens" }],
+              layout: "phones",
+              items: [{ caption: "Home" }, { caption: "Canteen info" }, { caption: "Activity" }],
             },
             {
-              type: "cards",
+              type: "showcase",
               title: "Key features",
               items: [
                 {
-                  title: "Food delivery between students",
-                  text: "Order food that another student delivers, schedule it ahead, or order for a group, and check how crowded a canteen is in real time.",
+                  title: "Home",
+                  text: "One place for shortcuts to QuesTip, the canteen catalog, and GachaIn, plus your Cuan balance and points. Applies Jakob’s Law, Miller’s Law, and Fitts’s Law.",
+                  alt: "Home screen with promos, Cuan balance and points, and shortcuts to food, canteens, and other features",
                 },
                 {
-                  title: "Spin Wheel and nearby canteens",
-                  text: "Get a random canteen or dish in seconds, see the canteens closest to you, and read reviews from other students.",
+                  title: "Explore",
+                  text: "Every campus canteen in one catalog, with menus, locations, and real-time crowd levels, so students don’t have to check in person. Applies the Law of Proximity and the Law of Common Region.",
+                  alt: "Explore screen with canteen cards and a canteen detail page showing its live status and menu",
                 },
                 {
-                  title: "Menus, locations, and prices",
-                  text: "Details for every canteen in one place.",
+                  title: "QuesTip",
+                  text: "Students pick up food-delivery quests that fit their schedule and earn from them, with full order details and a map from canteen to drop-off. Applies Hick’s Law, the Zeigarnik Effect, and the Goal-Gradient Effect.",
+                  alt: "QuesTip list of available quests, a quest’s delivery details, and a map to the customer",
                 },
                 {
-                  title: "Real-time opening status",
-                  text: "Know whether a canteen is open before walking there.",
+                  title: "Order",
+                  text: "From picking a menu in the catalog to customizing the order and tracking it in real time. Applies the Goal-Gradient Effect and Tesler’s Law.",
+                  alt: "Item detail, order summary with payment options, and live delivery tracking",
                 },
                 {
-                  title: "Reward points",
-                  text: "Earn points after spending a set amount.",
+                  title: "GachaIn",
+                  text: "A wheel that picks a dish when choosing feels hard, with a filter for what it can land on. It gives priority to canteens with fewer customers. Applies Hick’s Law and Tesler’s Law.",
+                  alt: "GachaIn wheel with food options, and the dish it picked",
                 },
               ],
             },
@@ -915,39 +895,187 @@ export const projects: Project[] = [
               type: "text",
               content: (
                 <>
-                  We ran <strong>moderated usability tests with 4 ITB Ganesha students</strong>{" "}
-                  on the Figma prototype over Google Meet, asking them to think out
-                  loud through 4 scenarios. Tasks took about 10 seconds on average.
+                  We ran scenario-based <strong>usability testing over 2 iterations</strong>.
+                  Both iterations met every KPI set in our testing plan.
                 </>
               ),
             },
             {
-              type: "metrics",
+              type: "facts",
               items: [
-                { label: "SUS score", after: "87.03" },
-                { label: "SEQ score", after: "6.875" },
-                { label: "Success rate", after: "81.25%" },
+                {
+                  label: "Method",
+                  value: "Moderated think-aloud, online with the Figma prototype and Google Meet",
+                },
+                {
+                  label: "Participants",
+                  value: "4 to 5 ITB Ganesha students in each iteration",
+                },
+                { label: "Dates", value: "Test 1 on 21 February 2026, test 2 on 28 February 2026" },
               ],
             },
             {
-              type: "cards",
-              title: "Scenarios",
+              type: "metrics",
+              items: [
+                { label: "SUS score", before: "87.03", after: "88.5", target: "above 78" },
+                { label: "SEQ score", before: "6.44", after: "6.68", target: "above 5.5" },
+                { label: "Success rate", before: "81.25%", after: "100%", target: "at least 80%" },
+              ],
+            },
+            {
+              type: "tasks",
+              title: "See the 5 task scenarios",
+              groups: [
+                {
+                  label: "Student",
+                  items: [
+                    { id: "S1", text: "Order food with a scheduled order." },
+                    { id: "S2", text: "Check the details of an ongoing order. Test 1: 3 of 4 completed it." },
+                    { id: "S3", text: "Reorder a past order with “Buy again”. Test 1: 2 of 4 completed it, the hardest task." },
+                    { id: "S4", text: "Let GachaIn pick a canteen, then a dish. Test 1: all 4 completed it." },
+                    { id: "S5", text: "Find a canteen with low crowd levels and a high rating. Test 1: all 4 completed it." },
+                  ],
+                },
+              ],
+            },
+            {
+              type: "mapping",
+              title: "Usability test 1: what we changed",
+              labels: ["Tester feedback", "What we changed"],
               items: [
                 {
-                  title: "Track an ongoing order",
-                  text: "Find order history and show the details of the current order. 3 of 4 participants completed it.",
+                  id: "T1",
+                  problem: "The canteen catalog was only reachable from the navigation bar, so finding it took time",
+                  feature: "A shortcut to the catalog on the home page",
                 },
                 {
-                  title: "Reorder with “Buy again”",
-                  text: "Reorder yesterday’s food from a past order. Only 2 of 4 completed it, the hardest task in the test.",
+                  id: "T2",
+                  problem: "Crowd levels were hidden inside each canteen’s catalog, so users had to open it first",
+                  feature: "Crowd level shown on each canteen card in Explore",
+                },
+              ],
+            },
+            {
+              type: "compare",
+              title: "Usability test 1: before and after",
+              items: [
+                {
+                  id: "T1",
+                  title: "Catalog shortcut on the home page",
+                  beforeAlt: "Home page without a shortcut to the canteen catalog",
+                  afterAlt: "Home page with a shortcut to the canteen catalog",
                 },
                 {
-                  title: "Let the Spin Wheel decide",
-                  text: "Use the Spin Wheel to pick a canteen, then a dish. All 4 participants completed it.",
+                  id: "T2",
+                  title: "Crowd level on canteen cards",
+                  beforeAlt: "Canteen card without a crowd level",
+                  afterAlt: "Canteen card showing its crowd level",
+                },
+              ],
+            },
+            {
+              type: "mapping",
+              title: "Usability test 2: what we changed",
+              labels: ["Tester feedback", "What we changed"],
+              items: [
+                {
+                  id: "U1",
+                  problem: "A grayed-out card left users asking why it was gray. It meant the canteen was closed",
+                  feature: "A “Closed” label at the bottom of the card",
                 },
                 {
-                  title: "Find a quiet, well-rated canteen",
-                  text: "Find a canteen with low crowd levels and a rating of at least 4. All 4 participants completed it.",
+                  id: "U2",
+                  problem: "Order details were easy to miss because the text was small",
+                  feature: "Larger text, moved below the canteen’s location",
+                },
+                {
+                  id: "U3",
+                  problem: "Sending a message took several steps",
+                  feature: "Quick messages, sent in one tap",
+                },
+                {
+                  id: "U4",
+                  problem: "Chats pile up, which makes past conversations hard to find",
+                  feature: "Search in the chat list",
+                },
+                {
+                  id: "U5",
+                  problem: "Filters didn’t cover everything campus stalls sell, such as medicine and stationery",
+                  feature: "More item types in the filter",
+                },
+                {
+                  id: "U6",
+                  problem: "The “Repeat Titip” card showed prices, which can change, while users only looked at what they ordered",
+                  feature: "Price removed from the card",
+                },
+              ],
+            },
+            {
+              type: "compare",
+              title: "Usability test 2: before and after",
+              items: [
+                {
+                  id: "U1",
+                  title: "“Closed” label on canteen cards",
+                  beforeAlt: "Grayed-out canteen card with no explanation",
+                  afterAlt: "Canteen card with a “Closed” label at the bottom",
+                },
+                {
+                  id: "U2",
+                  title: "Larger order details",
+                  beforeAlt: "Order card with small order details",
+                  afterAlt: "Order card with larger details below the canteen’s location",
+                },
+                {
+                  id: "U3",
+                  title: "Quick messages",
+                  beforeAlt: "Chat without quick replies",
+                  afterAlt: "Chat with a list of quick messages",
+                },
+                {
+                  id: "U4",
+                  title: "Search in chat",
+                  beforeAlt: "Chat list without search",
+                  afterAlt: "Chat list with a search bar",
+                },
+                {
+                  id: "U5",
+                  title: "More filter types",
+                  beforeAlt: "Preference filter with food types only",
+                  afterAlt: "Preference filter that also covers items such as medicine and stationery",
+                },
+                {
+                  id: "U6",
+                  title: "No price on the Repeat Titip card",
+                  beforeAlt: "Repeat Titip card showing the price",
+                  afterAlt: "Repeat Titip card without the price",
+                },
+              ],
+            },
+            {
+              type: "facts",
+              title: "Scope",
+              items: [
+                { label: "Platform", value: "Android, following Material Design" },
+                { label: "Area", value: "ITB Ganesha only, to get one campus right first" },
+                { label: "Needs", value: "An internet connection, and GPS to show nearby canteens" },
+              ],
+            },
+            {
+              type: "columns",
+              title: "Business model",
+              items: [
+                {
+                  title: "Platform fee",
+                  points: ["A small fee on every transaction"],
+                },
+                {
+                  title: "Advertising",
+                  points: ["Promotion space for canteens and third parties"],
+                },
+                {
+                  title: "Subscription",
+                  points: ["Unlimited GachaIn spins", "No ads", "Exclusive vouchers"],
                 },
               ],
             },

@@ -25,7 +25,7 @@ const caseStudies = [
     tag: "1st Runner Up",
     title: "Titipin",
     description:
-      'A mobile platform designed to streamline campus dining by integrating real-time canteen status, menu management, and a gamified "Spin Wheel" to eliminate decision fatigue. It facilitates a secure peer-to-peer delivery ecosystem within the ITB Ganesha community.',
+      'A mobile platform designed to streamline campus dining by integrating real-time canteen status, menu management, and a gamified wheel called GachaIn to eliminate decision fatigue. It facilitates QuesTip, a secure peer-to-peer delivery ecosystem within the ITB Ganesha community.',
     bgColor: "#D7FFE9",
     imageSrc: "/portfolio/Titipin/Cover%20Titipin.png",
     link: "/case-study/titipin",

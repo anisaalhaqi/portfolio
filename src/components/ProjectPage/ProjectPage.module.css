@@ -1396,6 +1396,12 @@
   gap: 24px;
 }
 
+.imagePhones .figurePlaceholder {
+  aspect-ratio: 450 / 907;
+  padding: 0 8px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .imagePhones {
     gap: 12px;
