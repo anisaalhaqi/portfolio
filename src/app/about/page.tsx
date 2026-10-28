@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { pageMetadata } from "../seo";
 import styles from "./page.module.css";
 import Footer from "@/components/Footer/Footer";
 import ContactCard from "@/components/ContactCard/ContactCard";
@@ -128,6 +129,13 @@ const skillGroups = [
     items: ["Indonesian (Native)", "English (Professional Working Proficiency)"],
   },
 ];
+
+export const metadata = pageMetadata({
+  title: "About | Anisa Aulia",
+  description:
+    "Experience, awards, and skills of Anisa Aulia, a UI/UX Designer & Researcher based in Bandung.",
+  path: "/portfolio/about",
+});
 
 export default function About() {
   return (

@@ -3,6 +3,7 @@ import { Outfit, Playfair_Display } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import Cursor from "@/components/Cursor/Cursor";
 import BackToTop from "@/components/BackToTop/BackToTop";
+import { SITE_URL, pageMetadata } from "./seo";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -18,8 +19,12 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Anisa Aulia | UI/UX Designer & Researcher",
-  description: "Portfolio of Anisa Aulia, a UI/UX Designer & Researcher based in Bandung.",
+  metadataBase: SITE_URL,
+  ...pageMetadata({
+    title: "Anisa Aulia | UI/UX Designer & Researcher",
+    description: "Portfolio of Anisa Aulia, a UI/UX Designer & Researcher based in Bandung.",
+    path: "/portfolio",
+  }),
 };
 
 // Tints the mobile browser bar to match the blue navbar at the top of every page
