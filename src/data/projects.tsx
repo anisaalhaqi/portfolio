@@ -125,10 +125,12 @@ export type Block =
       tabs: { label: string; actions: { label: string; screen?: string }[] }[];
     }
   // Rows of a screenshot beside the decision it shows. Leave src empty to show
-  // a placeholder until the image is exported.
+  // a placeholder until the image is exported. "phones" keeps portrait phone
+  // screens narrow instead of filling the wide image column.
   | {
       type: "showcase";
       title?: string;
+      layout?: "phones";
       items: { title: string; text: string; src?: string; alt: string }[];
     }
   // One image beside a list of points, e.g. what a logo means
@@ -1277,40 +1279,35 @@ export const projects: Project[] = [
               type: "text",
               title: "Wireframes",
               content:
-                "We built wireframes from the information architecture and navigation, referencing Material Design for Android, before moving to high-fidelity designs. Shown here are three of the key screens.",
-            },
-            {
-              type: "images",
-              layout: "phones",
-              items: [{ caption: "Home" }, { caption: "Canteen info" }, { caption: "Activity" }],
+                "We built wireframes from the information architecture and navigation, referencing Material Design for Android, before moving to high-fidelity designs.",
             },
             {
               type: "showcase",
               title: "Key features",
+              layout: "phones",
               items: [
                 {
                   title: "Home",
                   text: "One place for shortcuts to QuesTip, the canteen catalog, and GachaIn, plus your balance in Cuan, the in-app wallet, and your points. Applies Jakob’s Law, Miller’s Law, and Fitts’s Law.",
+                  src: "/portfolio/Titipin/key-features/Home.png",
                   alt: "Home screen with promos, Cuan balance and points, and shortcuts to food, canteens, and other features",
                 },
                 {
                   title: "Explore",
                   text: "Every campus canteen in one catalog, with menus, locations, and real-time crowd levels, so students don’t have to check in person. Applies the Law of Proximity and the Law of Common Region.",
+                  src: "/portfolio/Titipin/key-features/Jelajah.png",
                   alt: "Explore screen with canteen cards and a canteen detail page showing its live status and menu",
-                },
-                {
-                  title: "QuesTip",
-                  text: "Students pick up food-delivery quests that fit their schedule and earn from them, with full order details and a map from canteen to drop-off. Applies Hick’s Law, the Zeigarnik Effect, and the Goal-Gradient Effect.",
-                  alt: "QuesTip list of available quests, a quest’s delivery details, and a map to the customer",
                 },
                 {
                   title: "Order",
                   text: "From picking a menu in the catalog to customizing the order and tracking it in real time. Applies the Goal-Gradient Effect and Tesler’s Law.",
+                  src: "/portfolio/Titipin/key-features/Order.png",
                   alt: "Item detail, order summary with payment options, and live delivery tracking",
                 },
                 {
                   title: "GachaIn",
                   text: "A wheel that picks a dish when choosing feels hard, with a filter for what it can land on. It gives priority to canteens with fewer customers. Applies Hick’s Law and Tesler’s Law.",
+                  src: "/portfolio/Titipin/key-features/GachaIn.png",
                   alt: "GachaIn wheel with food options, and the dish it picked",
                 },
               ],
@@ -1391,12 +1388,16 @@ export const projects: Project[] = [
                 {
                   id: "T1",
                   title: "Catalog shortcut on the home page",
+                  before: "/portfolio/Titipin/testing/T1%20-%20Before.png",
+                  after: "/portfolio/Titipin/testing/T1%20-%20After.png",
                   beforeAlt: "Home page without a shortcut to the canteen catalog",
                   afterAlt: "Home page with a shortcut to the canteen catalog",
                 },
                 {
                   id: "T2",
                   title: "Crowd level on canteen cards",
+                  before: "/portfolio/Titipin/testing/T2%20-%20Before.png",
+                  after: "/portfolio/Titipin/testing/T2%20-%20After.png",
                   beforeAlt: "Canteen card without a crowd level",
                   afterAlt: "Canteen card showing its crowd level",
                 },
@@ -1446,36 +1447,48 @@ export const projects: Project[] = [
                 {
                   id: "U1",
                   title: "“Closed” label on canteen cards",
+                  before: "/portfolio/Titipin/testing/U1%20-%20Before.png",
+                  after: "/portfolio/Titipin/testing/U1%20-%20After.png",
                   beforeAlt: "Grayed-out canteen card with no explanation",
                   afterAlt: "Canteen card with a “Closed” label at the bottom",
                 },
                 {
                   id: "U2",
                   title: "Larger order details",
+                  before: "/portfolio/Titipin/testing/U2%20-%20Before.png",
+                  after: "/portfolio/Titipin/testing/U2%20-%20After.png",
                   beforeAlt: "Order card with small order details",
                   afterAlt: "Order card with larger details below the canteen’s location",
                 },
                 {
                   id: "U3",
                   title: "Quick messages",
+                  before: "/portfolio/Titipin/testing/U3%20-%20Before.png",
+                  after: "/portfolio/Titipin/testing/U3-%20After.png",
                   beforeAlt: "Chat without quick replies",
                   afterAlt: "Chat with a list of quick messages",
                 },
                 {
                   id: "U4",
                   title: "Search in chat",
+                  before: "/portfolio/Titipin/testing/U4%20-%20Before.png",
+                  after: "/portfolio/Titipin/testing/U4%20-%20After.png",
                   beforeAlt: "Chat list without search",
                   afterAlt: "Chat list with a search bar",
                 },
                 {
                   id: "U5",
                   title: "More filter types",
+                  before: "/portfolio/Titipin/testing/U5%20-%20Before.png",
+                  after: "/portfolio/Titipin/testing/U5%20-%20After.png",
                   beforeAlt: "Preference filter with food types only",
                   afterAlt: "Preference filter that also covers items such as medicine and stationery",
                 },
                 {
                   id: "U6",
                   title: "No price on the Repeat Titip card",
+                  before: "/portfolio/Titipin/testing/U6%20-%20Before.png",
+                  after: "/portfolio/Titipin/testing/U6%20-%20After.png",
                   beforeAlt: "Repeat Titip card showing the price",
                   afterAlt: "Repeat Titip card without the price",
                 },

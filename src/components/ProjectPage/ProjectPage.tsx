@@ -918,7 +918,7 @@ function PhaseBlock({ block }: { block: Block }) {
       return (
         <div className={styles.block}>
           <BlockTitle title={block.title} />
-          <ul className={styles.showcase}>
+          <ul className={`${styles.showcase} ${block.layout === "phones" ? styles.showcasePhones : ""}`}>
             {block.items.map((item) => (
               <li key={item.title} className={`${styles.showcaseRow} ${item.src ? "" : styles.showcaseRowEmpty}`}>
                 {item.src ? (

@@ -1693,6 +1693,12 @@
   gap: 32px;
 }
 
+/* Portrait phone screens stay phone-sized beside their text */
+.showcasePhones .showcaseRow {
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 40px;
+}
+
 /* Until the screenshot is exported, keep the placeholder small */
 .showcaseRowEmpty {
   grid-template-columns: 240px minmax(0, 1fr);
@@ -1716,12 +1722,16 @@
 
 @media (max-width: 768px) {
   .showcaseRow,
-  .showcaseRowEmpty {
+  .showcaseRowEmpty,
+  .showcasePhones .showcaseRow {
     grid-template-columns: 1fr;
     gap: 16px;
   }
   .showcaseRowEmpty .figurePlaceholder {
     max-width: 240px;
+  }
+  .showcasePhones .figureImage {
+    max-width: 170px;
   }
 }
 
