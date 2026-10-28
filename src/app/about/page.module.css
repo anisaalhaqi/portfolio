@@ -226,3 +226,35 @@
     gap: 6px;
   }
 }
+
+/* Page entrance: the same staggered rise as the home hero, so arriving from
+   home feels continuous. `backwards` fill releases transform afterwards. */
+.profileImage,
+.heroText,
+.hero + .section {
+  animation: aboutIn 500ms var(--ease-out) backwards;
+}
+
+.heroText { animation-delay: 60ms; }
+.hero + .section { animation-delay: 120ms; }
+
+@keyframes aboutIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes aboutFadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profileImage,
+  .heroText,
+  .hero + .section {
+    animation-name: aboutFadeIn;
+  }
+}
