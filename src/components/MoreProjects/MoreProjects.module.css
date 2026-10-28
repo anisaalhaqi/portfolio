@@ -48,6 +48,32 @@
   gap: 24px;
 }
 
+/* Scroll reveal, fired once on the grid (same motion as the home cards).
+   Moves the list items, so the cards' press transform is untouched. */
+@media (scripting: enabled) {
+  .grid > li {
+    opacity: 0;
+    translate: 0 24px;
+    transition:
+      opacity 600ms var(--ease-out),
+      translate 600ms var(--ease-out);
+  }
+
+  .grid > li:nth-child(2) { transition-delay: 60ms; }
+  .grid > li:nth-child(n + 3) { transition-delay: 120ms; }
+
+  .grid[data-visible] > li {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: reduce) {
+  .grid > li {
+    translate: 0 0;
+  }
+}
+
 /* Flat card: image beside the text, hairline frame, no glass */
 .card {
   height: 100%;

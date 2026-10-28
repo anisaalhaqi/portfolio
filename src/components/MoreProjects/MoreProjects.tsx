@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { otherProjects, projectHref, type Project } from "@/data/projects";
+import RevealGrid from "./RevealGrid";
 import styles from "./MoreProjects.module.css";
 
 const HEADINGS = {
@@ -24,7 +25,7 @@ const MoreProjects = ({ current }: { current: Project }) => {
         </Link>
       </div>
 
-      <ul className={styles.grid}>
+      <RevealGrid className={styles.grid}>
         {others.map((project) => (
           <li key={project.slug}>
             <Link href={projectHref(project)} className={styles.card}>
@@ -48,7 +49,7 @@ const MoreProjects = ({ current }: { current: Project }) => {
             </Link>
           </li>
         ))}
-      </ul>
+      </RevealGrid>
     </section>
   );
 };

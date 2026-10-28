@@ -81,6 +81,39 @@
   }
 }
 
+/* Page entrance: same staggered rise as the home and about heroes, so
+   opening a project feels continuous. `backwards` fill releases transform
+   afterwards, so the back chip's press still works. */
+.backLink,
+.heroText,
+.heroImage {
+  animation: projectIn 500ms var(--ease-out) backwards;
+}
+
+.heroText { animation-delay: 60ms; }
+.heroImage { animation-delay: 120ms; }
+
+@keyframes projectIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes projectFadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backLink,
+  .heroText,
+  .heroImage {
+    animation-name: projectFadeIn;
+  }
+}
+
 /* Hero: same composition as the home case study cards */
 .hero {
   display: grid;
@@ -750,6 +783,40 @@
 @media (prefers-reduced-motion: no-preference) {
   .requirementChevron {
     transition: transform 200ms var(--ease-out), margin 200ms var(--ease-out);
+  }
+}
+
+/* Content fades in instead of appearing at once; browsers without
+   ::details-content keep the instant open */
+.requirement::details-content {
+  opacity: 0;
+  transition:
+    opacity 200ms var(--ease-out),
+    content-visibility 200ms allow-discrete;
+}
+
+.requirement[open]::details-content {
+  opacity: 1;
+}
+
+/* With motion allowed, the row also grows to its content height, so the
+   rows below slide down instead of jumping */
+@media (prefers-reduced-motion: no-preference) {
+  .requirement {
+    interpolate-size: allow-keywords;
+  }
+
+  .requirement::details-content {
+    height: 0;
+    overflow: clip;
+    transition:
+      height 250ms var(--ease-out),
+      opacity 200ms var(--ease-out),
+      content-visibility 250ms allow-discrete;
+  }
+
+  .requirement[open]::details-content {
+    height: auto;
   }
 }
 
